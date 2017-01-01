@@ -1,6 +1,12 @@
-<p>Planets:</p>
-<ul>
-  <li *ngFor="let planet of planets">
-    {{ planet.name }}
-  </li>
-</ul>
+<md-card *ngFor="let planet of planets">
+  <md-card-header>
+    <img md-card-avatar src="assets/planets/1.png">
+    <md-card-title>{{ planet.name }}</md-card-title>
+    <md-card-subtitle>{{ planet.ip }}</md-card-subtitle>
+  </md-card-header>
+  <md-card-content>
+    <div *ngFor="let trooper of planet.troopers">
+        <img mdTooltip="{{trooper.name}}" mdTooltipPosition="below" style="height:50px" src="assets/trooper.png">
+    </div>
+  </md-card-content>
+</md-card>

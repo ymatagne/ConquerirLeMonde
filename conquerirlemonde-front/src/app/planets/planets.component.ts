@@ -3,26 +3,23 @@ import { Component, OnInit } from '@angular/core';
 
 import { Planet } from '../planet';
 import { PlanetsService } from '../planets.service';
+import {WebSocketService} from '../websocket.service';
 
 
 @Component({
   selector: 'app-planets',
   templateUrl: './planets.component.html',
   styleUrls: ['./planets.component.css'],
-  providers: [PlanetsService]
+  providers: [PlanetsService,WebSocketService]
 })
-export class PlanetsComponent implements OnInit {
+export class PlanetsComponent {
 
-  planets: Planet[];
+  planets: Planet[]=new Array();
+  ws:any;
 
-  constructor(private planetsService: PlanetsService) { }
-
-  getPlanets(): void {
-    this.planetsService.getPlanets().then(planets => this.planets = planets);
-  };
-
-  ngOnInit() {
-    this.getPlanets();
+  constructor(private planetsService: PlanetsService) { 
+      planetsService.planets.subscribe(planets => {
+            this.planets=planets;
+        });
   }
-
 }
