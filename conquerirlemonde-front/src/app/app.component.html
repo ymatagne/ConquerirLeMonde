@@ -1,13 +1,12 @@
 <md-toolbar color="primary">
   <span>Conquerir le monde avec CoreOs</span>
 
-  <!-- This fills the remaining space of the current row -->
   <span class="example-fill-remaining-space"></span>
 
   <span>SnowCamp 2017</span>
 </md-toolbar>
 
-<md-tab-group>
+<md-tab-group #tabgroup  (selectChange)="startGame(tabgroup)">
   <md-tab>
     <template md-tab-label>
       <md-icon>play_circle_filled</md-icon> Rules
@@ -20,7 +19,7 @@
     </template>
     <app-planets></app-planets>
   </md-tab>
-  <md-tab>
+  <md-tab >
     <template md-tab-label>
       <md-icon>videogame_asset</md-icon> Games
     </template>

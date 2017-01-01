@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
+declare var Game: any;
 
 @Component({
   selector: 'app-games',
   templateUrl: './games.component.html',
   styleUrls: ['./games.component.css']
 })
-export class GamesComponent implements OnInit {
+export class GamesComponent {
 
-  constructor() { }
+  game: any;
 
-  ngOnInit() {
+  constructor() {}
+
+  startGame() {
+    this.game = new Game();
+    this.game.init();
   }
 
 }
