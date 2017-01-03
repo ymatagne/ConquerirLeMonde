@@ -1,15 +1,13 @@
-<button  (click)="launchEnnemy()">Launch new Docker</button>
-
 <!-- The canvas for the panning background -->
-<canvas id="background" width="1200" height="720">
+<canvas #background id="background" width="1200" height="720">
   Your browser does not support canvas. Please try again with a different browser.
 </canvas>
 <!-- The canvas for all enemy ships and bullets -->
-<canvas id="main" width="1200" height="720">
+<canvas #main id="main" width="1200" height="720">
 </canvas>
 <!-- The canvas the ship uses (can only move up
          one forth the screen. -->720
-<canvas id="ship" width="1200" height="720">
+<canvas #ship id="ship" width="1200" height="720">
 </canvas>
 
 <button class="newDocker" onclick="javascript:game.launchEnnemy()">Launch new Docker</button>
@@ -22,3 +20,4 @@
 <div class="loading" id="loading">LOADING...
   <p>Please wait</p>
 </div>
+<script src="space_shooter_part_five.js"></script>

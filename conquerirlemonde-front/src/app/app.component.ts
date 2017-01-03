@@ -16,7 +16,7 @@ export class AppComponent {
 
   startGame(tab) {
     if (tab._selectedIndex === 2) {
-      this.gamesComponent.startGame();
+    //  this.gamesComponent.startGame();
     }
   }
 

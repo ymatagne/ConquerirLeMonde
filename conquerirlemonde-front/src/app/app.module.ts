@@ -11,9 +11,6 @@ import { GamesComponent } from './games/games.component';
 import { PlanetsComponent } from './planets/planets.component';
 
 
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './mock/in-memory-data.service';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,8 +22,7 @@ import { InMemoryDataService }  from './mock/in-memory-data.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    MaterialModule.forRoot(),
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    MaterialModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

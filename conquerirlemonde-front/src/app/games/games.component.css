@@ -1,9 +1,9 @@
-/*canvas {
-				position: absolute;
+		/*canvas {
+				position: fixed;
 				top: 0px;
 				left: 0px;
 				background: transparent;
-			}
+			}*/
 			#background {
 				z-index: -2;
 			}
@@ -48,9 +48,9 @@
 				font-family: Helvetica, sans-serif;
 				font-size: 30px;
 				cursor: default;
-			}*/
-			/*.newDocker {
+			}
+			.newDocker {
 				position: absolute;
 				top: 730px;
 				left: 210px;
-			}*/
+			}
