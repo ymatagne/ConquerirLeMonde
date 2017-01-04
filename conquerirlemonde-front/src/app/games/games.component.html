@@ -10,7 +10,7 @@
 <canvas #ship id="ship" width="1200" height="720">
 </canvas>
 
-<button class="newDocker" onclick="javascript:game.launchEnnemy()">Launch new Docker</button>
+<button class="newDocker" (click)="launchEnnemy()">Launch new Docker</button>
 <div class="score">Points de vie : <span id="score"></span></div>
 <div class="game-over" id="game-over">GAME OVER
   <p>

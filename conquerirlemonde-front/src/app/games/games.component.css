@@ -1,17 +1,19 @@
-		/*canvas {
-				position: fixed;
-				top: 0px;
-				left: 0px;
-				background: transparent;
-			}*/
 			#background {
-				z-index: -2;
-			}
-			#main {
 				z-index: -1;
 			}
-			#ship {
+			#main {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        background: transparent;
 				z-index: 0;
+			}
+			#ship {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        background: transparent;
+				z-index: 1;
 			}
 			.score {
 				position: absolute;
