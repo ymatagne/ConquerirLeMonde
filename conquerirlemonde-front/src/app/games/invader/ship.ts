@@ -32,6 +32,7 @@ export class Ship extends Drawable {
   }
 
   draw() {
+    console.log('draw -  x : ' + this.x+', y : '+ this.y+', width : '+ this.imageRepository.spaceship.width+', height : '+  this.imageRepository.spaceship.height);
     this.shipContext.drawImage(this.imageRepository.spaceship, this.x, this.y);
     if (this.counter >= this.fireRate) {
       this.fire();
@@ -43,6 +44,7 @@ export class Ship extends Drawable {
     this.counter++;
     // Redraw the ship
     if (!this.isColliding) {
+      console.log('Clear -  x : ' + this.x+', y : '+ this.y+', width : '+ this.width+', height : '+  this.height);
       this.shipContext.clearRect(this.x, this.y, this.width, this.height);
       this.x += this.speed;
       // Keep player within the screen

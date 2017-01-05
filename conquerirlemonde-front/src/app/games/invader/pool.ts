@@ -55,7 +55,7 @@ export class Pool {
         bullet.x = 0;
         bullet.y = 0;
         bullet.width = this.imageRepository.bullet.width;
-        bullet.height = this.imageRepository.bullet.width;
+        bullet.height = this.imageRepository.bullet.height;
         bullet.collidableWith = "enemy";
         bullet.type = "bullet";
         this.pool[i] = bullet;
@@ -78,7 +78,7 @@ export class Pool {
         bullet.x = 0;
         bullet.y = 0;
         bullet.width = this.imageRepository.enemyBullet.width;
-        bullet.height = this.imageRepository.enemyBullet.width;
+        bullet.height = this.imageRepository.enemyBullet.height;
         bullet.collidableWith = "ship";
         bullet.canvasHeight = 720;
         bullet.type = "enemyBullet";
