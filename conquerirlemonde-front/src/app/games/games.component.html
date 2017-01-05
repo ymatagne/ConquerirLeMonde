@@ -11,7 +11,7 @@
 </canvas>
 
 <button class="newDocker" (click)="launchEnnemy()">Launch new Docker</button>
-<div class="score">Points de vie : <span id="score"></span></div>
+<div class="score">Points de vie : <span #score>{{playerScore}}</span></div>
 <div class="game-over" id="game-over">GAME OVER
   <p>
     <span onclick="game.restart()">Restart</span>

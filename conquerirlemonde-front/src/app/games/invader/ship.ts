@@ -1,6 +1,7 @@
 import {Pool} from "./pool";
 import {Drawable} from "./drawable";
 import {ImageRepository} from "./imageRepository";
+import {GamesComponent} from "../games.component";
 /**
  * Create the Ship object that the player controls. The ship is
  * drawn on the "ship" canvas and uses dirty rectangles to move
@@ -15,8 +16,9 @@ export class Ship extends Drawable {
   alive = true;
   shipContext;
   mainContext;
+  game: GamesComponent;
 
-  constructor(x, y, width, height, imageRepository: ImageRepository, shipContext, shipCanvas, mainContext) {
+  constructor(x, y, width, height, imageRepository: ImageRepository, shipContext, shipCanvas, mainContext, game : GamesComponent) {
     super(x, y, width, height);
     this.imageRepository = imageRepository;
     this.collidableWith = "enemyBullet";
@@ -29,6 +31,7 @@ export class Ship extends Drawable {
 
     this.bulletPool = new Pool(30, imageRepository, mainContext);
     this.bulletPool.init("bullet", undefined);
+    this.game = game;
   }
 
   draw() {
@@ -53,6 +56,7 @@ export class Ship extends Drawable {
       this.draw();
     } else {
       this.isColliding = false;
+      this.game.playerScore -= 10
     }
   }
 
