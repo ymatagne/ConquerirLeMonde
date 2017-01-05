@@ -43,15 +43,6 @@
 			.game-over span:hover {
 				color: #FFD700;
 			}
-			.loading {
-				position: absolute;
-				top: 100px;
-				left: 210px;
-				color: #FF7F00;
-				font-family: Helvetica, sans-serif;
-				font-size: 30px;
-				cursor: default;
-			}
 			.newDocker {
 				position: absolute;
 				top: 730px;

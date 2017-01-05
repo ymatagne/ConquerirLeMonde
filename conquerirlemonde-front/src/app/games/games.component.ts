@@ -27,10 +27,6 @@ export class GamesComponent implements AfterViewInit {
   quadTree :QuadTreeDetection;
 
   //game: any;
-  spaceship = new Image();
-  bullet = new Image();
-  enemy = new Image();
-  enemyBullet = new Image();
   enemyXIndex = 0;
   enemyYIndex = 0;
   nextEnemyX = 100;
@@ -40,6 +36,8 @@ export class GamesComponent implements AfterViewInit {
   mainContext: any;
   nextEnemySpacer: any;
   imageRepository = new ImageRepository();
+
+  playerScore = 5000;
 
   constructor() { }
 
@@ -83,7 +81,7 @@ export class GamesComponent implements AfterViewInit {
     this.enemyYIndex = 0;
     this.nextEnemyX = 100;
     this.nextEnemyY = 250;
-    this.nextEnemySpacer = this.enemy.height * 1.5;
+    this.nextEnemySpacer = -this.imageRepository.enemy.height * 1.5;
 
     // Test to see if canvas is supported. Only need to
     // check one canvas
@@ -108,7 +106,6 @@ export class GamesComponent implements AfterViewInit {
 
       // Start QuadTree
       this.quadTree = new QuadTreeDetection({x:0,y:0,width:this.mainCanvas.nativeElement.width,height:this.mainCanvas.nativeElement.height}, 0);
-
     }
   }
 
@@ -116,6 +113,7 @@ export class GamesComponent implements AfterViewInit {
   launchEnnemy() {
       this.enemyPool.get(this.nextEnemyX,this.nextEnemyY,2);
       this.nextEnemyX += this.imageRepository.enemy.width + 25;
+
       if (this.enemyXIndex % 15 == 0) {
         this.nextEnemyX = 100;
         this.nextEnemyY += this.nextEnemySpacer;
