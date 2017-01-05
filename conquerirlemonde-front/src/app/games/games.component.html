@@ -12,9 +12,5 @@
 
 <button class="newDocker" (click)="launchEnnemy()">Launch new Docker</button>
 <div class="score">Points de vie : <span #score>{{playerScore}}</span></div>
-<div class="game-over" id="game-over">GAME OVER
-  <p>
-    <span onclick="game.restart()">Restart</span>
-</p>
-</div>
+<div class="game-over" id="game-over">{{message}}</div>
 <script src="space_shooter_part_five.js"></script>

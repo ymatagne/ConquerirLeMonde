@@ -37,7 +37,8 @@ export class GamesComponent implements AfterViewInit {
   nextEnemySpacer: any;
   imageRepository = new ImageRepository();
 
-  playerScore = 5000;
+  playerScore = 50;
+  message = "";
 
   constructor() { }
 
@@ -60,6 +61,7 @@ export class GamesComponent implements AfterViewInit {
   }
 
   animate() {
+    if(this.playerScore > 0) {
     // Insert objects into quadtree
     this.quadTree.clear();
     this.quadTree.insert(this.ship);
@@ -74,6 +76,10 @@ export class GamesComponent implements AfterViewInit {
     this.ship.bulletPool.animate();
     this.enemyPool.animate();
     this.enemyBulletPool.animate();
+
+    } else {
+      this.message = "Mission Accomplie !!!";
+    }
   }
 
   init() {

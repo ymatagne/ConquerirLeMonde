@@ -32,16 +32,6 @@
 				font-family: Helvetica, sans-serif;
 				font-size: 30px;
 				cursor: default;
-				display: none;
-			}
-			.game-over span {
-				font-size: 20px;
-				cursor: pointer;
-				position: relative;
-				left: 50px;
-			}
-			.game-over span:hover {
-				color: #FFD700;
 			}
 			.newDocker {
 				position: absolute;
