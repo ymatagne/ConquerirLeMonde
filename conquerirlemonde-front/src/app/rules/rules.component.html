@@ -1,98 +1,100 @@
-<md-card>
-  <md-card-header>
-    <img md-card-avatar src="assets/episode1.png">
-    <md-card-title>Episode 1</md-card-title>
-    <md-card-subtitle>Vagrant et CoreOs</md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
-    <p>Nous allons crée notre base de commandemant</p>
-  </md-card-content>
-  <md-card-actions>
-    <button md-button>Show</button>
-    <button md-button>Links</button>
-  </md-card-actions>
-</md-card>
-<md-card>
-  <md-card-header>
-    <img md-card-avatar src="assets/episode2.png">
-    <md-card-title>Episode 2</md-card-title>
-    <md-card-subtitle>Docker</md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
-    <p>Créons et déployon notre vaisseau !</p>
-  </md-card-content>
-  <md-card-actions>
-    <button md-button>Show</button>
-    <button md-button>Links</button>
-  </md-card-actions>
-</md-card>
-<md-card>
-  <md-card-header>
-    <img md-card-avatar src="assets/episode3.png">
-    <md-card-title>Episode 3</md-card-title>
-    <md-card-subtitle>Fleet</md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
-    <p>Un vaisseau c'est bien, 10 c'est mieux :)</p>
-  </md-card-content>
-  <md-card-actions>
-    <button md-button>Show</button>
-    <button md-button>Links</button>
-  </md-card-actions>
-</md-card>
-<md-card>
-  <md-card-header>
-    <img md-card-avatar src="assets/episode4.png">
-    <md-card-title>Episode 4</md-card-title>
-    <md-card-subtitle>Limites</md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
-    <p>Quels sont les limites actuelles de notre système.</p>
-  </md-card-content>
-  <md-card-actions>
-    <button md-button>Show</button>
-    <button md-button>Links</button>
-  </md-card-actions>
-</md-card>
-<md-card>
-  <md-card-header>
-    <img md-card-avatar src="assets/episode5.png">
-    <md-card-title>Episode 5</md-card-title>
-    <md-card-subtitle>Vagrant ... le retour </md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
-    <p>On recommence tout pour initialiser notre nouveau cluster</p>
-  </md-card-content>
-  <md-card-actions>
-    <button md-button>Show</button>
-    <button md-button>Links</button>
-  </md-card-actions>
-</md-card>
-<md-card>
-  <md-card-header>
-    <img md-card-avatar src="assets/episode6.png">
-    <md-card-title>Episode 6</md-card-title>
-    <md-card-subtitle>Kubernetes</md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
-    <p>Utilisation de Kubernetes</p>
-  </md-card-content>
-  <md-card-actions>
-    <button md-button>Show</button>
-    <button md-button>Links</button>
-  </md-card-actions>
-</md-card>
-<md-card>
-  <md-card-header>
-    <img md-card-avatar src="assets/episode7.png">
-    <md-card-title>Episode 7</md-card-title>
-    <md-card-subtitle>Elle est morte cette étoile ?</md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
-    <p>Fin</p>
-  </md-card-content>
-  <md-card-actions>
-    <button md-button>Show</button>
-    <button md-button>Links</button>
-  </md-card-actions>
-</md-card>
+<div class="card-container">
+  <md-card>
+    <md-card-header>
+      <img md-card-avatar src="assets/episode1.png">
+      <md-card-title>Episode 1</md-card-title>
+      <md-card-subtitle>Vagrant et CoreOs</md-card-subtitle>
+    </md-card-header>
+    <md-card-content>
+      <p>Nous allons crée notre base de commandemant</p>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button routerLink="/episode1" routerLinkActive="active">Show</button>
+      <button md-button>Links</button>
+    </md-card-actions>
+  </md-card>
+  <md-card>
+    <md-card-header>
+      <img md-card-avatar src="assets/episode2.png">
+      <md-card-title>Episode 2</md-card-title>
+      <md-card-subtitle>Docker</md-card-subtitle>
+    </md-card-header>
+    <md-card-content>
+      <p>Créons et déployon notre vaisseau !</p>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button>Show</button>
+      <button md-button>Links</button>
+    </md-card-actions>
+  </md-card>
+  <md-card>
+    <md-card-header>
+      <img md-card-avatar src="assets/episode3.png">
+      <md-card-title>Episode 3</md-card-title>
+      <md-card-subtitle>Fleet</md-card-subtitle>
+    </md-card-header>
+    <md-card-content>
+      <p>Un vaisseau c'est bien, 10 c'est mieux :)</p>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button>Show</button>
+      <button md-button>Links</button>
+    </md-card-actions>
+  </md-card>
+  <md-card>
+    <md-card-header>
+      <img md-card-avatar src="assets/episode4.png">
+      <md-card-title>Episode 4</md-card-title>
+      <md-card-subtitle>Limites</md-card-subtitle>
+    </md-card-header>
+    <md-card-content>
+      <p>Quels sont les limites actuelles de notre système.</p>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button>Show</button>
+      <button md-button>Links</button>
+    </md-card-actions>
+  </md-card>
+  <md-card>
+    <md-card-header>
+      <img md-card-avatar src="assets/episode5.png">
+      <md-card-title>Episode 5</md-card-title>
+      <md-card-subtitle>Vagrant ... le retour </md-card-subtitle>
+    </md-card-header>
+    <md-card-content>
+      <p>On recommence tout pour initialiser notre nouveau cluster</p>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button>Show</button>
+      <button md-button>Links</button>
+    </md-card-actions>
+  </md-card>
+  <md-card>
+    <md-card-header>
+      <img md-card-avatar src="assets/episode6.png">
+      <md-card-title>Episode 6</md-card-title>
+      <md-card-subtitle>Kubernetes</md-card-subtitle>
+    </md-card-header>
+    <md-card-content>
+      <p>Utilisation de Kubernetes</p>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button>Show</button>
+      <button md-button>Links</button>
+    </md-card-actions>
+  </md-card>
+  <md-card>
+    <md-card-header>
+      <img md-card-avatar src="assets/episode7.png">
+      <md-card-title>Episode 7</md-card-title>
+      <md-card-subtitle>Elle est morte cette étoile ?</md-card-subtitle>
+    </md-card-header>
+    <md-card-content>
+      <p>Fin</p>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button>Show</button>
+      <button md-button>Links</button>
+    </md-card-actions>
+  </md-card>
+</div>

@@ -1,0 +1,52 @@
+<md-card>
+  <md-card-header>
+    <md-card-title>Episode 1</md-card-title>
+  </md-card-header>
+  <md-card-content>
+    <h3>Copy files from usb key :</h3>
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">cp USB/coreos_production_vagrant.box coreos_production_vagrant.box</span>
+      </code>
+    </pre>
+    <h3>Create config file :</h3>
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">Create file with name : Vagrantfile</span>
+      </code>
+    </pre>
+    <h3>This file contains :</h3>
+    <pre class="ng-scope undefined lang-rb prettyprinted">
+        <span class="tag">Vagrant.configure("2") do |config|</span>
+        <span class="pln"></span>
+        <span class="tag">    config.vm.box = "coreos-alpha"</span>
+        <span class="pln"></span>
+        <span class="tag">    config.vm.network "private_network", ip: "192.168.33.10"</span>
+        <span class="pln"></span>
+        <span class="tag">    config.vm.network "public_network</span>
+        <span class="pln"></span>
+        <span class="tag">end</span>
+    </pre>
+    <h3>Create vagrant box :</h3>
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">vagrant box add coreos-alpha coreos_production_vagrant.box</span>
+      </code>
+    </pre>
+    <h3>Start your box :</h3>
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">vagrant up</span>
+      </code>
+    </pre>
+    <h3>Connect to your box :</h3>
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">vagrant ssh</span>
+      </code>
+    </pre>
+  </md-card-content>
+  <md-card-actions>
+    <button md-button routerLink="/rules" routerLinkActive="active">Back</button>
+  </md-card-actions>
+</md-card>
