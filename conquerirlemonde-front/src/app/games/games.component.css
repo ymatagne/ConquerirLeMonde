@@ -1,25 +1,24 @@
 			#background {
 				z-index: -1;
         background: transparent;
-		top: 150px;
 			}
 			#main {
         position: fixed;
-        top: 150px;
+        top: 0px;
         left: 0px;
         background: transparent;
 				z-index: 0;
 			}
 			#ship {
         position: fixed;
-        top: 150px;
+        top: 0px;
         left: 0px;
         background: transparent;
 				z-index: 1;
 			}
 			.score {
 				position: absolute;
-				top: 120px;
+				top: 0px;
 				left: 480px;
 				color: #FF7F00;
 				font-family: Helvetica, sans-serif;
@@ -27,7 +26,7 @@
 			}
 			.game-over {
 				position: absolute;
-				top: 120px;
+				top: 0px;
 				left: 210px;
 				color: #FF7F00;
 				font-family: Helvetica, sans-serif;
