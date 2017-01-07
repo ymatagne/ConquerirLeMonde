@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/core/theming/all-theme';
+@include md-core();
+$primary: md-palette($md-orange, 800);
+$accent:  md-palette($md-light-blue, 600, A100, A400);
+$warn:    md-palette($md-red, 600);
+$theme: md-light-theme($primary, $accent, $warn);
+
+md-card{
+    margin-bottom: 15px;
+    margin-top: 15px;
+    min-width: 400px;
+    md-card-content{
+        margin-top:10px;
+    }
+}
+@include angular-material-theme($theme);

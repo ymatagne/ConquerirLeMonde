@@ -2,4 +2,5 @@
 .idea
 **/node_modules
 conquerirlemonde-front/dist/
-
+.DS_Store
+**/.DS_Store

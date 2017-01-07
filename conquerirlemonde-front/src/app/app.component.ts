@@ -11,25 +11,36 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
+
   constructor(private router: Router) {
     this.router = router;
+  }
+
+  public selectedIndex() {
+    switch (this.router.url) {
+      case (this.router.url.match(/\/rules|\/episode.*/) || {})[0]: return 1;
+      case '/planets': return 2;
+      case '/games': return 3;
+      default: return 0;
+    }
   }
 
   public changeTab(e) {
     console.log(e);
     switch (e.index) {
       case 0:
-        this.router.navigateByUrl('/rules');
+        this.router.navigateByUrl('');
         break;
       case 1:
-        this.router.navigateByUrl('/planets');
+        this.router.navigateByUrl('/rules');
         break;
       case 2:
+        this.router.navigateByUrl('/planets');
+        break;
+      case 3:
         this.router.navigateByUrl('/games');
         break;
-
       default:
-        console.log('e is: ', e, 'e.index is: ', e.index);
         break;
     }
   }
