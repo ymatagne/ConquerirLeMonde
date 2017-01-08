@@ -1,6 +1,8 @@
 import {Drawable} from "./drawable";
 import {Pool} from "./pool";
 import {ImageRepository} from "./imageRepository";
+import {Trooper} from "../../trooper";
+
 /**
  * Create the Enemy ship object.
  */
@@ -18,6 +20,7 @@ export class Enemy extends Drawable {
   context: any;
   imageRepository: ImageRepository;
   enemyBulletPool : Pool;
+  trooper:Trooper;
 
   constructor(imageRepository: ImageRepository, mainContext: any, bulletPool: Pool) {
     super(0, 0, 0, 0);

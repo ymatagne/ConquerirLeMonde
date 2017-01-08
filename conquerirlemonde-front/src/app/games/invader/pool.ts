@@ -1,6 +1,6 @@
-import {Bullet} from "./bullet";
-import {Enemy} from "./enemy";
-import {ImageRepository} from "./imageRepository";
+import { Bullet } from "./bullet";
+import { Enemy } from "./enemy";
+import { ImageRepository } from "./imageRepository";
 /**
  * Custom Pool object. Holds Bullet objects to be managed to prevent
  * garbage collection.
@@ -92,9 +92,11 @@ export class Pool {
    * pushes it to the front of the array.
    */
   get(x, y, speed) {
-    if (!this.pool[this.size - 1].alive) {
+    var obj=this.pool[this.size - 1];
+    if (!obj.alive) {
       this.pool[this.size - 1].spawn(x, y, speed);
       this.pool.unshift(this.pool.pop());
+      return obj;
     }
   };
 

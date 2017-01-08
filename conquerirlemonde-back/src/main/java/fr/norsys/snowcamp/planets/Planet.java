@@ -1,6 +1,6 @@
 package fr.norsys.snowcamp.planets;
 
-import fr.norsys.snowcamp.Trooper;
+import fr.norsys.snowcamp.trooper.Trooper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

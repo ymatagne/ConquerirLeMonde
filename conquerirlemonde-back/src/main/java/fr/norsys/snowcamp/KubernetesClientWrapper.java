@@ -1,6 +1,7 @@
 package fr.norsys.snowcamp;
 
 import fr.norsys.snowcamp.planets.Planet;
+import fr.norsys.snowcamp.trooper.Trooper;
 import io.fabric8.kubernetes.api.model.Node;
 import io.fabric8.kubernetes.client.Config;
 import io.fabric8.kubernetes.client.ConfigBuilder;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class KubernetesClientWrapper {
 
     KubernetesClient client;
@@ -34,7 +35,7 @@ public class KubernetesClientWrapper {
 
     private Planet createPlanet(Node node) {
         List<Trooper> troopers = new ArrayList<>();
-        node.getStatus().getImages().forEach(container -> troopers.add(new Trooper(container.getNames().get(1))));
+        //node.getStatus().getImages().forEach(container -> troopers.add(new Trooper(container.getNames().get(1))));
         return new Planet(node.getMetadata().getUid(),node.getMetadata().getName(),node.getStatus().getAddresses().get(0).getAddress(),troopers);
     }
 }

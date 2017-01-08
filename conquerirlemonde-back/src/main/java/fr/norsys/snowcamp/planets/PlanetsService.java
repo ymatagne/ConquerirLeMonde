@@ -23,7 +23,7 @@ public class PlanetsService {
     @Autowired
     PlanetsHandler planetsHandler;
 
-    @Autowired
+    //@Autowired
     KubernetesClientWrapper kubernetes;
 
 
@@ -31,6 +31,6 @@ public class PlanetsService {
 
     @Scheduled(fixedDelay = 1000)
     public void sendPlanets() {
-        planetsHandler.sendPlanets(kubernetes.planets());
+        //planetsHandler.sendPlanets(kubernetes.planets());
     }
 }

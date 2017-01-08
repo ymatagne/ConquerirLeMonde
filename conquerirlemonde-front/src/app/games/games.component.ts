@@ -1,10 +1,13 @@
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import {QuadTreeDetection} from "./invader/quadTreeDetection";
-import {Ship} from "./invader/ship";
-import {Background} from "./invader/background";
-import {Pool} from "./invader/pool";
-import {ImageRepository} from "./invader/imageRepository";
+import { QuadTreeDetection } from "./invader/quadTreeDetection";
+import { Ship } from "./invader/ship";
+import { Background } from "./invader/background";
+import { Pool } from "./invader/pool";
+import { ImageRepository } from "./invader/imageRepository";
+import {Trooper} from '../trooper';
+import { TrooperService } from '../trooper.service';
+import { WebSocketService } from '../websocket.service';
 
 
 //declare var Game: any;
@@ -12,9 +15,19 @@ import {ImageRepository} from "./invader/imageRepository";
 @Component({
   selector: 'app-games',
   templateUrl: './games.component.html',
-  styleUrls: ['./games.component.css']
+  styleUrls: ['./games.component.css'],
+  providers: [TrooperService, WebSocketService]
 })
 export class GamesComponent implements AfterViewInit {
+
+
+  constructor(private trooperService: TrooperService) {
+    trooperService.trooper.subscribe(trooper => {
+      this.launchEnnemy(trooper);
+    });
+  }
+  ws: any;
+
 
   @ViewChild("background") bgCanvas: ElementRef;
   @ViewChild("main") mainCanvas: ElementRef;
@@ -24,7 +37,7 @@ export class GamesComponent implements AfterViewInit {
   ship: Ship;
   enemyPool: Pool;
   enemyBulletPool: Pool;
-  quadTree :QuadTreeDetection;
+  quadTree: QuadTreeDetection;
 
   //game: any;
   enemyXIndex = 0;
@@ -39,8 +52,6 @@ export class GamesComponent implements AfterViewInit {
 
   playerScore = 50;
   message = "";
-
-  constructor() { }
 
   ngAfterViewInit() {
     this.init();
@@ -61,21 +72,21 @@ export class GamesComponent implements AfterViewInit {
   }
 
   animate() {
-    if(this.playerScore > 0) {
-    // Insert objects into quadtree
-    this.quadTree.clear();
-    this.quadTree.insert(this.ship);
-    this.quadTree.insert(this.ship.bulletPool.getPool());
-    this.quadTree.insert(this.enemyPool.getPool());
-    this.quadTree.insert(this.enemyBulletPool.getPool());
+    if (this.playerScore > 0) {
+      // Insert objects into quadtree
+      this.quadTree.clear();
+      this.quadTree.insert(this.ship);
+      this.quadTree.insert(this.ship.bulletPool.getPool());
+      this.quadTree.insert(this.enemyPool.getPool());
+      this.quadTree.insert(this.enemyBulletPool.getPool());
 
-    this.detectCollision();
+      this.detectCollision();
 
-  	this.background.draw();
-    this.ship.move();
-    this.ship.bulletPool.animate();
-    this.enemyPool.animate();
-    this.enemyBulletPool.animate();
+      this.background.draw();
+      this.ship.move();
+      this.ship.bulletPool.animate();
+      this.enemyPool.animate();
+      this.enemyBulletPool.animate();
 
     } else {
       this.message = "Mission Accomplie !!!";
@@ -111,28 +122,29 @@ export class GamesComponent implements AfterViewInit {
       this.enemyPool.init("enemy", this.enemyBulletPool);
 
       // Start QuadTree
-      this.quadTree = new QuadTreeDetection({x:0,y:0,width:this.mainCanvas.nativeElement.width,height:this.mainCanvas.nativeElement.height}, 0);
+      this.quadTree = new QuadTreeDetection({ x: 0, y: 0, width: this.mainCanvas.nativeElement.width, height: this.mainCanvas.nativeElement.height }, 0);
     }
   }
 
   // Spawn a new wave of enemies
-  launchEnnemy() {
-      this.enemyPool.get(this.nextEnemyX,this.nextEnemyY,2);
-      this.nextEnemyX += this.imageRepository.enemy.width + 25;
+  launchEnnemy(trooper:Trooper) {
+    var enemy = this.enemyPool.get(this.nextEnemyX, this.nextEnemyY, 2);
+    enemy.trooper=trooper;
+    this.nextEnemyX += this.imageRepository.enemy.width + 25;
 
-      if (this.enemyXIndex % 15 == 0) {
-        this.nextEnemyX = 100;
-        this.nextEnemyY += this.nextEnemySpacer;
-        this.enemyYIndex ++;
-        this.enemyXIndex = 0;
-      }
-      if(this.enemyYIndex % 10 == 0){
-        this.nextEnemyX = 100;
-        this.nextEnemyY = 250;
-        this.enemyYIndex = 1;
-        this.enemyXIndex = 0
-      }
-      this.enemyXIndex ++;
+    if (this.enemyXIndex % 15 == 0) {
+      this.nextEnemyX = 100;
+      this.nextEnemyY += this.nextEnemySpacer;
+      this.enemyYIndex++;
+      this.enemyXIndex = 0;
+    }
+    if (this.enemyYIndex % 10 == 0) {
+      this.nextEnemyX = 100;
+      this.nextEnemyY = 250;
+      this.enemyYIndex = 1;
+      this.enemyXIndex = 0
+    }
+    this.enemyXIndex++;
   }
 
   detectCollision() {
@@ -150,15 +162,18 @@ export class GamesComponent implements AfterViewInit {
         // DETECT COLLISION ALGORITHM
         if (objects[x].collidableWith === obj[y].type &&
           (objects[x].x < obj[y].x + obj[y].width &&
-          objects[x].x + objects[x].width > obj[y].x &&
-          objects[x].y < obj[y].y + obj[y].height &&
-          objects[x].y + objects[x].height > obj[y].y)) {
+            objects[x].x + objects[x].width > obj[y].x &&
+            objects[x].y < obj[y].y + obj[y].height &&
+            objects[x].y + objects[x].height > obj[y].y)) {
 
           objects[x].isColliding = true;
           obj[y].isColliding = true;
+          if (obj[y].type === "enemy") {
+            this.trooperService.dropTrooper(obj[y].trooper);
+          }
         }
       }
     }
-};
+  };
 
 }

@@ -1,4 +1,4 @@
-package fr.norsys.snowcamp.ship;
+package fr.norsys.snowcamp.trooper;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Ship {
+public class Trooper {
+    private String image;
+    private String url;
     private String name;
-    private String ip;
 }
