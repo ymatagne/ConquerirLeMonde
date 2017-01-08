@@ -1,21 +1,46 @@
 <md-card>
-  <md-card-header>
-    <md-card-title>Episode 1</md-card-title>
-  </md-card-header>
   <md-card-content>
-    <h3>Copy files from usb key :</h3>
+    <button color="primary" md-mini-fab routerLink="/rules" routerLinkActive="active">
+    <md-icon class="md-24">keyboard_arrow_left</md-icon>
+  </button>
+    <h2 id="header"> Episode 1 : Vagrant and CoreOs</h2>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
+      Copy files from usb key
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine1">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">cp USB/coreos_production_vagrant.box coreos_production_vagrant.box</span>
       </code>
     </pre>
-    <h3>Create config file :</h3>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine2">
+      Create config file
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine2">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">Create file with name : Vagrantfile</span>
+        <span class="tag">touch Vagrantfile</span>
       </code>
     </pre>
-    <h3>This file contains :</h3>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
+      This file contains
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine3">
     <pre class="ng-scope undefined lang-rb prettyprinted">
         <span class="tag">Vagrant.configure("2") do |config|</span>
         <span class="pln"></span>
@@ -27,26 +52,48 @@
         <span class="pln"></span>
         <span class="tag">end</span>
     </pre>
-    <h3>Create vagrant box :</h3>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine4">
+      Create vagrant box
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine4">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">vagrant box add coreos-alpha coreos_production_vagrant.box</span>
       </code>
     </pre>
-    <h3>Start your box :</h3>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine5">
+      Start your box
+    </md-slide-toggle>
+    <md-card-title></md-card-title>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine5">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">vagrant up</span>
       </code>
     </pre>
-    <h3>Connect to your box :</h3>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine6">
+      Connect to your box
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine6">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">vagrant ssh</span>
       </code>
     </pre>
   </md-card-content>
-  <md-card-actions>
-    <button md-button routerLink="/rules" routerLinkActive="active">Back</button>
-  </md-card-actions>
 </md-card>

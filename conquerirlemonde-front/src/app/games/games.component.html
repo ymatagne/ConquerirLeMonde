@@ -1,16 +1,12 @@
-<!-- The canvas for the panning background -->
 <canvas #background id="background" width="1200" height="720">
   Your browser does not support canvas. Please try again with a different browser.
 </canvas>
-<!-- The canvas for all enemy ships and bullets -->
+
 <canvas #main id="main" width="1200" height="720">
 </canvas>
-<!-- The canvas the ship uses (can only move up
-         one forth the screen. -->720
+
 <canvas #ship id="ship" width="1200" height="720">
 </canvas>
 
-<button class="newDocker" (click)="launchEnnemy()">Launch new Docker</button>
 <div class="score">Points de vie : <span #score>{{playerScore}}</span></div>
 <div class="game-over" id="game-over">{{message}}</div>
-<script src="space_shooter_part_five.js"></script>
