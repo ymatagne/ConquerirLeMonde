@@ -6,9 +6,15 @@ services:
     volumes:
         - ./conquerirlemonde-back/target/conquerirlemonde.jar:/app/conquerirlemonde.jar
     command: java -jar /app/conquerirlemonde.jar
+    expose: 
+        - "8080"
+    ports:
+        - "0.0.0.0:8080:8080"  
   front:
     image: nginx
     volumes:
         - ./conquerirlemonde-front/www:/usr/share/nginx/html:ro
     ports:
-        - "0.0.0.0:8080:80"        
+        - "0.0.0.0:80:80"   
+    links:
+        - back     
