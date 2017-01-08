@@ -9,13 +9,93 @@
 <md-card>
   <md-card-header>
     <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
-      Copy files from usb key
+      Create user-data's file
     </md-slide-toggle>
   </md-card-header>
   <md-card-content *ngIf="displayLine1">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">cp USB/coreos_production_vagrant.box coreos_production_vagrant.box</span>
+        <span class="tag">touch user-data.yaml</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine2">
+      Contents of this file
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine2">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">#cloud-config</span>
+        <span class="tag">hostname: "naboo"</span>
+        <span class="tag">users:</span>
+        <span class="tag">  - name: "jarjar"</span>
+        <span class="tag">    passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."</span>
+        <span class="tag">    groups:</span>
+        <span class="tag">      - "sudo"</span>
+        <span class="tag">      - "docker"</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
+      Start your box
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine3">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">vagrant up</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine4">
+      Connect to your box
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine4">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">user : jarjar</span>
+        <span class="tag">pass : binks</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine5">
+      Verify service status
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine5">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">systemctl status fleet</span>
+        <span class="tag">systemctl status etcd</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine5">
+      Change Vagrantfile
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine5">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">systemctl status fleet</span>
+        <span class="tag">systemctl status etcd</span>
       </code>
     </pre>
   </md-card-content>

@@ -1,0 +1,14 @@
+#cloud-config
+hostname: "naboo"
+coreos:
+    fleet:
+        etcd_servers: "http://192.168.33.10:2379"
+        metadata: "hostname=naboo"    
+    etcd2:
+        name: "naboo"
+        initial-cluster-token: starwars
+    units:
+      - name: fleet.service
+        command: start
+      - name: etcd2.service
+        command: start

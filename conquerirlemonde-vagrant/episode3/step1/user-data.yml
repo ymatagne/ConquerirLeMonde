@@ -1,0 +1,8 @@
+#cloud-config
+hostname: "naboo"
+users:
+  - name: "jarjar"
+    passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."
+    groups:
+      - "sudo"
+      - "docker"
