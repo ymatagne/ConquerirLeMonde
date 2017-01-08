@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { Observable, Subject } from 'rxjs/Rx';
+import { environment } from '../environments/environment';
 
 import { WebSocketService } from './websocket.service';
 import { Trooper } from './trooper';
@@ -10,11 +11,8 @@ export class TrooperService {
 
   trooper: Subject<Trooper>;
 
-  private newTrooperUrl = 'ws://localhost:8080/ws/trooper';  // URL to web api
-  private dropTrooperUrl = 'http://localhost:8080/trooper/drop';  // URL to web api
-
   constructor(private wsService: WebSocketService, private http: Http) {
-    this.trooper = <Subject<Trooper>>wsService.connect(this.newTrooperUrl)
+    this.trooper = <Subject<Trooper>>wsService.connect(environment.newTrooperUrl)
       .map((response: MessageEvent): Trooper => {
         return JSON.parse(response.data);;
       });
@@ -23,9 +21,9 @@ export class TrooperService {
   public dropTrooper(trooper: Trooper) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    this.http.post(this.dropTrooperUrl, trooper, options).toPromise()
-             .then(()=> console.log('ok'))
-             .catch(()=> console.log('ko'));
+    this.http.post(environment.dropTrooperUrl, trooper, options).toPromise()
+      .then(() => console.log('ok'))
+      .catch(() => console.log('ko'));
   }
 
 }

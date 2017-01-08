@@ -1,4 +1,4 @@
-*.iml
+*iml
 .idea
 **/node_modules
 conquerirlemonde-front/dist/
@@ -6,3 +6,5 @@ conquerirlemonde-front/dist/
 **/.DS_Store
 conquerirlemonde-vagrant/.Vagrantfile.swp
 conquerirlemonde-vagrant/.vagrant
+**/Vagrantfile
+**/www

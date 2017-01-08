@@ -4,5 +4,8 @@
 // The list of which env maps to which file can be found in `angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  planetsUrls: 'ws://localhost:8080/ws/planets',
+  newTrooperUrl: 'ws://localhost:8080/ws/trooper',
+  dropTrooperUrl: 'http://localhost:8080/trooper/drop'
 };

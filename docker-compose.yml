@@ -1,0 +1,14 @@
+version: '2'
+services:
+  back:
+    image: java:openjdk-8u91-jdk
+    working_dir: /app
+    volumes:
+        - ./conquerirlemonde-back/target/conquerirlemonde.jar:/app/conquerirlemonde.jar
+    command: java -jar /app/conquerirlemonde.jar
+  front:
+    image: nginx
+    volumes:
+        - ./conquerirlemonde-front/www:/usr/share/nginx/html:ro
+    ports:
+        - "0.0.0.0:8080:80"        
