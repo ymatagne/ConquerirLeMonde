@@ -9,10 +9,21 @@ import { Planet } from './planet';
 @Injectable()
 export class PlanetsService {
 
-  planets: Subject<Planet[]>;
+  planetsWithKubernetes: Subject<Planet[]>;
 
-  constructor(private wsService: WebSocketService) {
-    this.planets = <Subject<Planet[]>>wsService.connect(environment.planetsUrls)
+  planetsWithFleet: Subject<Planet[]>;
+
+  constructor(private wsService: WebSocketService) {  }
+
+  public initWebSocketKubernetes() {
+    this.planetsWithKubernetes = <Subject<Planet[]>>this.wsService.connect(environment.wsPlanetsKubernetes)
+      .map((response: MessageEvent): Planet[] => {
+        return JSON.parse(response.data);;
+      });
+  }
+
+  public initWebSocketFleet() {
+    this.planetsWithFleet = <Subject<Planet[]>>this.wsService.connect(environment.wsPlanetsFleet)
       .map((response: MessageEvent): Planet[] => {
         return JSON.parse(response.data);;
       });

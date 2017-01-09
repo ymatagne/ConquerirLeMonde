@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 @Slf4j
-public class PlanetsHandler extends TextWebSocketHandler {
+public class PlanetsFleetHandler extends TextWebSocketHandler {
     WebSocketSession session;
 
     public void sendPlanets(List<Planet> planets) {

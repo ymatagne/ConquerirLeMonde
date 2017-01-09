@@ -1,6 +1,7 @@
 package fr.norsys.snowcamp;
 
-import fr.norsys.snowcamp.planets.PlanetsHandler;
+import fr.norsys.snowcamp.planets.PlanetsFleetHandler;
+import fr.norsys.snowcamp.planets.PlanetsKubernetesHandler;
 import fr.norsys.snowcamp.trooper.TrooperHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -12,14 +13,18 @@ import org.springframework.web.socket.config.annotation.*;
 @EnableScheduling
 public class WebSocketConfig implements WebSocketConfigurer {
     @Autowired
-    PlanetsHandler planetsHandler;
+    PlanetsKubernetesHandler planetsKubernetesHandler;
+
+    @Autowired
+    PlanetsFleetHandler planetsFleetHandler;
 
     @Autowired
     TrooperHandler trooperHandler;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(planetsHandler, "/ws/planets")
+        registry.addHandler(planetsKubernetesHandler, "/ws/planets/kubernetes")
+                .addHandler(planetsFleetHandler, "/ws/planets/fleet")
                 .addHandler(trooperHandler,"/ws/trooper")
                 .setAllowedOrigins("*");
     }

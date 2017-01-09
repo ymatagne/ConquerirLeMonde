@@ -5,7 +5,8 @@
 
 export const environment = {
   production: false,
-  planetsUrls: 'ws://localhost:8080/ws/planets',
+  wsPlanetsKubernetes: 'ws://localhost:8080/ws/planets/kubernetes',
+  wsPlanetsFleet: 'ws://localhost:8080/ws/planets/fleet',
   newTrooperUrl: 'ws://localhost:8080/ws/trooper',
   dropTrooperUrl: 'http://localhost:8080/trooper/drop'
 };
