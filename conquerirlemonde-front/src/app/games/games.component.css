@@ -4,14 +4,14 @@
 			}
 			#main {
         position: fixed;
-        top: 0px;
+        top: 120px;
         left: 0px;
         background: transparent;
 				z-index: 0;
 			}
 			#ship {
         position: fixed;
-        top: 0px;
+        top: 120px;
         left: 0px;
         background: transparent;
 				z-index: 1;
