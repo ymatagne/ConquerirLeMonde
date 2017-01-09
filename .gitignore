@@ -5,6 +5,6 @@ conquerirlemonde-front/dist/
 .DS_Store
 **/.DS_Store
 conquerirlemonde-vagrant/.Vagrantfile.swp
-conquerirlemonde-vagrant/.vagrant
+**/.vagrant
 **/Vagrantfile
 **/www

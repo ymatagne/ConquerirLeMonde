@@ -3,7 +3,7 @@ hostname: "tatooine"
 coreos:
     etcd2:
       name: "tatooine"
-      initial-cluster-token: tatooine
+      initial-cluster-token: starwars
       initial-advertise-peer-urls: http://$public_ipv4:2380
       listen-peer-urls: http://0.0.0.0:2380,http://0.0.0.0:7001
       listen-client-urls: http://0.0.0.0:4001
@@ -12,6 +12,7 @@ coreos:
       initial-cluster-state: new
     fleet:
       public-ip: $public_ipv4
+      metadata: "hostname=naboo"
     flannel:
       interface: $public_ipv4
     units:

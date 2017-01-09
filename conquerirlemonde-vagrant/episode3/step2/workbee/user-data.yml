@@ -2,8 +2,9 @@
 hostname: "naboo"
 coreos:
     fleet:
-        etcd_servers: "http://192.168.33.10:2379"
-        metadata: "hostname=naboo"    
+        etcd_servers: "http://192.168.33.10:4001"
+        metadata: "hostname=naboo"
+        public-ip: $public_ipv4    
     etcd2:
         name: "naboo"
         initial-cluster-token: starwars
