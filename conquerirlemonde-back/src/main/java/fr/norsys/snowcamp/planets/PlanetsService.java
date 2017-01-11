@@ -45,6 +45,30 @@ public class PlanetsService {
 
     @Scheduled(fixedDelay = 1000)
     public void sendPlanets() {
+        Trooper trooper = new Trooper();
+        trooper.setName("trooperName");
+        trooper.setImage("image");
+        trooper.setUrl("http://www.google.com");
+        List<Trooper> troopers = new ArrayList<>();
+        troopers.add(trooper);
+        Planet planet = new Planet();
+        planet.setId("12321312");
+        planet.setName("name");
+        planet.setTroopers(troopers);
+        List<Planet> planets = new ArrayList<>();
+        planets.add(planet);
+        planets.add(planet);
+        planets.add(planet);
+        planets.add(planet);
+        planets.add(planet);
+        planets.add(planet);
+        planets.add(planet);
+        planets.add(planet);
+        planets.add(planet);
+        planets.add(planet);
+        planets.add(planet);
+
+        //planetsFleetHandler.sendPlanets(planets);
         //planetsHandler.sendPlanets(kubernetes.planets());
     }
 
@@ -63,7 +87,7 @@ public class PlanetsService {
 
         try {
             EtcdKeysResponse response = etcd.getDir("/_coreos.com/fleet/machines/").recursive().send().get();
-            planets = response.node.nodes.stream().filter(p -> p != null && p.nodes.size() > 0).map(m -> decodePlanet(m)).collect(Collectors.toList());
+            planets = response.node.nodes.stream().filter(p -> p != null && p.nodes.size() > 0).map(m -> decodePlanet(m)).sorted((planet1, planet2) -> planet1.getName().compareTo(planet2.getName())).collect(Collectors.toList());
 
         } catch (IOException | EtcdAuthenticationException | TimeoutException | EtcdException e) {
             log.debug("erreur", e);
@@ -71,11 +95,15 @@ public class PlanetsService {
 
         if (planets.size()>0) {
 
-            EtcdKeysResponse response = etcd.get("/_coreos.com/fleet/state").recursive().send().get();
-            List<Trooper> troopers = response.node.nodes.stream().filter(n -> Boolean.TRUE.equals(n.key.matches("/_coreos.com/fleet/state/.*.service"))).map(n -> decodeTrooper(n.value, n.key)).collect(Collectors.toList());
+            try {
+                EtcdKeysResponse response = etcd.get("/_coreos.com/fleet/state").recursive().send().get();
+                List<Trooper> troopers = response.node.nodes.stream().filter(n -> Boolean.TRUE.equals(n.key.matches("/_coreos.com/fleet/state/.*.service"))).map(n -> decodeTrooper(n.value, n.key)).collect(Collectors.toList());
 
-            for(Planet planet :planets){
-                planet.setTroopers(troopers.stream().filter(trooper -> trooper.getPlanet().getId().equals(planet.getId())).collect(Collectors.toList()));
+                for (Planet planet : planets) {
+                    planet.setTroopers(troopers.stream().filter(trooper -> trooper.getPlanet().getId().equals(planet.getId())).collect(Collectors.toList()));
+                }
+            }catch (EtcdException exception){
+                log.error(exception.getMessage(),exception);
             }
 
         }
@@ -85,7 +113,8 @@ public class PlanetsService {
 
     private Trooper decodeTrooper(String value, String key) {
             Docker docker = new Gson().fromJson(value, Docker.class);
-            Trooper trooper = new Trooper("","","",new Planet(docker.getMachineState().getID(),"null",docker.getMachineState().getPublicIP(), new ArrayList<>()));
+            String [] name = key.split("/");
+            Trooper trooper = new Trooper("","",name[name.length-1],new Planet(docker.getMachineState().getID(),"null",docker.getMachineState().getPublicIP(), new ArrayList<>()));
             return trooper;
     }
 
@@ -93,7 +122,7 @@ public class PlanetsService {
     private Planet decodePlanet(EtcdKeysResponse.EtcdNode node) {
             if (node.nodes.size() > 0) {
                 Machine machine= new Gson().fromJson(node.nodes.get(0).value, Machine.class);
-                return new Planet(machine.getID(),"null",machine.getPublicIP(), new ArrayList<>());
+                return new Planet(machine.getID(),machine.getMetadata().getHostname(),machine.getPublicIP(), new ArrayList<>());
             }
         return null;
     }

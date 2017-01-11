@@ -1,3 +1,6 @@
   md-radio-button {
     margin: 8px;
   }
+  md-card{
+    width: inherit!;
+  }

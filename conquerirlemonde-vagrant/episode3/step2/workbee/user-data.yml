@@ -1,9 +1,9 @@
 #cloud-config
-hostname: "naboo"
+hostname: "toto"
 coreos:
     fleet:
         etcd_servers: "http://192.168.33.10:4001"
-        metadata: "hostname=naboo"
+        metadata: "hostname=toto"
         public-ip: $public_ipv4    
     etcd2:
         name: "naboo"

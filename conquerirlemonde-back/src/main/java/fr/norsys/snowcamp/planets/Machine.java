@@ -9,4 +9,5 @@ public class Machine {
     public String ID;
     public String PublicIP;
     public String Version;
+    public Metadata Metadata;
 }

@@ -260,3 +260,55 @@
     </pre>
   </md-card-content>
 </md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine15">
+      Create your fleet discovery service
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine15">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">touch xwing.service</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine16">
+      This file content:
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine16">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">[Unit]</span>
+        <span class="tag">Description=Go To your ship !</span>
+        <span class="tag">BindsTo=luke.service</span>
+        <span class="tag">After=luke.service</span>
+        <span class="pln"></span>
+        <span class="tag">[Service]</span>
+        <span class="tag">{{"ExecStart=/bin/sh -c \"while true; do etcdctl set /conquerirlemonde/ship/xwing \'{ \"host\": \"%H\", \"port\": 80, \"version\": \"52c7248a14\" }\' --ttl 60;sleep 45;done"}}"</span>
+        <span class="tag">ExecStop=/usr/bin/etcdctl rm /conquerirlemonde/ship/xwing</span>
+        <span class="pln"></span>
+        <span class="tag">[X-Fleet]</span>
+        <span class="tag">MachineOf=luke.service</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine17">
+      Start your service
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine17">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">fleetctl start xwing.service</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>

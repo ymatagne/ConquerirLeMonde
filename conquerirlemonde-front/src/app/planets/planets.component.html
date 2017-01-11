@@ -1,24 +1,34 @@
-<md-card>
-  <md-card-header>
-    <md-card-title>What do you use ?</md-card-title>
-  </md-card-header>
-  <md-card-content>
-    <md-radio-group [(ngModel)]="chosenOption">
-      <md-radio-button *ngFor="let option of options" [value]="option">
-        {{option}}
-      </md-radio-button>
-    </md-radio-group>
-  </md-card-content>
-</md-card>
-<md-card *ngFor="let planet of planets">
-  <md-card-header>
-    <img md-card-avatar src="assets/planets/1.png">
-    <md-card-title>{{ planet.name }}</md-card-title>
-    <md-card-subtitle>{{ planet.ip }}</md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
-    <div *ngFor="let trooper of planet.troopers">
-      <img mdTooltip="{{trooper.name}}" mdTooltipPosition="below" style="height:50px" src="assets/trooper.png">
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <md-card>
+    <md-card-header>
+      <md-card-title>What do you use ?</md-card-title>
+    </md-card-header>
+    <md-card-content>
+      <md-radio-group [(ngModel)]="chosenOption">
+        <md-radio-button *ngFor="let option of options" [value]="option">
+          {{option}}
+        </md-radio-button>
+      </md-radio-group>
+    </md-card-content>
+  </md-card>
 </div>
+
+<div class="flex-container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="space-around stretch">
+  <div class="flex-item" *ngFor="let planet of planets">
+
+    <md-card>
+      <md-card-title-group>
+        <img md-card-sm-image src="assets/planets/bespin.png">
+        <md-card-title>{{ planet.name }}</md-card-title>
+        <md-card-subtitle>{{ planet.ip }}</md-card-subtitle>
+      </md-card-title-group>
+      <md-card-content>
+      <div class="flex-container" fxLayout="row" fxLayout.xs="column" >
+        <div *ngFor="let trooper of planet.troopers">
+            <img mdTooltip="{{trooper.name}}" mdTooltipPosition="below" style="height:50px" src="assets/trooper.png">
+        </div>
+      </div>
 </md-card-content>
 </md-card>
+</div>
+</div>
