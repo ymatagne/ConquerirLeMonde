@@ -21,14 +21,34 @@ export class Enemy extends Drawable {
   imageRepository: ImageRepository;
   enemyBulletPool : Pool;
   trooper:Trooper;
+  enemyImage = new Image();
 
   constructor(imageRepository: ImageRepository, mainContext: any, bulletPool: Pool) {
     super(0, 0, 0, 0);
     this.imageRepository = imageRepository;
     this.context = mainContext;
     this.enemyBulletPool = bulletPool;
+    this.enemyImage.src = "/assets/games/imgs/enemy.png";
   }
 
+  setTrooper(trooper : Trooper){
+    this.trooper = trooper;
+    this.enemyImage.src = "/assets/games/imgs/"+trooper.image;
+
+    //set default image in case of trouble
+    if(!this.imageExists(this.enemyImage.src)){
+      this.enemyImage.src = "/assets/games/imgs/enemy.png"
+    }
+    this.width = this.enemyImage.width;
+    this.height = this.enemyImage.height;
+  }
+
+  imageExists(image_url){
+    var http = new XMLHttpRequest();
+    http.open('HEAD', image_url, false);
+    http.send();
+    return http.status != 404;
+  }
   /*
    * Sets the Enemy values
    */
@@ -65,7 +85,7 @@ export class Enemy extends Drawable {
     }
 
     if (!this.isColliding) {
-      this.context.drawImage(this.imageRepository.enemy, this.x, this.y);
+      this.context.drawImage(this.enemyImage, this.x, this.y);
 
       // Enemy has a chance to shoot every movement
       this.chance = Math.floor(Math.random() * 101);

@@ -48,7 +48,8 @@ public class PlanetsService {
         Trooper trooper = new Trooper();
         trooper.setName("trooperName");
         trooper.setImage("image");
-        trooper.setUrl("http://www.google.com");
+        trooper.setTrooperHost("www.google.com");
+        trooper.setTrooperPort("80");
         List<Trooper> troopers = new ArrayList<>();
         troopers.add(trooper);
         Planet planet = new Planet();
@@ -114,7 +115,7 @@ public class PlanetsService {
     private Trooper decodeTrooper(String value, String key) {
             Docker docker = new Gson().fromJson(value, Docker.class);
             String [] name = key.split("/");
-            Trooper trooper = new Trooper("","",name[name.length-1],new Planet(docker.getMachineState().getID(),"null",docker.getMachineState().getPublicIP(), new ArrayList<>()));
+            Trooper trooper = new Trooper("","","",name[name.length-1],new Planet(docker.getMachineState().getID(),"null",docker.getMachineState().getPublicIP(), new ArrayList<>()));
             return trooper;
     }
 

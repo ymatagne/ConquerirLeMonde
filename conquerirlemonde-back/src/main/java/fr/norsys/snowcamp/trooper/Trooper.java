@@ -1,5 +1,7 @@
 package fr.norsys.snowcamp.trooper;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.norsys.snowcamp.planets.Planet;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,8 +13,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Trooper {
+    @JsonProperty
+    private String trooperHost;
+    @JsonProperty
+    private String trooperPort;
+    @JsonProperty
     private String image;
-    private String url;
+    @JsonProperty
     private String name;
+    @JsonIgnore
     private Planet planet;
 }

@@ -22,8 +22,8 @@ export class TrooperService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     this.http.post(environment.dropTrooperUrl, trooper, options).toPromise()
-      .then(() => console.log('ok'))
-      .catch(() => console.log('ko'));
+      .then(() => console.log('Trooper '+trooper.name +' is dead'))
+      .catch(() => console.log('Unable to kill trooper '+trooper.name));
   }
 
 }

@@ -1,3 +1,3 @@
 export class Trooper {
-    constructor(public name = '', public url = '', public image = '') { }
+    constructor(public name = '', public trooperHost = '', public trooperPort = '', public image = '') { }
 }

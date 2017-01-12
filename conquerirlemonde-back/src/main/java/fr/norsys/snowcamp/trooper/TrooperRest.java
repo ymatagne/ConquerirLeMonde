@@ -21,6 +21,6 @@ public class TrooperRest {
 
     @PostMapping("/trooper/drop")
     public void dropTrooper(@RequestBody Trooper trooper){
-        new RestTemplate().delete(trooper.getUrl()+"/die");
+        new RestTemplate().delete("http://"+trooper.getTrooperHost()+":"+trooper.getTrooperPort()+"/die");
     }
 }

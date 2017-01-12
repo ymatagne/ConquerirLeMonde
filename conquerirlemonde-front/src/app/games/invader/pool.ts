@@ -67,8 +67,6 @@ export class Pool {
         var enemy = new Enemy(this.imageRepository, this.mainContext, bulletPool);
         enemy.x = 0;
         enemy.y = 0;
-        enemy.width = this.imageRepository.enemy.width;
-        enemy.height = this.imageRepository.enemy.height;
         this.pool[i] = enemy;
       }
     }

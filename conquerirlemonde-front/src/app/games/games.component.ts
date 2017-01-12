@@ -47,7 +47,6 @@ export class GamesComponent implements AfterViewInit {
   bgContext: any;
   shipContext: any;
   mainContext: any;
-  nextEnemySpacer: any;
   imageRepository = new ImageRepository();
 
   playerScore = 50;
@@ -98,7 +97,6 @@ export class GamesComponent implements AfterViewInit {
     this.enemyYIndex = 0;
     this.nextEnemyX = 100;
     this.nextEnemyY = 250;
-    this.nextEnemySpacer = -this.imageRepository.enemy.height * 1.5;
 
     // Test to see if canvas is supported. Only need to
     // check one canvas
@@ -129,12 +127,14 @@ export class GamesComponent implements AfterViewInit {
   // Spawn a new wave of enemies
   launchEnnemy(trooper:Trooper) {
     var enemy = this.enemyPool.get(this.nextEnemyX, this.nextEnemyY, 2);
-    enemy.trooper=trooper;
-    this.nextEnemyX += this.imageRepository.enemy.width + 25;
+    enemy.setTrooper(trooper);
+
+    var nextEnemySpacer = -enemy.enemyImage.height * 1.5;
+    this.nextEnemyX += enemy.enemyImage.width + 25;
 
     if (this.enemyXIndex % 15 == 0) {
       this.nextEnemyX = 100;
-      this.nextEnemyY += this.nextEnemySpacer;
+      this.nextEnemyY += nextEnemySpacer;
       this.enemyYIndex++;
       this.enemyXIndex = 0;
     }
