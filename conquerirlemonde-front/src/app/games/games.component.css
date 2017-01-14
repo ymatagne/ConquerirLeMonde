@@ -18,7 +18,7 @@
 			}
 			.score {
 				position: absolute;
-				top: 0px;
+        top: 120px;
 				left: 480px;
 				color: #FF7F00;
 				font-family: Helvetica, sans-serif;
@@ -26,15 +26,10 @@
 			}
 			.game-over {
 				position: absolute;
-				top: 0px;
+        top: 320px;
 				left: 210px;
 				color: #FF7F00;
 				font-family: Helvetica, sans-serif;
 				font-size: 30px;
 				cursor: default;
-			}
-			.newDocker {
-				position: absolute;
-				top: 730px;
-				left: 210px;
 			}
