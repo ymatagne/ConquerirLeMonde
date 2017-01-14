@@ -9,10 +9,10 @@ export class SettingsComponent implements OnInit {
 
   srcPlanetImg = 'ko';
 
-  srcShipImg = 'enemy';
+  srcShipImg = 'Corellian';
 
   planets = ['alderaan', 'bespin', 'coruscant', 'dagobah', 'endor', 'hoth', 'jakku', 'kashyyyk', 'mandalore', 'naboo', 'tatooine', 'yavin']
-  ships = ['enemy', 'ship']
+  ships = ['Corellian', 'DroidStarFighter', 'JediStarFighter', 'MilleniumFalcon', 'NabooBomber', 'NabooStarFighter', 'RebublicCruiser', 'Tibirium', 'TieFighter', 'Xwing', 'YWing']
 
   constructor() { }
 

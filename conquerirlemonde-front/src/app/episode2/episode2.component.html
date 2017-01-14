@@ -1,0 +1,125 @@
+<md-card>
+  <md-card-content>
+    <button color="primary" md-mini-fab routerLink="/rules" routerLinkActive="active">
+    <md-icon class="md-24">keyboard_arrow_left</md-icon>
+  </button>
+    <h2 id="header"> Episode 2 : Docker</h2>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
+      Create DockerFile
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine1">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">touch DockerFile</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine2">
+      DocckerFile content
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine2">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code>
+        <span class="tag">FROM ubuntu:yakkety</span>
+        <span class="pln"></span>
+        <span class="tag">RUN apt-get update</span>
+        <span class="pln"></span>
+        <span class="tag">RUN apt-get install -y curl</span>
+        <span class="pln"></span>
+        <span class="tag">RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -</span>
+        <span class="pln"></span>
+        <span class="tag">RUN apt-get update -y</span>
+        <span class="pln"></span>
+        <span class="pln"></span>
+
+        <span class="tag">RUN apt-get install -y nodejs git</span>
+        <span class="pln"></span>
+        <span class="tag">RUN npm install https://github.com/stalina/trooper.git</span>
+        <span class="pln"></span>
+        <span class="pln"></span>
+
+        <span class="tag">ENV PLANET_HOST=localhost</span>
+        <span class="pln"></span>
+        <span class="tag">ENV PLANET_PORT=8080</span>
+        <span class="pln"></span>
+        <span class="tag">ENV TROOPER_NAME=trooper1</span>
+        <span class="pln"></span>
+        <span class="tag">ENV TROOPER_HOST=localhost</span>
+        <span class="pln"></span>
+        <span class="tag">ENV TROOPER_PORT=9000</span>
+        <span class="pln"></span>
+        <span class="tag">ENV SHIP_IMG=enemy</span>
+        <span class="pln"></span>
+        <span class="pln"></span>
+
+        <span class="tag">EXPOSE 9000</span>
+        <span class="pln"></span>
+        <span class="pln"></span>
+
+        <span class="tag">ENTRYPOINT ["node",  "node_modules/trooper/trooper.js"]</span>
+        <span class="pln"></span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
+      Build your docker image
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine3">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">docker build . -t trooper</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine4">
+      Choose your spaceship
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine4">
+    <div class="flex-container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="space-around stretch" >
+
+      <md-list-item *ngFor="let ship of ships">
+        <md-card class="spaceship-card">
+          <img md-card-image src="assets/games/imgs/ship/big/{{ ship }}.png">
+          <md-card-content>
+            <p>
+              {{ ship }}
+            </p>
+          </md-card-content>
+        </md-card>
+      </md-list-item>
+
+    </div>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine5">
+      Launch your docker
+    </md-slide-toggle>
+    <md-card-title></md-card-title>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine5">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">docker run -d -p 80:9000 -e PLANET_HOST=172.20.20.57 -e PLANET_PORT=8080 -e TROOPER_NAME=luke -e TROOPER_HOST=192.168.56.101 -e TROOPER_PORT=8080 -e SPACESHIP=Xwing trooper</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>

@@ -11,8 +11,9 @@ import { AppComponent } from './app.component';
 import { RulesComponent } from './rules/rules.component';
 import { GamesComponent } from './games/games.component';
 import { PlanetsComponent } from './planets/planets.component';
-import { Episode1Component } from './episode1/episode1.component';
 import { HomeComponent } from './home/home.component';
+import { Episode1Component } from './episode1/episode1.component';
+import { Episode2Component } from './episode2/episode2.component';
 import { Episode3Component } from './episode3/episode3.component';
 import { SettingsComponent } from './settings/settings.component';
 
@@ -24,6 +25,7 @@ export const routes: Routes = [
   { path: 'planets', component: PlanetsComponent },
   { path: 'games', component: GamesComponent },
   { path: 'episode1', component: Episode1Component },
+  { path: 'episode2', component: Episode2Component },
   { path: 'episode3', component: Episode3Component }
 ];
 
@@ -34,8 +36,9 @@ export const routes: Routes = [
     RulesComponent,
     GamesComponent,
     PlanetsComponent,
-    Episode1Component,
     HomeComponent,
+    Episode1Component,
+    Episode2Component,
     Episode3Component,
     SettingsComponent
   ],

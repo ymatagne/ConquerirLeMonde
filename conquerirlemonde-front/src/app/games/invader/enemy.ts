@@ -7,6 +7,7 @@ import {Trooper} from "../../trooper";
  * Create the Enemy ship object.
  */
 export class Enemy extends Drawable {
+
   percentFire = .01;
   chance = 0;
   alive = false;
@@ -28,16 +29,16 @@ export class Enemy extends Drawable {
     this.imageRepository = imageRepository;
     this.context = mainContext;
     this.enemyBulletPool = bulletPool;
-    this.enemyImage.src = "/assets/games/imgs/enemy.png";
+    this.enemyImage.src = "/assets/games/imgs/ship/enemy.png";
   }
 
   setTrooper(trooper : Trooper){
     this.trooper = trooper;
-    this.enemyImage.src = "/assets/games/imgs/"+trooper.image;
+    this.enemyImage.src = "/assets/games/imgs/ship/"+trooper.image+".png";
 
     //set default image in case of trouble
     if(!this.imageExists(this.enemyImage.src)){
-      this.enemyImage.src = "/assets/games/imgs/enemy.png"
+      this.enemyImage.src = "/assets/games/imgs/ship/enemy.png"
     }
     this.width = this.enemyImage.width;
     this.height = this.enemyImage.height;
