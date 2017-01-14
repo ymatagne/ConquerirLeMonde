@@ -20,6 +20,10 @@ export class PlanetsComponent implements OnInit {
 
   constructor(private planetsService: PlanetsService) { }
 
+  updateBrokenImage(event) {
+    event.srcElement.src = "/assets/planets/ko.gif";
+  }
+
   ngOnInit() {
     switch (this.chosenOption) {
       case 'Fleet':

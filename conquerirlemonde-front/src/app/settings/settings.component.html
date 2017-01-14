@@ -1,0 +1,32 @@
+<div fxLayout="row" fxLayoutAlign="space-around start">
+  <md-card>
+    <md-card-title-group>
+      <img md-card-lg-image src="/assets/planets/{{srcPlanetImg}}.png">
+      <md-card-title>Your planet is</md-card-title>
+      <md-card-subtitle>{{srcPlanetImg}}</md-card-subtitle>
+    </md-card-title-group>
+  </md-card>
+  <md-card>
+    <md-card-title-group>
+      <img md-card-lg-image src="/assets/games/imgs/{{srcShipImg}}.png">
+      <md-card-title>Your ship is</md-card-title>
+      <md-card-subtitle>{{srcShipImg}}</md-card-subtitle>
+    </md-card-title-group>
+  </md-card>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-around start">
+  <div fxLayout="column" fxLayoutAlign="space-between none">
+    <md-nav-list>
+      <md-list-item *ngFor="let planet of planets">
+        <a (click)="showPlanet(planet)" md-line>{{ planet }}</a>
+      </md-list-item>
+    </md-nav-list>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="space-between none">
+    <md-nav-list>
+      <md-list-item *ngFor="let ship of ships">
+        <a (click)="showShip(ship)" md-line>{{ ship }}</a>
+      </md-list-item>
+    </md-nav-list>
+  </div>
+</div>

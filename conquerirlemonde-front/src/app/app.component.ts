@@ -18,9 +18,10 @@ export class AppComponent {
 
   public selectedIndex() {
     switch (this.router.url) {
-      case (this.router.url.match(/\/rules|\/episode.*/) || {})[0]: return 1;
-      case '/planets': return 2;
-      case '/games': return 3;
+      case '/settings': return 1;
+      case (this.router.url.match(/\/rules|\/episode.*/) || {})[0]: return 2;      
+      case '/planets': return 3;
+      case '/games': return 4;
       default: return 0;
     }
   }
@@ -32,12 +33,15 @@ export class AppComponent {
         this.router.navigateByUrl('');
         break;
       case 1:
-        this.router.navigateByUrl('/rules');
+        this.router.navigateByUrl('/settings');
         break;
       case 2:
-        this.router.navigateByUrl('/planets');
+        this.router.navigateByUrl('/rules');
         break;
       case 3:
+        this.router.navigateByUrl('/planets');
+        break;
+      case 4:
         this.router.navigateByUrl('/games');
         break;
       default:

@@ -18,7 +18,7 @@
 
     <md-card>
       <md-card-title-group>
-        <img md-card-sm-image src="assets/planets/bespin.png">
+        <img md-card-sm-image src="assets/planets/{{planet.name}}.png" (error)="updateBrokenImage($event)">
         <md-card-title>{{ planet.name }}</md-card-title>
         <md-card-subtitle>{{ planet.ip }}</md-card-subtitle>
       </md-card-title-group>

@@ -14,10 +14,12 @@ import { PlanetsComponent } from './planets/planets.component';
 import { Episode1Component } from './episode1/episode1.component';
 import { HomeComponent } from './home/home.component';
 import { Episode3Component } from './episode3/episode3.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'settings', component: SettingsComponent },
   { path: 'rules', component: RulesComponent },
   { path: 'planets', component: PlanetsComponent },
   { path: 'games', component: GamesComponent },
@@ -34,7 +36,8 @@ export const routes: Routes = [
     PlanetsComponent,
     Episode1Component,
     HomeComponent,
-    Episode3Component
+    Episode3Component,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

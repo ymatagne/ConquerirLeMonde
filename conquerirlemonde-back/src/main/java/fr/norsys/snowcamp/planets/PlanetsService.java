@@ -91,7 +91,7 @@ public class PlanetsService {
             planets = response.node.nodes.stream().filter(p -> p != null && p.nodes.size() > 0).map(m -> decodePlanet(m)).sorted((planet1, planet2) -> planet1.getName().compareTo(planet2.getName())).collect(Collectors.toList());
 
         } catch (IOException | EtcdAuthenticationException | TimeoutException | EtcdException e) {
-            log.debug("erreur", e);
+            log.debug("erreur");
         }
 
         if (planets.size()>0) {
@@ -104,7 +104,7 @@ public class PlanetsService {
                     planet.setTroopers(troopers.stream().filter(trooper -> trooper.getPlanet().getId().equals(planet.getId())).collect(Collectors.toList()));
                 }
             }catch (EtcdException exception){
-                log.error(exception.getMessage(),exception);
+                log.error(exception.getMessage());
             }
 
         }
