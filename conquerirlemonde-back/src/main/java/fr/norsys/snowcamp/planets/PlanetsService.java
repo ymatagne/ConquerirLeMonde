@@ -33,7 +33,10 @@ public class PlanetsService {
     @Autowired
     PlanetsFleetHandler planetsFleetHandler;
 
-    //@Autowired
+    @Autowired
+    PlanetsKubernetesHandler planetsKubernetesHandler;
+
+    @Autowired
     KubernetesClientWrapper kubernetes;
 
     EtcdClient etcd;
@@ -43,35 +46,6 @@ public class PlanetsService {
     }
     List<Planet> planets;
 
-    @Scheduled(fixedDelay = 1000)
-    public void sendPlanets() {
-        Trooper trooper = new Trooper();
-        trooper.setName("trooperName");
-        trooper.setImage("image");
-        trooper.setTrooperHost("www.google.com");
-        trooper.setTrooperPort("80");
-        List<Trooper> troopers = new ArrayList<>();
-        troopers.add(trooper);
-        Planet planet = new Planet();
-        planet.setId("12321312");
-        planet.setName("name");
-        planet.setTroopers(troopers);
-        List<Planet> planets = new ArrayList<>();
-        planets.add(planet);
-        planets.add(planet);
-        planets.add(planet);
-        planets.add(planet);
-        planets.add(planet);
-        planets.add(planet);
-        planets.add(planet);
-        planets.add(planet);
-        planets.add(planet);
-        planets.add(planet);
-        planets.add(planet);
-
-        //planetsFleetHandler.sendPlanets(planets);
-        //planetsHandler.sendPlanets(kubernetes.planets());
-    }
 
     private void connectEtcd() {
         if (etcd == null) {
@@ -80,6 +54,10 @@ public class PlanetsService {
     }
 
     @Scheduled(fixedDelay = 1000)
+    public void sendPlanetsWithKubernetes() throws IOException, EtcdAuthenticationException, TimeoutException, EtcdException {
+        planetsKubernetesHandler.sendPlanets(kubernetes.planets());
+    }
+        @Scheduled(fixedDelay = 1000)
     public void sendPlanetsWithFleet() throws IOException, EtcdAuthenticationException, TimeoutException, EtcdException {
         connectEtcd();
 

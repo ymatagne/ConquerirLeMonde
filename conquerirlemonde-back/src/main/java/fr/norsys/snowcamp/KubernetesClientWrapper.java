@@ -9,22 +9,24 @@ import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
 import org.springframework.stereotype.Component;
 
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-//@Component
+@Component
 public class KubernetesClientWrapper {
 
     KubernetesClient client;
 
-    KubernetesClientWrapper(){
+    KubernetesClientWrapper() throws URISyntaxException {
         Config config = new ConfigBuilder()
-                .withMasterUrl("https://172.17.4.99")
-                .withCaCertFile("/Users/luya/Workspace/coreos-kubernetes/single-node/ssl/ca.pem")
-                .withClientCertFile("/Users/luya/Workspace/coreos-kubernetes/single-node/ssl/admin.pem")
-                .withClientKeyFile("/Users/luya/Workspace/coreos-kubernetes/single-node/ssl/admin-key.pem")
+                .withMasterUrl("https://192.168.33.10")
+                .withCaCertFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-back/src/main/resources/certificats/ca.pem")
+                .withClientCertFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-back/src/main/resources/certificats/admin.pem")
+                .withClientKeyFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-back/src/main/resources/certificats/admin-key.pem")
                 .build();
         client = new DefaultKubernetesClient(config);
     }

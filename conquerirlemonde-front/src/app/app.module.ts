@@ -18,6 +18,8 @@ import { Episode3Component } from './episode3/episode3.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SlidesComponent } from './slides/slides.component';
 import {SafeUrlPipe} from "./slides/safe-url.pipe";
+import { Episode5Component } from './episode5/episode5.component';
+import { Episode6Component } from './episode6/episode6.component';
 
 
 export const routes: Routes = [
@@ -29,6 +31,7 @@ export const routes: Routes = [
   { path: 'episode1', component: Episode1Component },
   { path: 'episode2', component: Episode2Component },
   { path: 'episode3', component: Episode3Component },
+  { path: 'episode5', component: Episode5Component },
   { path: 'slides/:id', component: SlidesComponent }
 ];
 
@@ -45,7 +48,9 @@ export const routes: Routes = [
     Episode3Component,
     SettingsComponent,
     SlidesComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
+    Episode5Component,
+    Episode6Component
   ],
   imports: [
     BrowserModule,

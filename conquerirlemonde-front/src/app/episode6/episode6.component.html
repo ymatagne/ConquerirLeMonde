@@ -1,0 +1,85 @@
+
+Facon 1
+
+touch trooper-controller.json
+
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1",
+   "metadata":{
+      "name":"trooper",
+      "labels":{
+         "app":"trooper"
+      }
+   },
+   "spec":{
+      "replicas":3,
+      "selector":{
+         "app":"trooper"
+      },
+      "template":{
+         "metadata":{
+            "labels":{
+               "app":"trooper"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"trooper",
+                  "image":"nginx",
+                  "ports":[
+                     {
+                        "name":"http-server",
+                        "containerPort":80
+                     }
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}
+
+kubectl get rc
+
+
+
+kubectl run trooper --image=nginx --replicas=3 --port=80
+
+kubectl get pods -l run-container=webserver
+
+touch trooper-service.json
+
+{
+   "kind":"Service",
+   "apiVersion":"v1",
+   "metadata":{
+      "name":"trooper",
+      "labels":{
+         "app":"trooper"
+      }
+   },
+   "spec":{
+      "ports": [
+         {
+           "port":80,
+           "targetPort":"http-server"
+         }
+      ],
+      "selector":{
+         "app":"trooper"
+      },
+      "type": "LoadBalancer"
+   }
+}
+
+kubectl get services
+
+
+
+
+Facon 2
+
+kubectl run trooper3 --image=nginx --port=80 --replicas=2
+kubectl expose rs trooper3- --port=80 --target-port=80 --type=LoadBalancer

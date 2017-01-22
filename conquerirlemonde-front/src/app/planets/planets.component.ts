@@ -24,6 +24,22 @@ export class PlanetsComponent implements OnInit {
     event.srcElement.src = "/assets/planets/ko.gif";
   }
 
+  changeOption(option) {
+    switch (option) {
+      case 'Fleet':
+        this.planetsService.initWebSocketFleet();
+        this.planetsService.planetsWithFleet.subscribe(planets => {
+          this.planets = planets;
+        });
+        break;
+      case 'Kubernetes':
+        this.planetsService.initWebSocketKubernetes();
+        this.planetsService.planetsWithKubernetes.subscribe(planets => {
+          this.planets = planets;
+        });
+        break;
+    }
+  }
   ngOnInit() {
     switch (this.chosenOption) {
       case 'Fleet':

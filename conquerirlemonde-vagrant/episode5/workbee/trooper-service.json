@@ -1,0 +1,23 @@
+{
+   "kind":"Service",
+   "apiVersion":"v1",
+   "metadata":{
+      "name":"trooper",
+      "labels":{
+         "app":"trooper"
+      }
+   },
+   "spec":{
+      "ports": [
+         {
+           "port":80,
+           "targetPort":"http-server",
+           "nodePort": 31000
+         }
+      ],
+      "selector":{
+         "app":"trooper"
+      },
+      "type": "LoadBalancer"
+   }
+}

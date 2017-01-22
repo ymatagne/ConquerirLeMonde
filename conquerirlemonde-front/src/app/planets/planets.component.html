@@ -4,7 +4,7 @@
       <md-card-title>What do you use ?</md-card-title>
     </md-card-header>
     <md-card-content>
-      <md-radio-group [(ngModel)]="chosenOption">
+      <md-radio-group [(ngModel)]="chosenOption" (change)="changeOption($event.value);">
         <md-radio-button *ngFor="let option of options" [value]="option">
           {{option}}
         </md-radio-button>

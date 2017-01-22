@@ -1,0 +1,37 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1",
+   "metadata":{
+      "name":"trooper",
+      "labels":{
+         "app":"trooper"
+      }
+   },
+   "spec":{
+      "replicas":3,
+      "selector":{
+         "app":"trooper"
+      },
+      "template":{
+         "metadata":{
+            "labels":{
+               "app":"trooper"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"trooper",
+                  "image":"nginx",
+                  "ports":[
+                     {
+                        "name":"http-server",
+                        "containerPort":80
+                     }
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}
