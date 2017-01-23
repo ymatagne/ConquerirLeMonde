@@ -1,86 +1,284 @@
-<!--
-Facon 1
-
-touch trooper-controller.json
-
-{
-   "kind":"ReplicationController",
-   "apiVersion":"v1",
-   "metadata":{
-      "name":"trooper",
-      "labels":{
-         "app":"trooper"
-      }
-   },
-   "spec":{
-      "replicas":3,
-      "selector":{
-         "app":"trooper"
-      },
-      "template":{
-         "metadata":{
-            "labels":{
-               "app":"trooper"
-            }
-         },
-         "spec":{
-            "containers":[
-               {
-                  "name":"trooper",
-                  "image":"nginx",
-                  "ports":[
-                     {
-                        "name":"http-server",
-                        "containerPort":80
-                     }
-                  ]
-               }
-            ]
-         }
-      }
-   }
-}
-
-kubectl get rc
-
-
-
-kubectl run trooper --image=nginx --replicas=3 --port=80
-
-kubectl get pods -l run-container=webserver
-
-touch trooper-service.json
-
-{
-   "kind":"Service",
-   "apiVersion":"v1",
-   "metadata":{
-      "name":"trooper",
-      "labels":{
-         "app":"trooper"
-      }
-   },
-   "spec":{
-      "ports": [
-         {
-           "port":80,
-           "targetPort":"http-server"
-         }
-      ],
-      "selector":{
-         "app":"trooper"
-      },
-      "type": "LoadBalancer"
-   }
-}
-
-kubectl get services
-
-
-
-
-Facon 2
-
-kubectl run trooper3 --image=nginx --port=80 --replicas=2
-kubectl expose rs trooper3- --port=80 --target-port=80 --type=LoadBalancer
--->
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
+      Create nginxfile-controller.json file
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine1">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">touch nginxfile-controller.json</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine2">
+      This file contains:
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine2">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag"></span>        
+        <span class="tag">{{"{"}}</span>        
+        <span class="tag">  "kind":"ReplicationController",</span>
+        <span class="tag">  "apiVersion":"v1",</span>
+        <span class="tag">  {{"\"metadata\":{"}}</span>
+        <span class="tag">      "name":"nginxfile",</span>
+        <span class="tag">      {{"\"labels\":{"}}</span>
+        <span class="tag">          "app":"nginxfile"</span>
+        <span class="tag">      {{"}"}}</span>
+        <span class="tag">  {{"},"}}</span>
+        <span class="tag">  {{"\"spec\":{"}}</span>
+        <span class="tag">      "replicas":1,</span>
+        <span class="tag">      {{"\"selector\":{"}}</span>
+        <span class="tag">        "app":"nginxfile"</span>
+        <span class="tag">      {{"},"}}</span>
+        <span class="tag">      {{"\"template\":{"}}</span>
+        <span class="tag">          {{"\"metadata\":{"}}</span>
+        <span class="tag">              {{"\"labels\":{"}}</span>
+        <span class="tag">                    "app":"nginxfile"</span>
+        <span class="tag">              {{"}"}}</span>
+        <span class="tag">          {{"},"}}</span>
+        <span class="tag">      {{"\"spec\":{"}}</span>
+        <span class="tag">          "containers":[</span>
+        <span class="tag">              {{"{"}}</span>
+        <span class="tag">                  "name":"nginxfile",</span>
+        <span class="tag">                  "image":"nginx",</span>
+        <span class="tag">                  "ports":[</span>
+        <span class="tag">                      {{"{"}}</span>
+        <span class="tag">                          "name":"http-server",</span>
+        <span class="tag">                          "containerPort":80</span>
+        <span class="tag">                      {{"}"}}</span>
+        <span class="tag">                  ]</span>
+        <span class="tag">              {{"}"}}</span>
+        <span class="tag">          ]</span>
+        <span class="tag">      {{"}"}}</span>
+        <span class="tag">    {{"}"}}</span>
+        <span class="tag">  {{"}"}}</span>
+        <span class="tag">{{"}"}}</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
+      Create nginxfile-service.json file
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine3">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">nginxfile-service.json</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine4">
+      This file contains:
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine4">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag"></span>   
+        <span class="tag">{{"{"}}</span>
+        <span class="tag">    "kind":"Service",</span>
+        <span class="tag">    "apiVersion":"v1",</span>
+        <span class="tag">    {{"\"metadata\":{"}}</span>
+        <span class="tag">        "name":"nginxfile",</span>
+        <span class="tag">        {{"\"labels\":{"}}</span>
+        <span class="tag">            "app":"nginxfile"</span>
+        <span class="tag">        {{"}"}}</span>
+        <span class="tag">    {{"},"}}</span>
+        <span class="tag">    {{"\"spec\":{"}}</span>
+        <span class="tag">        "ports": [</span>
+        <span class="tag">        {{"{"}}</span>
+        <span class="tag">            "port":80,</span>
+        <span class="tag">            "targetPort":"http-server",</span>
+        <span class="tag">            "nodePort": 32100</span>
+        <span class="tag">        {{"}"}}</span>
+        <span class="tag">        ],</span>
+        <span class="tag">        {{"\"selector\":{"}}</span>
+        <span class="tag">            "app":"nginxfile"</span>
+        <span class="tag">        {{"},"}}</span>
+        <span class="tag">        "type": "LoadBalancer"</span>
+        <span class="tag">    {{"\}"}}</span>
+        <span class="tag">{{"\}\""}}</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine5">
+      Run replicas
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine5">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">kubectl create -f nginxfile-controller.json</span>  
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine6">
+      View Replicas
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine6">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">kubectl get rc</span>  
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine7">
+      View pods
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine7">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">kubectl get pods</span>  
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine8">
+      Run replicas
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine8">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">kubectl create -f nginxfile-service.json</span>  
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine9">
+      View Replicas
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine9">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">kubectl get services</span>  
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine10">
+      Connect to your nginx service
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine10">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">curl -XGET http://192.168.1.11:32100/</span>  
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine11">
+      Is it so hard ? Run only two commands...
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine11">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">kubectl run ship --image=nginx --port=80 --replicas=2</span>  
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine12">
+      Is it so hard ? Run only two commands...
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine12">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">kubectl expose rs ship* --port=80 --target-port=80 --type=LoadBalancer</span>  
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine13">
+      Get nodePort
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine13">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">kubectl descibe rs ship</span>  
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine14">
+      Connect to your nginx service
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine14">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">curl -XGET http://192.168.1.11:PORT/</span>  
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine15">
+      And if you run troopers ?
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine15">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">kubectl run trooper --image=nginx --port=80 --replicas=10</span>  
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine16">
+      Create nodePort
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine16">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">kubectl expose rs trooper* --port=80 --target-port=80 --type=LoadBalancer</span>  
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>

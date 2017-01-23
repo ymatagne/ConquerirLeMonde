@@ -32,6 +32,7 @@ export const routes: Routes = [
   { path: 'episode2', component: Episode2Component },
   { path: 'episode3', component: Episode3Component },
   { path: 'episode5', component: Episode5Component },
+  { path: 'episode6', component: Episode6Component },
   { path: 'slides/:id', component: SlidesComponent }
 ];
 
