@@ -37,7 +37,7 @@ public class KubernetesClientWrapper {
 
     private Planet createPlanet(Node node) {
         List<Trooper> troopers = new ArrayList<>();
-        //node.getStatus().getImages().forEach(container -> troopers.add(new Trooper(container.getNames().get(1))));
+        client.pods().list().getItems().stream().filter(pod -> pod.getSpec().getNodeName().equals(node.getMetadata().getName()) ).forEach(pod -> troopers.add(new Trooper(node.getMetadata().getName(),"",pod.getSpec().getContainers().get(0).getImage(),node.getMetadata().getName(),null)));
         return new Planet(node.getMetadata().getUid(),node.getMetadata().getName(),node.getStatus().getAddresses().get(0).getAddress(),troopers);
     }
 }
