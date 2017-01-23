@@ -3,7 +3,7 @@ import { Observable, Subject, Observer } from 'rxjs/Rx';
 
 
 @Injectable()
-export class WebSocketService {
+export class KubernetesWebSocketService {
     private subject: Subject<MessageEvent>;
 
     public connect(url): Subject<MessageEvent> {
