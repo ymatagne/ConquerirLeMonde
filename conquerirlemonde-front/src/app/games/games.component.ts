@@ -49,7 +49,7 @@ export class GamesComponent implements AfterViewInit {
   mainContext: any;
   imageRepository = new ImageRepository();
 
-  playerScore = 50;
+  playerScore = 5000;
   message = "";
 
   ngAfterViewInit() {
