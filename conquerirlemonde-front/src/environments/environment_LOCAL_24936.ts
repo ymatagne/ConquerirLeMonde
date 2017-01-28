@@ -8,5 +8,5 @@ export const environment = {
   wsPlanetsKubernetes: 'ws://192.168.0.11:8080/ws/planets/kubernetes',
   wsPlanetsFleet: 'ws://192.168.0.11:8080/ws/planets/fleet',
   newTrooperUrl: 'ws://192.168.0.11:8080/ws/trooper',
-  dropTrooperUrl: 'http://192.168.0.11:8080/trooper/die'
+  dropTrooperUrl: 'http://192.168.0.11:8080/trooper/drop'
 };

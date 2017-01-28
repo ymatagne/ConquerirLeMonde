@@ -5,8 +5,15 @@
 
 export const environment = {
   production: false,
+<<<<<<< 161fe792cb392748525904f7e796583029a6d3cf
   wsPlanetsKubernetes: 'ws://192.168.0.11:8080/ws/planets/kubernetes',
   wsPlanetsFleet: 'ws://192.168.0.11:8080/ws/planets/fleet',
   newTrooperUrl: 'ws://192.168.0.11:8080/ws/trooper',
-  dropTrooperUrl: 'http://192.168.0.11:8080/trooper/die'
+  dropTrooperUrl: 'http://192.168.0.11:8080/trooper/drop'
+=======
+  wsPlanetsKubernetes: 'ws://localhost:8080/ws/planets/kubernetes',
+  wsPlanetsFleet: 'ws://localhost:8080/ws/planets/fleet',
+  newTrooperUrl: 'ws://localhost:8080/ws/trooper',
+  dropTrooperUrl: 'http://localhost:8080/trooper/die'
+>>>>>>> feat(trooper) : check if die is ok
 };

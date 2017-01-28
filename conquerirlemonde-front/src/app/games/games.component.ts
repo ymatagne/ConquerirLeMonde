@@ -166,10 +166,12 @@ export class GamesComponent implements AfterViewInit {
             objects[x].y < obj[y].y + obj[y].height &&
             objects[x].y + objects[x].height > obj[y].y)) {
 
-          objects[x].isColliding = true;
-          obj[y].isColliding = true;
+
           if (obj[y].type === "enemy") {
-            this.trooperService.dropTrooper(obj[y].trooper);
+            if(this.trooperService.dropTrooper(obj[y].trooper)){
+              objects[x].isColliding = true;
+              obj[y].isColliding = true;
+            }
           }
         }
       }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions } from '@angular/http';
+import {Headers, Http, RequestOptions, Response} from '@angular/http';
 import { Observable, Subject } from 'rxjs/Rx';
 import { environment } from '../environments/environment';
 
@@ -18,12 +18,27 @@ export class TrooperService {
       });
   }
 
-  public dropTrooper(trooper: Trooper) {
+  public dropTrooper(trooper: Trooper): Promise<boolean> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    this.http.post(environment.dropTrooperUrl, trooper, options).toPromise()
-      .then(() => console.log('Trooper '+trooper.name +' is dead'))
-      .catch(() => console.log('Unable to kill trooper '+trooper.name));
+    return this.http.post(environment.dropTrooperUrl, trooper, options)
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleError);
+  }
+
+  private extractData(res: Response) {
+    let body = res.toString()
+      if(body){
+        console.log('Trooper is dead')
+        return true;
+      }
+      return false;
+  }
+
+  private handleError (error: Response | any) {
+    console.error('Unable to kill trooper : .' + error);
+    return false;
   }
 
 }
