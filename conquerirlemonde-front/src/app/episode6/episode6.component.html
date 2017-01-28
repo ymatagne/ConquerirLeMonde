@@ -1,4 +1,13 @@
 <md-card>
+  <md-card-content>
+    <button color="primary" md-mini-fab routerLink="/rules" routerLinkActive="active">
+    <md-icon class="md-24">keyboard_arrow_left</md-icon>
+  </button>
+    <h2 id="header">Episode 6 : Always use kubernetes !</h2>
+  </md-card-content>
+</md-card>
+<md-card>
+<md-card>
   <md-card-header>
     <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
       Create nginxfile-controller.json file
@@ -72,7 +81,7 @@
   <md-card-content *ngIf="displayLine3">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">nginxfile-service.json</span>
+        <span class="tag">touch nginxfile-service.json</span>
       </code>
     </pre>
   </md-card-content>
@@ -109,7 +118,7 @@
         <span class="tag">        {{"},"}}</span>
         <span class="tag">        "type": "LoadBalancer"</span>
         <span class="tag">    {{"\}"}}</span>
-        <span class="tag">{{"\}\""}}</span>
+        <span class="tag">{{"\}"}}</span>
       </code>
     </pre>
   </md-card-content>
@@ -123,7 +132,7 @@
   <md-card-content *ngIf="displayLine5">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">kubectl create -f nginxfile-controller.json</span>  
+        <span class="tag">./kubectl create -f nginxfile-controller.json</span>  
       </code>
     </pre>
   </md-card-content>
@@ -151,7 +160,7 @@
   <md-card-content *ngIf="displayLine7">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">kubectl get pods</span>  
+        <span class="tag">./kubectl get pods</span>  
       </code>
     </pre>
   </md-card-content>
@@ -165,7 +174,7 @@
   <md-card-content *ngIf="displayLine8">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">kubectl create -f nginxfile-service.json</span>  
+        <span class="tag">./kubectl create -f nginxfile-service.json</span>  
       </code>
     </pre>
   </md-card-content>
@@ -179,7 +188,7 @@
   <md-card-content *ngIf="displayLine9">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">kubectl get services</span>  
+        <span class="tag">./kubectl get services</span>  
       </code>
     </pre>
   </md-card-content>
@@ -193,7 +202,7 @@
   <md-card-content *ngIf="displayLine10">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">curl -XGET http://192.168.1.11:32100/</span>  
+        <span class="tag">curl -XGET http://YOU_IP:32100/</span>  
       </code>
     </pre>
   </md-card-content>
@@ -221,7 +230,7 @@
   <md-card-content *ngIf="displayLine12">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">kubectl expose rs ship* --port=80 --target-port=80 --type=LoadBalancer</span>  
+        <span class="tag">kubectl expose rs SHIP_NAME --port=80 --target-port=80 --type=NodePort</span>  
       </code>
     </pre>
   </md-card-content>
@@ -235,7 +244,7 @@
   <md-card-content *ngIf="displayLine13">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">kubectl descibe rs ship</span>  
+        <span class="tag">kubectl get services</span>  
       </code>
     </pre>
   </md-card-content>
@@ -249,7 +258,7 @@
   <md-card-content *ngIf="displayLine14">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">curl -XGET http://192.168.1.11:PORT/</span>  
+        <span class="tag">curl -XGET http://YOUR_IP:PORT/</span>  
       </code>
     </pre>
   </md-card-content>
@@ -263,7 +272,7 @@
   <md-card-content *ngIf="displayLine15">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">kubectl run trooper --image=nginx --port=80 --replicas=10</span>  
+        <span class="tag">kubectl run trooper --image=ymatagne/trooper --port=9000 --replicas=10</span>  
       </code>
     </pre>
   </md-card-content>
@@ -277,7 +286,7 @@
   <md-card-content *ngIf="displayLine16">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">kubectl expose rs trooper* --port=80 --target-port=80 --type=LoadBalancer</span>  
+        <span class="tag">kubectl expose rs trooper* --port=9000 --target-port=9000 --type=LoadBalancer</span>  
       </code>
     </pre>
   </md-card-content>

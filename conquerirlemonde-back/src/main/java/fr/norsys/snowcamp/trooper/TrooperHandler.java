@@ -16,22 +16,22 @@ public class TrooperHandler extends TextWebSocketHandler {
     WebSocketSession session;
 
     public void sendTrooper(Trooper trooper) {
-        log.info("Trying to send trooper...");
+        log.debug("Trying to send trooper...");
         if (session != null && session.isOpen()) {
             try {
-                log.info("send trooper !");
+                log.debug("send trooper !");
                 session.sendMessage(new TextMessage(new Gson().toJson(trooper)));
             } catch (IOException e) {
-                log.error(e.getMessage(),e);
+                log.debug(e.getMessage(),e);
             }
         } else {
-            log.info("Don't have open session to send trooper");
+            log.debug("Don't have open session to send trooper");
         }
     }
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
-        log.info("Connection established");
+        log.debug("Connection established");
         this.session = session;
     }
 
@@ -41,7 +41,7 @@ public class TrooperHandler extends TextWebSocketHandler {
         if ("CLOSE".equalsIgnoreCase(message.getPayload())) {
             session.close();
         } else {
-            log.info("Received:" + message.getPayload());
+            log.debug("Received:" + message.getPayload());
         }
     }
 }

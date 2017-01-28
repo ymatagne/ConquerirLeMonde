@@ -17,22 +17,22 @@ public class PlanetsFleetHandler extends TextWebSocketHandler {
     WebSocketSession session;
 
     public void sendPlanets(List<Planet> planets) {
-        log.info("Trying to send planets...");
+        log.debug("Trying to send planets...");
         if (session != null && session.isOpen()) {
             try {
-                log.info("send planets !");
+                log.debug("send planets !");
                 session.sendMessage(new TextMessage(new Gson().toJson(planets)));
             } catch (IOException e) {
-                log.error(e.getMessage(),e);
+                log.debug(e.getMessage(),e);
             }
         } else {
-            log.info("Don't have open session to send planets");
+            log.debug("Don't have open session to send planets");
         }
     }
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
-        log.info("Connection established");
+        log.debug("Connection established");
         this.session = session;
     }
 
@@ -42,7 +42,7 @@ public class PlanetsFleetHandler extends TextWebSocketHandler {
         if ("CLOSE".equalsIgnoreCase(message.getPayload())) {
             session.close();
         } else {
-            log.info("Received:" + message.getPayload());
+            log.debug("Received:" + message.getPayload());
         }
     }
 }

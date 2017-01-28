@@ -262,7 +262,7 @@
   <md-card-content *ngIf="displayLine15">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">./createWorkerCertificats.sh</span>
+        <span class="tag">./certificates/createWorkerCertificats.sh</span>
       </code>
     </pre>
   </md-card-content>
@@ -304,7 +304,7 @@
   <md-card-content *ngIf="displayLine8">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">systemctl start flanneld</span>
+        <span class="tag">sudo systemctl start flanneld</span>
       </code>
     </pre>
   </md-card-content>
@@ -318,7 +318,7 @@
   <md-card-content *ngIf="displayLine9">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
         <code ng-non-bindable="">
-          <span class="tag">systemctl start kubelet</span>
+          <span class="tag">sudo systemctl start kubelet</span>
         </code>
     </pre>
   </md-card-content>
@@ -339,6 +339,20 @@
 </md-card>
 <md-card>
   <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine20">
+      Exit box
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine20">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">exit</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
     <md-slide-toggle color="primary" [(ngModel)]="displayLine11">
       Get kubectl script
     </md-slide-toggle>
@@ -346,8 +360,8 @@
   <md-card-content *ngIf="displayLine11">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">curl -O https://storage.googleapis.com/kubernetes-release/release/v1.5.2/bin/linux/amd64/kubectl</span>
-        <span class="tag">curl -O https://storage.googleapis.com/kubernetes-release/release/v1.5.2/bin/darwin/amd64/kubectl</span>
+        <span class="tag">for linux : curl -O https://storage.googleapis.com/kubernetes-release/release/v1.5.2/bin/linux/amd64/kubectl</span>
+        <span class="tag">for macos : curl -O https://storage.googleapis.com/kubernetes-release/release/v1.5.2/bin/darwin/amd64/kubectl</span>
       </code>
     </pre>
   </md-card-content>
@@ -362,10 +376,15 @@
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag"></span>
-        <span class="tag">{{"kubectl config set-cluster default-cluster --server=https://${MASTER_HOST} --certificate-authority=${CA_CERT}"}}</span>
-        <span class="tag">{{"kubectl config set-credentials default-admin --certificate-authority=${CA_CERT} --client-key=${ADMIN_KEY} --client-certificate=${ADMIN_CERT}"}}</span>
-        <span class="tag">{{"kubectl config set-context default-system --cluster=default-cluster --user=default-admin"}}</span>
-        <span class="tag">{{"kubectl config use-context default-system"}}</span>
+        <span class="tag">export MASTER_HOST=MASTER_HOST:MASTER_PORT</span>
+        <span class="tag">export CA_CERT=CERTIFICATS_PATH/ca.pem</span>
+        <span class="tag">export ADMIN_KEY=CERTIFICATS_PATH/admin-key.pem</span>
+        <span class="tag">export ADMIN_CERT=CERTIFICATS_PATH/admin.pem</span>
+        <span class="tag"></span>
+        <span class="tag">{{"./kubectl config set-cluster default-cluster --server=https://${MASTER_HOST} --certificate-authority=${CA_CERT}"}}</span>
+        <span class="tag">{{"./kubectl config set-credentials default-admin --certificate-authority=${CA_CERT} --client-key=${ADMIN_KEY} --client-certificate=${ADMIN_CERT}"}}</span>
+        <span class="tag">{{"./kubectl config set-context default-system --cluster=default-cluster --user=default-admin"}}</span>
+        <span class="tag">{{"./kubectl config use-context default-system"}}</span>
       </code>
     </pre>
   </md-card-content>
@@ -378,7 +397,7 @@
   </md-card-header>
   <md-card-content *ngIf="displayLine13">
     <pre class="prettyprint prettyprinted lang-yaml">
-     kubectl get nodes
+     ./kubectl get nodes
     </pre>
   </md-card-content>
 </md-card>
