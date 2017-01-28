@@ -59,8 +59,8 @@
 		    <span class="tag">  config.vm.provision :shell, :inline => "mkdir -p /etc/kubernetes ;mv /tmp/ssl /etc/kubernetes/ssl", :privileged => true</span>
 	      <span class="tag">  config.vm.provision :shell, :inline => "chmod 600 /etc/kubernetes/ssl/*-key.pem", :privileged => true</span>
 	      <span class="tag">  config.vm.provision :shell, :inline => "chown -R root:root /etc/kubernetes/ssl", :privileged => true</span>
-	      <span class="tag">  config.vm.provision :shell, :inline => "cd /etc/kubernetes/ssl/; ln -s tatoone-worker.pem worker.pem", :privileged => true</span>
-	      <span class="tag">  config.vm.provision :shell, :inline => "cd /etc/kubernetes/ssl/; ln -s tatoone-worker-key.pem worker-key.pem", :privileged => true</span>
+	      <span class="tag">  config.vm.provision :shell, :inline => "cd /etc/kubernetes/ssl/; ln -s #PLANET_NAME-worker.pem worker.pem", :privileged => true</span>
+	      <span class="tag">  config.vm.provision :shell, :inline => "cd /etc/kubernetes/ssl/; ln -s #PLANET_NAME-worker-key.pem worker-key.pem", :privileged => true</span>
         <span class="tag">end</span>
         <span class="pln"></span>
       </code>
@@ -99,7 +99,7 @@
         <span class="tag">    owner: "root"</span> 
         <span class="tag">    content: |</span> 
         <span class="tag">      FLANNELD_IFACE=$public_ipv4</span> 
-        <span class="tag">      FLANNELD_ETCD_ENDPOINTS=http://192.168.33.10:2379</span> 
+        <span class="tag">      FLANNELD_ETCD_ENDPOINTS=#ETCD_URL</span> 
         <span class="tag">  - path: "/etc/kubernetes/cni/docker_opts_cni.env"</span> 
         <span class="tag">    permissions: "0644"</span> 
         <span class="tag">    owner: "root"</span> 
@@ -132,7 +132,7 @@
         <span class="tag">      ExecStartPre=/usr/bin/mkdir -p /var/log/containers</span> 
         <span class="tag">      ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/run/kubelet-pod.uuid</span> 
         <span class="tag">      ExecStart=/usr/lib/coreos/kubelet-wrapper \</span> 
-        <span class="tag">        --api-servers=https://192.168.33.10 \</span> 
+        <span class="tag">        --api-servers=#MASTER_URL \</span> 
         <span class="tag">        --cni-conf-dir=/etc/kubernetes/cni/net.d \</span> 
         <span class="tag">        --network-plugin=cni \</span> 
         <span class="tag">        --container-runtime=docker \</span> 
@@ -168,7 +168,7 @@
         <span class="tag">          command:</span> 
         <span class="tag">          - /hyperkube</span> 
         <span class="tag">          - proxy</span> 
-        <span class="tag">          - --master=https://192.168.33.10</span> 
+        <span class="tag">          - --master=#MASTER_URL</span> 
         <span class="tag">          - --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml</span> 
         <span class="tag">          securityContext:</span> 
         <span class="tag">            privileged: true</span> 
@@ -234,6 +234,35 @@
         <span class="tag">              [Service]</span> 
         <span class="tag">              EnvironmentFile=/etc/kubernetes/cni/docker_opts_cni.env</span> 
         <span class="tag">        command: start</span>  
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine14">
+      Change WORKER NAME and IP in createWorkerCertificats.sh
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine14">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">WORKER_IP=#WORKER_IP</span>
+        <span class="tag">WORKER_FQDN=#PLANET_NAME</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine15">
+      Generate certificates
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine15">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">./createWorkerCertificats.sh</span>
       </code>
     </pre>
   </md-card-content>
