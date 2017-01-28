@@ -39,3 +39,5 @@ spec:
             port: 9090
           initialDelaySeconds: 30
           timeoutSeconds: 30
+        args:
+        - --apiserver-host=https://192.168.0.11:30443
