@@ -7,7 +7,7 @@ write_files:
     owner: "root"
     content: |
       FLANNELD_IFACE=$public_ipv4
-      FLANNELD_ETCD_ENDPOINTS=http://$public_ipv4:2379
+      FLANNELD_ETCD_ENDPOINTS=http://192.168.0.11:32379
   - path: "/etc/kubernetes/cni/docker_opts_cni.env"
     permissions: "0644"
     owner: "root"
@@ -47,7 +47,7 @@ write_files:
         --container-runtime=docker \
         --allow-privileged=true \
         --pod-manifest-path=/etc/kubernetes/manifests \
-        --hostname-override=$public_ipv4 \
+        --hostname-override=192.168.0.11 \
         --cluster_dns=10.3.0.10 \
         --cluster_domain=cluster.local
       ExecStop=-/usr/bin/rkt stop --uuid-file=/var/run/kubelet-pod.uuid
@@ -74,7 +74,7 @@ write_files:
           - /hyperkube
           - apiserver
           - --bind-address=0.0.0.0
-          - --etcd-servers=http://$public_ipv4:2379
+          - --etcd-servers=http://192.168.0.11:32379
           - --allow-privileged=true
           - --service-cluster-ip-range=10.3.0.0/24
           - --secure-port=443
@@ -222,7 +222,7 @@ coreos:
     etcd2:
       name: "deathstar"
       listen-client-urls: "http://0.0.0.0:2379,http://0.0.0.0:4001"
-      advertise-client-urls: "http://$public_ipv4:2379"
+      advertise-client-urls: "http://192.168.0.11:32379"
     units:
       - name: etcd2.service
         command: start
