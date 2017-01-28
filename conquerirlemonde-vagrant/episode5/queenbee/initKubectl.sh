@@ -7,3 +7,10 @@ kubectl config set-credentials default-admin --certificate-authority=${CERTIFICA
 kubectl config set-context default-system --cluster=default-cluster --user=default-admin
 kubectl config use-context default-system
 
+kubectl get nodes
+
+kubectl create -f dns-addon.yml
+kubectl create -f kube-dashboard-rc.yaml
+kubectl create -f kube-dashboard-svc.yaml
+kubectl get pods --namespace=kube-system
+echo kubectl port-forward kubernetes-dashboard-v1.4.1-SOME-ID 9090 --namespace=kube-system

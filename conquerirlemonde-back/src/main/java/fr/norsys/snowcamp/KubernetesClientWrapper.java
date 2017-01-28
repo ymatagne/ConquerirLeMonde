@@ -23,10 +23,10 @@ public class KubernetesClientWrapper {
 
     KubernetesClientWrapper() throws URISyntaxException {
         Config config = new ConfigBuilder()
-                .withMasterUrl("https://192.168.33.10")
-                .withCaCertFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-back/src/main/resources/certificats/ca.pem")
-                .withClientCertFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-back/src/main/resources/certificats/admin.pem")
-                .withClientKeyFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-back/src/main/resources/certificats/admin-key.pem")
+                .withMasterUrl("https://192.168.0.11:30443")
+                .withCaCertFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-vagrant/episode5/queenbee/certificats/ca.pem")
+                .withClientCertFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-vagrant/episode5/queenbee/certificats/admin.pem")
+                .withClientKeyFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-vagrant/episode5/queenbee/certificats/admin-key.pem")
                 .build();
         client = new DefaultKubernetesClient(config);
     }
