@@ -172,6 +172,9 @@ export class GamesComponent implements AfterViewInit {
               objects[x].isColliding = true;
               obj[y].isColliding = true;
             }
+          }else {
+            objects[x].isColliding = true;
+            obj[y].isColliding = true;
           }
         }
       }
