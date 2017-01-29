@@ -6,8 +6,8 @@ write_files:
     permissions: "0644"
     owner: "root"
     content: |
-      FLANNELD_IFACE=$public_ipv4
-      FLANNELD_ETCD_ENDPOINTS=http://192.168.0.11:32379
+      FLANNELD_IFACE=192.168.0.71
+      FLANNELD_ETCD_ENDPOINTS=http://192.168.0.71:32379
   - path: "/etc/kubernetes/cni/docker_opts_cni.env"
     permissions: "0644"
     owner: "root"
@@ -47,7 +47,7 @@ write_files:
         --container-runtime=docker \
         --allow-privileged=true \
         --pod-manifest-path=/etc/kubernetes/manifests \
-        --hostname-override=192.168.0.11 \
+        --hostname-override=192.168.0.71 \
         --cluster_dns=10.3.0.10 \
         --cluster_domain=cluster.local
       ExecStop=-/usr/bin/rkt stop --uuid-file=/var/run/kubelet-pod.uuid
@@ -74,11 +74,11 @@ write_files:
           - /hyperkube
           - apiserver
           - --bind-address=0.0.0.0
-          - --etcd-servers=http://192.168.0.11:32379
+          - --etcd-servers=http://192.168.0.71:32379
           - --allow-privileged=true
           - --service-cluster-ip-range=10.3.0.0/24
           - --secure-port=443
-          - --advertise-address=192.168.0.11
+          - --advertise-address=192.168.0.71
           - --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota
           - --tls-cert-file=/etc/kubernetes/ssl/apiserver.pem
           - --tls-private-key-file=/etc/kubernetes/ssl/apiserver-key.pem

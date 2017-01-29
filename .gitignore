@@ -6,5 +6,4 @@ conquerirlemonde-front/dist/
 **/.DS_Store
 conquerirlemonde-vagrant/.Vagrantfile.swp
 **/.vagrant
-**/Vagrantfile
 **/www

@@ -1,5 +1,5 @@
 #!/bin/bash
-MASTER_HOST=192.168.0.11:30443
+MASTER_HOST=192.168.0.71:30443
 CERTIFICATES_PATH=/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-vagrant/episode5/queenbee/certificats
 
 kubectl config set-cluster default-cluster --server=https://${MASTER_HOST} --certificate-authority=${CERTIFICATES_PATH}/ca.pem

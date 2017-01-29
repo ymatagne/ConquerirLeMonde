@@ -1,0 +1,25 @@
+  
+Vagrant.configure("2") do |config|
+	config.vm.box = "coreos-alpha"
+	config.vm.network "public_network", auto_config: false
+	#config.vm.network "private_network"
+
+	config.vm.network :forwarded_port, guest: 80, host: 30080
+  	config.vm.network :forwarded_port, guest: 443, host: 30443	
+	config.vm.network :forwarded_port, guest: 2379, host: 32379
+	config.vm.network :forwarded_port, guest: 15441, host: 15441
+
+	config.vm.provision :file, :source => "user-data.yml", :destination => "/tmp/vagrantfile-user-data"
+        config.vm.provision :shell, :inline => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", :privileged => true
+
+        config.vm.provision :file, source: "./initCluster.sh", destination:"/home/core/initCluster.sh"
+        config.vm.provision :file, source: "./startCluster.sh", destination:"/home/core/startCluster.sh"	
+	config.vm.provision :shell, :inline => "chmod +x /home/core/*.sh", :privileged => true
+	config.vm.provision :file, source: "./certificats", destination: "/tmp/ssl"
+        config.vm.provision :shell, :inline => "mkdir -p /etc/kubernetes/", :privileged => true
+	config.vm.provision :shell, :inline => "mv /tmp/ssl /etc/kubernetes/ssl", :privileged => true
+	config.vm.provision :shell, :inline => "chmod 600 /etc/kubernetes/ssl/*-key.pem", :privileged => true
+	config.vm.provision :shell, :inline => "chown -R root:root /etc/kubernetes/ssl", :privileged => true
+
+	config.vm.provision "shell", run: "always", inline: "ifconfig eth1 192.168.0.71 netmask 255.255.255.0 up"
+end

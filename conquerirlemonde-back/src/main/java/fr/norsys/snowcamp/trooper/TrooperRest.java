@@ -25,6 +25,7 @@ public class TrooperRest {
 
     @PostMapping("/trooper/die")
     public boolean dropTrooper(@RequestBody Trooper trooper){
+        log.info("Delete "+trooper.getName()+" start : " + trooper.getTrooperHost()+" send request... ");
         HttpHeaders headers = new HttpHeaders();
         RestTemplate restTemplate=new RestTemplate();
         try {

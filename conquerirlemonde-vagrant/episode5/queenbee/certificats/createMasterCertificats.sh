@@ -1,7 +1,7 @@
 #!/bin/bash
 
 K8S_SERVICE_IP=10.3.0.1
-MASTER_HOST=192.168.0.11
+MASTER_HOST=192.168.0.71
 
 cp openssl.cnf.template openssl.cnf
 
