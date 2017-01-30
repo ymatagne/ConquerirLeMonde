@@ -1,35 +1,36 @@
-			#background {
-				z-index: -1;
-        background: transparent;
-			}
-			#main {
-        position: fixed;
-        top: 120px;
-        left: 0px;
-        background: transparent;
-				z-index: 0;
-			}
-			#ship {
-        position: fixed;
-        top: 120px;
-        left: 0px;
-        background: transparent;
-				z-index: 1;
-			}
-			.score {
-				position: absolute;
-        top: 120px;
-				left: 480px;
-				color: #FF7F00;
-				font-family: Helvetica, sans-serif;
-				cursor: default;
-			}
-			.game-over {
-				position: absolute;
-        top: 320px;
-				left: 210px;
-				color: #FF7F00;
-				font-family: Helvetica, sans-serif;
-				font-size: 30px;
-				cursor: default;
-			}
+#background {
+    position: fixed;
+    z-index: -1;
+    background: transparent;
+}
+
+#main {
+    position: fixed;
+    background: transparent;
+    z-index: 0;
+}
+
+#ship {
+    position: fixed;
+    background: transparent;
+    z-index: 1;
+}
+
+.score {
+    position: absolute;
+    top: 120px;
+    left: 480px;
+    color: #FF7F00;
+    font-family: Helvetica, sans-serif;
+    cursor: default;
+}
+
+.game-over {
+    position: absolute;
+    top: 320px;
+    left: 210px;
+    color: #FF7F00;
+    font-family: Helvetica, sans-serif;
+    font-size: 30px;
+    cursor: default;
+}
