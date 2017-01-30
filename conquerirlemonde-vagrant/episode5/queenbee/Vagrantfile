@@ -27,7 +27,6 @@ Vagrant.configure("2") do |config|
         config.vm.provision :file, source: "./initCluster.sh", destination:"/home/core/template/initCluster.sh"
 	config.vm.provision :file, source: "./startCluster.sh", destination:"/home/core/startCluster.sh"	
 	config.vm.provision :shell, :inline => "chmod +x /home/core/*.sh", :privileged => true
-	config.vm.provision :shell, :inline => "chmod +x /home/core/template/*.sh", :privileged => true
 	config.vm.provision :file, source: "./certificats", destination: "/tmp/ssl"
         config.vm.provision :shell, :inline => "mkdir -p /etc/kubernetes/", :privileged => true
 	config.vm.provision :shell, :inline => "mv /tmp/ssl /etc/kubernetes/ssl", :privileged => true
