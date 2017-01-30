@@ -28,11 +28,12 @@ sh /etc/kubernetes/ssl/createMasterCertificats.sh
 
 # Start etcd2
 echo "start etcd2"
+systemctl daemon-reload
 systemctl stop etcd2
 systemctl start etcd2
 systemctl enable etcd2
 
-sleep 5
+sleep 10
 echo "insert network in etcd2"
 curl -X PUT -d "value={\"Network\":\"$POD_NETWORK\",\"Backend\":{\"Type\":\"vxlan\"}}" "$ETCD_SERVER/v2/keys/coreos.com/network/config"
 
