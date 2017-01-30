@@ -22,9 +22,16 @@ Environment="ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379,http://0.0.0.0:4001"
 EOF
 
 # Generate Certificates
+rm -rf /etc/kubernetes/ssl/admin.* /etc/kubernetes/ssl/apiserver.* ca.* openssl.cnf
 echo "Generate certificats"
 chmod +x /etc/kubernetes/ssl/createMasterCertificats.sh
 sh /etc/kubernetes/ssl/createMasterCertificats.sh
+
+mkdir -p /tmp/newCerts/
+cp -rf /etc/kubernetes/ssl /tmp/newssl
+
+chmod 600 /etc/kubernetes/ssl/*-key.pem
+chown root:root /etc/kubernetes/ssl/*-key.pem
 
 # Start etcd2
 echo "start etcd2"
@@ -36,6 +43,10 @@ systemctl enable etcd2
 sleep 10
 echo "insert network in etcd2"
 curl -X PUT -d "value={\"Network\":\"$POD_NETWORK\",\"Backend\":{\"Type\":\"vxlan\"}}" "$ETCD_SERVER/v2/keys/coreos.com/network/config"
+
+echo "start docker"
+systemctl stop docker
+systemctl start docker
 
 echo "start flanneld"
 systemctl stop flanneld

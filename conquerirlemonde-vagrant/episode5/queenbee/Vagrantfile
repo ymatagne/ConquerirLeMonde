@@ -1,12 +1,11 @@
 $update_channel = "alpha"
 
 Vagrant.configure("2") do |config|
-	$update_channel = "alpha"
-
+	
 	config.vm.box = "coreos-%s" % $update_channel
 	config.vm.box_url = "http://%s.release.core-os.net/amd64-usr/current/coreos_production_vagrant.json" % $update_channel
 	
-	config.vm.network "public_network", ip: "172.20.20.90"
+	config.vm.network "public_network",bridge: "en1: Wi-Fi (AirPort)", ip: "192.168.0.29"
 	config.vm.hostname = "deathstar"
 
 	config.vm.network :forwarded_port, guest: 80, host: 80
@@ -14,11 +13,17 @@ Vagrant.configure("2") do |config|
 	config.vm.network :forwarded_port, guest: 2379, host: 2379
 	config.vm.network :forwarded_port, guest: 15441, host: 15441
 	config.vm.network :forwarded_port, guest: 10250, host: 10250
+	config.vm.network :forwarded_port, guest: 10053, host: 10053
+	config.vm.network :forwarded_port, guest: 8081, host: 8081
 	config.vm.network :forwarded_port, guest: 8001, host: 8001
 	config.vm.network :forwarded_port, guest: 8285, host: 8285
 	config.vm.network :forwarded_port, guest: 8472, host: 8472
 	config.vm.network :forwarded_port, guest: 179, host: 179
-	
+	config.vm.network :forwarded_port, guest: 53, host: 53
+	config.vm.network :forwarded_port, guest: 9090, host: 9090
+	config.vm.network :forwarded_port, guest: 8082, host: 8082
+ 	 config.vm.network :forwarded_port, guest: 8080, host: 8080
+
 	config.vm.provision :file, :source => "user-data.yml", :destination => "/tmp/vagrantfile-user-data"
         config.vm.provision :shell, :inline => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", :privileged => true
 

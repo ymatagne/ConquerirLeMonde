@@ -1,7 +1,7 @@
 #!/bin/bash
 
 K8S_SERVICE_IP=10.3.0.1
-MASTER_HOST=172.20.20.232
+MASTER_HOST=192.168.0.35
 
 cp /etc/kubernetes/ssl/openssl.cnf.template /etc/kubernetes/ssl/openssl.cnf
 

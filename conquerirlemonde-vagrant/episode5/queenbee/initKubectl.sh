@@ -1,8 +1,9 @@
 #!/bin/bash
-MASTER_HOST=172.20.20.232
+MASTER_HOST=192.168.0.35
 CERTIFICATES_PATH=/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-vagrant/episode5/queenbee/certificats
 
-scp -r -P 2222 -i /var/root/.vagrant.d/insecure_private_key core@127.0.0.1:/etc/kubernetes/ssl/* ./certificats/
+scp -r -P 2222 -i /var/root/.vagrant.d/insecure_private_key core@127.0.0.1:/tmp/newssl/* ./certificats/
+
 
 kubectl config set-cluster default-cluster --server=https://${MASTER_HOST} --certificate-authority=${CERTIFICATES_PATH}/ca.pem
 kubectl config set-credentials default-admin --certificate-authority=${CERTIFICATES_PATH}/ca.pem --client-key=${CERTIFICATES_PATH}/admin-key.pem --client-certificate=${CERTIFICATES_PATH}/admin.pem
