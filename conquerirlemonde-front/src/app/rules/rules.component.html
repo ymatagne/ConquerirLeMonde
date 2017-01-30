@@ -11,7 +11,7 @@
       </md-card-content>
       <md-card-actions layout="row" layout-align="end center">
         <button md-button routerLink="/episode1" routerLinkActive="active">Show</button>
-        <button md-button routerLink="/slides/episode1" routerLinkActive="active">Slides</button>
+        <button md-button routerLink="/slides/episode1" routerLinkActive="active"  *ngIf="guard.isLoggued()">Slides</button>
       </md-card-actions>
     </md-card>
     <md-card>
@@ -26,7 +26,7 @@
       <md-card-actions layout="row" layout-align="end center">
         <button md-button routerLink="/episode2" routerLinkActive="active">Show</button>
         <button md-button>Links</button>
-        <button md-button routerLink="/slides/episode2" routerLinkActive="active">Slides</button>
+        <button md-button routerLink="/slides/episode2" routerLinkActive="active"  *ngIf="guard.isLoggued()">Slides</button>
       </md-card-actions>
     </md-card>
     <md-card>
@@ -40,7 +40,7 @@
       </md-card-content>
       <md-card-actions layout="row" layout-align="end center">
         <button md-button routerLink="/episode3" routerLinkActive="active">Show</button>
-        <button md-button routerLink="/slides/episode3" routerLinkActive="active">Slides</button>
+        <button md-button routerLink="/slides/episode3" routerLinkActive="active"  *ngIf="guard.isLoggued()">Slides</button>
       </md-card-actions>
     </md-card>
     <md-card>
@@ -53,7 +53,7 @@
         Quels sont les limites actuelles de notre système.
       </md-card-content>
       <md-card-actions layout="row" layout-align="end center">
-        <button md-button routerLink="/slides/episode4" routerLinkActive="active">Slides</button>
+        <button md-button routerLink="/slides/episode4" routerLinkActive="active"  *ngIf="guard.isLoggued()">Slides</button>
       </md-card-actions>
     </md-card>
     <md-card>
@@ -94,7 +94,7 @@
         Conclusion
       </md-card-content>
       <md-card-actions layout="row" layout-align="end center">
-        <button md-button routerLink="/slides/episode7" routerLinkActive="active">Slides</button>
+        <button md-button routerLink="/slides/episode7" routerLinkActive="active" *ngIf="guard.isLoggued()">Slides</button>
       </md-card-actions>
     </md-card>
 </div>

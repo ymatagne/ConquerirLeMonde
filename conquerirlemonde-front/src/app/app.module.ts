@@ -20,6 +20,9 @@ import { SlidesComponent } from './slides/slides.component';
 import {SafeUrlPipe} from "./slides/safe-url.pipe";
 import { Episode5Component } from './episode5/episode5.component';
 import { Episode6Component } from './episode6/episode6.component';
+import { LoginComponent } from './login/login.component';
+import {AuthGuard} from "./auth/auth.guard";
+import {AuthenticationService} from "./auth/authentication.service";
 
 
 export const routes: Routes = [
@@ -27,13 +30,14 @@ export const routes: Routes = [
   { path: 'settings', component: SettingsComponent },
   { path: 'rules', component: RulesComponent },
   { path: 'planets', component: PlanetsComponent },
-  { path: 'games', component: GamesComponent },
+  { path: 'games', component: GamesComponent, canActivate: [AuthGuard] },
   { path: 'episode1', component: Episode1Component },
   { path: 'episode2', component: Episode2Component },
   { path: 'episode3', component: Episode3Component },
   { path: 'episode5', component: Episode5Component },
   { path: 'episode6', component: Episode6Component },
-  { path: 'slides/:id', component: SlidesComponent }
+  { path: 'slides/:id', component: SlidesComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent }
 ];
 
 
@@ -51,7 +55,8 @@ export const routes: Routes = [
     SlidesComponent,
     SafeUrlPipe,
     Episode5Component,
-    Episode6Component
+    Episode6Component,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +66,10 @@ export const routes: Routes = [
     FlexLayoutModule.forRoot(),
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AuthenticationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
