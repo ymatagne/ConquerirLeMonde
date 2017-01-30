@@ -13,16 +13,18 @@ sed s/#MASTER_IP/$MASTER_IP/g /home/core/template/kubelet.service > /etc/systemd
 sed s/#MASTER_IP/$MASTER_IP/g /home/core/template/kube-apiserver.yaml > /etc/kubernetes/manifests/kube-apiserver.yaml
 sed s/#MASTER_IP/$MASTER_IP/g /home/core/template/createMasterCertificats.sh > /etc/kubernetes/ssl/createMasterCertificats.sh
 
-sudo cat <<'EOF
+rm /run/systemd/system/etcd2.service.d/20-cloudinit.conf
+cat << EOF > /run/systemd/system/etcd2.service.d/20-cloudinit.conf
 [Service]
 Environment="ETCD_NAME=deathstar"
 Environment="ETCD_ADVERTISE_CLIENT_URLS=http://$MASTER_IP:2379"
 Environment="ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379,http://0.0.0.0:4001"
-' > /run/systemd/system/etcd2.service.d/20-cloudinit.conf
+EOF
 
 # Generate Certificates
 echo "Generate certificats"
-ssh /etc/kubernetes/ssl/createMasterCertificats.sh
+chmod +x /etc/kubernetes/ssl/createMasterCertificats.sh
+sh /etc/kubernetes/ssl/createMasterCertificats.sh
 
 # Start etcd2
 echo "start etcd2"
@@ -30,6 +32,7 @@ systemctl stop etcd2
 systemctl start etcd2
 systemctl enable etcd2
 
+sleep 5
 echo "insert network in etcd2"
 curl -X PUT -d "value={\"Network\":\"$POD_NETWORK\",\"Backend\":{\"Type\":\"vxlan\"}}" "$ETCD_SERVER/v2/keys/coreos.com/network/config"
 
