@@ -30,13 +30,19 @@ export class Bullet extends Drawable {
    * the bullet.
    */
   draw() {
-    this.context.clearRect(this.x - 1, this.y - 1, this.width + 2, this.height + 2);
+    if (this.self === "bullet") {
+      this.context.clearRect(this.x - 1, this.y - 1, this.imageRepository.bullet.width + 2, this.imageRepository.bullet.height + 2);
+    }
+    else if (this.self === "enemyBullet") {
+      this.context.clearRect(this.x - 1, this.y - 1, this.imageRepository.enemyBullet.width + 2, this.imageRepository.enemyBullet.height + 2);
+    }
+
     this.y -= this.speed;
 
     if (this.isColliding) {
       return true;
     }
-    else if (this.self === "bullet" && this.y <= 0 - this.height) {
+    else if (this.self === "bullet" && this.y <= 0 - this.imageRepository.bullet.height) {
       return true;
     }
     else if (this.self === "enemyBullet" && this.y >= this.canvasHeight) {
