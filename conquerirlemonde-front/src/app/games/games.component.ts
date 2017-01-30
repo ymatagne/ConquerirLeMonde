@@ -20,7 +20,6 @@ import { WebSocketService } from '../websocket.service';
 })
 export class GamesComponent implements AfterViewInit {
 
-
   constructor(private trooperService: TrooperService) {
     trooperService.trooper.subscribe(trooper => {
       this.launchEnnemy(trooper);
@@ -53,9 +52,11 @@ export class GamesComponent implements AfterViewInit {
   message = "";
 
   ngAfterViewInit() {
-    this.init();
-    this.start();
-    this.updateGame();
+    setTimeout(_ => {
+      this.init();
+      this.start();
+      this.updateGame();
+    });
   }
 
   updateGame() {
