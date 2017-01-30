@@ -46,10 +46,10 @@ export class Ship extends Drawable {
     this.counter++;
     // Redraw the ship
     if (!this.isColliding) {
-      this.shipContext.clearRect(this.x, this.y, this.width, this.height);
+      this.shipContext.clearRect(this.x, this.y, this.imageRepository.spaceship.width, this.imageRepository.spaceship.height);
       this.x += this.speed;
       // Keep player within the screen
-      if (this.x <= 0 || this.x >= this.canvasWidth - this.width) {
+      if (this.x <= 0 || this.x >= this.canvasWidth - this.imageRepository.spaceship.width) {
         this.speed = this.speed*-1;
         this.x += this.speed;
       }
