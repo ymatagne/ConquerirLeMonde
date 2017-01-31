@@ -1,17 +1,17 @@
 #background {
-    position: fixed;
+    position: absolute;
     z-index: -1;
     background: transparent;
 }
 
 #main {
-    position: fixed;
+    position: absolute;
     background: transparent;
     z-index: 0;
 }
 
 #ship {
-    position: fixed;
+    position: absolute;
     background: transparent;
     z-index: 1;
 }

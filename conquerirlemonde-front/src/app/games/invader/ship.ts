@@ -18,8 +18,8 @@ export class Ship extends Drawable {
   mainContext;
   game: GamesComponent;
 
-  constructor(x, y, width, height, imageRepository: ImageRepository, shipContext, shipCanvas, mainContext, game : GamesComponent) {
-    super(x, y, width, height);
+  constructor(x, y, imageRepository: ImageRepository, shipContext, shipCanvas, mainContext, game : GamesComponent) {
+    super(x, y, imageRepository.spaceship);
     this.imageRepository = imageRepository;
     this.collidableWith = "enemyBullet";
     this.type = "ship";
@@ -35,7 +35,7 @@ export class Ship extends Drawable {
   }
 
   draw() {
-    this.shipContext.drawImage(this.imageRepository.spaceship, this.x, this.y);
+    this.shipContext.drawImage(this.image, this.x, this.y);
     if (this.counter >= this.fireRate) {
       this.fire();
       this.counter = 0;
@@ -46,10 +46,10 @@ export class Ship extends Drawable {
     this.counter++;
     // Redraw the ship
     if (!this.isColliding) {
-      this.shipContext.clearRect(this.x, this.y, this.imageRepository.spaceship.width, this.imageRepository.spaceship.height);
+      this.shipContext.clearRect(this.x, this.y, this.width, this.height);
       this.x += this.speed;
       // Keep player within the screen
-      if (this.x <= 0 || this.x >= this.canvasWidth - this.imageRepository.spaceship.width) {
+      if (this.x <= 0 || this.x >= this.canvasWidth - this.width) {
         this.speed = this.speed*-1;
         this.x += this.speed;
       }

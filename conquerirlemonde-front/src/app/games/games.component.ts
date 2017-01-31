@@ -111,7 +111,7 @@ export class GamesComponent implements AfterViewInit {
 
       // Initialize the background object
       this.background = new Background(this.imageRepository, this.bgContext, this.bgCanvas.nativeElement);
-      this.ship = new Ship(525, 570, this.imageRepository.spaceship.width, this.imageRepository.spaceship.height, this.imageRepository, this.shipContext, this.shipCanvas.nativeElement, this.mainContext, this);
+      this.ship = new Ship(525, 570, this.imageRepository, this.shipContext, this.shipCanvas.nativeElement, this.mainContext, this);
 
 
       this.enemyBulletPool = new Pool(50, this.imageRepository, this.mainContext);
