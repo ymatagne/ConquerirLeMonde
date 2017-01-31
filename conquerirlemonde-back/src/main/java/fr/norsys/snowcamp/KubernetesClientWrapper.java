@@ -23,7 +23,7 @@ public class KubernetesClientWrapper {
 
     KubernetesClientWrapper() throws URISyntaxException {
         Config config = new ConfigBuilder()
-                .withMasterUrl("https://192.168.0.11:30443")
+                .withMasterUrl("https://172.20.20.248:443")
                 .withCaCertFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-vagrant/episode5/queenbee/certificats/ca.pem")
                 .withClientCertFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-vagrant/episode5/queenbee/certificats/admin.pem")
                 .withClientKeyFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-vagrant/episode5/queenbee/certificats/admin-key.pem")
@@ -37,7 +37,7 @@ public class KubernetesClientWrapper {
 
     private Planet createPlanet(Node node) {
         List<Trooper> troopers = new ArrayList<>();
-        client.pods().list().getItems().stream().filter(pod -> pod.getSpec().getNodeName().equals(node.getMetadata().getName()) ).forEach(pod -> troopers.add(new Trooper(node.getMetadata().getName(),"",pod.getSpec().getContainers().get(0).getImage(),node.getMetadata().getName(),null)));
+        client.pods().list().getItems().stream().filter(pod-> pod.getSpec().getNodeName() != null).filter(pod -> pod.getSpec().getNodeName().equals(node.getMetadata().getName()) ).forEach(pod -> troopers.add(new Trooper(node.getMetadata().getName(),"",pod.getSpec().getContainers().get(0).getImage(),node.getMetadata().getName(),null)));
         return new Planet(node.getMetadata().getUid(),node.getMetadata().getName(),node.getStatus().getAddresses().get(0).getAddress(),troopers);
     }
 }

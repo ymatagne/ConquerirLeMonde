@@ -130,8 +130,8 @@ export class GamesComponent implements AfterViewInit {
     var enemy = this.enemyPool.get(this.nextEnemyX, this.nextEnemyY, 2);
     enemy.setTrooper(trooper);
 
-    var nextEnemySpacer = -enemy.enemyImage.height * 1.5;
-    this.nextEnemyX += enemy.enemyImage.width + 25;
+    var nextEnemySpacer = -enemy.image.height * 1.5;
+    this.nextEnemyX += enemy.image.width + 25;
 
     if (this.enemyXIndex % 15 == 0) {
       this.nextEnemyX = 100;
@@ -168,7 +168,7 @@ export class GamesComponent implements AfterViewInit {
             objects[x].y + objects[x].height > obj[y].y)) {
 
 
-          if (obj[y].type === "enemy") {
+         /* if (obj[y].type === "enemy") {
             if(this.trooperService.dropTrooper(obj[y].trooper)){
               objects[x].isColliding = true;
               obj[y].isColliding = true;
@@ -176,7 +176,9 @@ export class GamesComponent implements AfterViewInit {
           }else {
             objects[x].isColliding = true;
             obj[y].isColliding = true;
-          }
+          }*/
+          objects[x].isColliding = true;
+          obj[y].isColliding = true;
         }
       }
     }

@@ -1,5 +1,5 @@
 #!/bin/bash
-MASTER_HOST=192.168.0.35
+MASTER_HOST=172.20.20.248
 CERTIFICATES_PATH=/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-vagrant/episode5/queenbee/certificats
 
 scp -r -P 2222 -i /var/root/.vagrant.d/insecure_private_key core@127.0.0.1:/tmp/newssl/* ./certificats/

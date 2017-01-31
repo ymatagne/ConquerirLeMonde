@@ -48,8 +48,8 @@
         <span class="tag">Vagrant.configure("2") do |config|</span>
         <span class="tag">    config.vm.box = "coreos-%s" % $update_channel</span>
 	      <span class="tag">    config.vm.box_url = "http://%s.release.core-os.net/amd64-usr/current/coreos_production_vagrant.json" % $update_channel</span>
-	      <span class="tag">    config.vm.network "public_network",bridge: "en1: Wi-Fi (AirPort)", ip: "192.168.0.29"</span>
-	      <span class="tag">    config.vm.hostname = "deathstar"</span>
+	      <span class="tag">    config.vm.network "public_network",bridge: "#YOUR_INTERFACE", ip: "#YOUR_IP"</span>
+	      <span class="tag">    config.vm.hostname = "#YOUR_PLANET_NAME"</span>
         <span class="tag">    config.vm.network :forwarded_port, guest: 80, host: 80</span>
   	    <span class="tag">    config.vm.network :forwarded_port, guest: 443, host: 443	</span>
 	      <span class="tag">    config.vm.network :forwarded_port, guest: 2379, host: 2379</span>
@@ -71,10 +71,6 @@
         <span class="tag">    config.vm.provision :shell, :inline => "mkdir -p /home/core/template", :privileged => true</span>
         <span class="tag">    config.vm.provision :shell, :inline => "chmod 777 -R /home/core/template", :privileged => true</span>
         <span class="pln"></span>
-        <span class="tag">    config.vm.provision :file, source: "./createMasterCertificats.sh", destination:"/home/core/template/createMasterCertificats.sh"</span>
-        <span class="tag">    config.vm.provision :file, source: "./initCluster.sh", destination:"/home/core/template/initCluster.sh"</span>
-        <span class="tag">    config.vm.provision :file, source: "./startCluster.sh", destination:"/home/core/startCluster.sh"	</span>
-        <span class="tag">    config.vm.provision :shell, :inline => "chmod +x /home/core/*.sh", :privileged => true</span>
         <span class="tag">    config.vm.provision :file, source: "./certificats", destination: "/tmp/ssl"</span>
         <span class="tag">    config.vm.provision :shell, :inline => "mkdir -p /etc/kubernetes/", :privileged => true</span>
         <span class="tag">    config.vm.provision :shell, :inline => "mv /tmp/ssl /etc/kubernetes/ssl", :privileged => true</span>
@@ -135,7 +131,7 @@
         <span class="tag">          "delegate": {{"{"}}</span> 
         <span class="tag">              "isDefaultGateway": true</span> 
         <span class="tag">{{"          }"}}</span> 
-        <span class="tag">{{"     }"}}</span> 
+        <span class="tag">{{"      }"}}</span> 
         <span class="tag">  - path: "/etc/systemd/system/kubelet.service"</span> 
         <span class="tag">    permissions: "0644"</span> 
         <span class="tag">    owner: "root"</span> 
@@ -288,6 +284,34 @@
 </md-card>
 <md-card>
   <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine24">
+      Get your ip
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine24">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">ifconfig</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine25">
+      Connect to sudo
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine25">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">sudo su</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
     <md-slide-toggle color="primary" [(ngModel)]="displayLine14">
       Change WORKER NAME and IP in createWorkerCertificats.sh
     </md-slide-toggle>
@@ -311,7 +335,7 @@
   <md-card-content *ngIf="displayLine15">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">sh /etc/kubernetes/ssl/createWorkerCertificats.sh</span>
+        <span class="tag">cd /etc/kubernetes/ssl/ ; sh createWorkerCertificats.sh</span>
       </code>
     </pre>
   </md-card-content>
@@ -327,6 +351,20 @@
       <code ng-non-bindable="">
         <span class="tag">sudo systemctl restart flanneld</span>
       </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine9">
+      Change ip of master and your ip
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine9">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <code ng-non-bindable="">
+          <span class="tag">sudo vi /etc/systemd/system/kubelet.service</span>
+        </code>
     </pre>
   </md-card-content>
 </md-card>
@@ -397,7 +435,7 @@
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag"></span>
-        <span class="tag">export MASTER_HOST=MASTER_HOST:MASTER_PORT</span>
+        <span class="tag">export MASTER_HOST=#MASTER_HOST</span>
         <span class="tag">export CA_CERT=CERTIFICATS_PATH/ca.pem</span>
         <span class="tag">export ADMIN_KEY=CERTIFICATS_PATH/admin-key.pem</span>
         <span class="tag">export ADMIN_CERT=CERTIFICATS_PATH/admin.pem</span>

@@ -146,7 +146,7 @@
   <md-card-content *ngIf="displayLine6">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">kubectl get rc</span>  
+        <span class="tag">./kubectl get rc</span>  
       </code>
     </pre>
   </md-card-content>
@@ -168,7 +168,7 @@
 <md-card>
   <md-card-header>
     <md-slide-toggle color="primary" [(ngModel)]="displayLine8">
-      Run replicas
+      Run service
     </md-slide-toggle>
   </md-card-header>
   <md-card-content *ngIf="displayLine8">
@@ -182,7 +182,7 @@
 <md-card>
   <md-card-header>
     <md-slide-toggle color="primary" [(ngModel)]="displayLine9">
-      View Replicas
+      View Services
     </md-slide-toggle>
   </md-card-header>
   <md-card-content *ngIf="displayLine9">
@@ -202,63 +202,27 @@
   <md-card-content *ngIf="displayLine10">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">curl -XGET http://YOU_IP:32100/</span>  
+        <span class="tag">curl -XGET http://YOUR_IP:32100/</span>  
       </code>
     </pre>
   </md-card-content>
 </md-card>
 <md-card>
   <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine11">
-      Is it so hard ? Run only two commands...
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine15">
+      Create file trooper.service.yml
     </md-slide-toggle>
   </md-card-header>
-  <md-card-content *ngIf="displayLine11">
+  <md-card-content *ngIf="displayLine15">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">kubectl run ship --image=nginx --port=80 --replicas=2</span>  
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine12">
-      Is it so hard ? Run only two commands...
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine12">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">kubectl expose rs SHIP_NAME --port=80 --target-port=80 --type=NodePort</span>  
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine13">
-      Get nodePort
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine13">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">kubectl get services</span>  
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine14">
-      Connect to your nginx service
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine14">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">curl -XGET http://YOUR_IP:PORT/</span>  
+        <span class="tag"></span>  
+        <span class="tag"></span>  
+        <span class="tag"></span>  
+        <span class="tag"></span>  
+        <span class="tag"></span>  
+        <span class="tag"></span>  
+        <span class="tag"></span>  
       </code>
     </pre>
   </md-card-content>
@@ -272,7 +236,27 @@
   <md-card-content *ngIf="displayLine15">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">kubectl run trooper --image=ymatagne/trooper --port=9000 --replicas=10</span>  
+        <span class="tag">./kubectl create -f trooper.service.yml</span>  
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine15">
+      Create file trooper.service.yml
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine15">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag"></span>  
+        <span class="tag"></span>  
+        <span class="tag"></span>  
+        <span class="tag"></span>  
+        <span class="tag"></span>  
+        <span class="tag"></span>  
+        <span class="tag"></span>  
       </code>
     </pre>
   </md-card-content>
@@ -286,7 +270,7 @@
   <md-card-content *ngIf="displayLine16">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">kubectl expose rs trooper* --port=9000 --target-port=9000 --type=LoadBalancer</span>  
+        <span class="tag">./kubectl create -f trooper.deployement.yml</span>  
       </code>
     </pre>
   </md-card-content>
