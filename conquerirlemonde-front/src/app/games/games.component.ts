@@ -168,7 +168,7 @@ export class GamesComponent implements AfterViewInit {
             objects[x].y + objects[x].height > obj[y].y)) {
 
 
-         /* if (obj[y].type === "enemy") {
+          if (obj[y].type === "enemy") {
             if(this.trooperService.dropTrooper(obj[y].trooper)){
               objects[x].isColliding = true;
               obj[y].isColliding = true;
@@ -176,9 +176,7 @@ export class GamesComponent implements AfterViewInit {
           }else {
             objects[x].isColliding = true;
             obj[y].isColliding = true;
-          }*/
-          objects[x].isColliding = true;
-          obj[y].isColliding = true;
+          }
         }
       }
     }
