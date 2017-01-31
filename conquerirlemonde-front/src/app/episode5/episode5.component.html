@@ -43,24 +43,43 @@
   <md-card-content *ngIf="displayLine3">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code>
-        <span class="pln"></span>      
+        <span class="pln"></span>
+        <span class="tag">$update_channel = "alpha"</span>      
         <span class="tag">Vagrant.configure("2") do |config|</span>
-	      <span class="tag">  config.vm.box = "coreos-alpha"</span>
-        <span class="tag">  config.vm.network "private_network", ip: "192.168.33.11"</span>
-        <span class="tag">  for i in 30000..32767</span>
-        <span class="tag">    config.vm.network :forwarded_port, guest: i, host: i</span>
-        <span class="tag">  end</span>
-	      <span class="pln"></span>
-        <span class="tag">  config.vm.provision :file, :source => "user-data.yml", :destination => "/tmp/vagrantfile-user-data"</span>
-        <span class="tag">  config.vm.provision :shell, :inline => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", :privileged => true</span>
+        <span class="tag">    config.vm.box = "coreos-%s" % $update_channel</span>
+	      <span class="tag">    config.vm.box_url = "http://%s.release.core-os.net/amd64-usr/current/coreos_production_vagrant.json" % $update_channel</span>
+	      <span class="tag">    config.vm.network "public_network",bridge: "en1: Wi-Fi (AirPort)", ip: "192.168.0.29"</span>
+	      <span class="tag">    config.vm.hostname = "deathstar"</span>
+        <span class="tag">    config.vm.network :forwarded_port, guest: 80, host: 80</span>
+  	    <span class="tag">    config.vm.network :forwarded_port, guest: 443, host: 443	</span>
+	      <span class="tag">    config.vm.network :forwarded_port, guest: 2379, host: 2379</span>
+        <span class="tag">    config.vm.network :forwarded_port, guest: 15441, host: 15441</span>
+        <span class="tag">    config.vm.network :forwarded_port, guest: 10250, host: 10250</span>
+        <span class="tag">    config.vm.network :forwarded_port, guest: 10053, host: 10053</span>
+        <span class="tag">    config.vm.network :forwarded_port, guest: 8081, host: 8081</span>
+        <span class="tag">    config.vm.network :forwarded_port, guest: 8001, host: 8001</span>
+        <span class="tag">    config.vm.network :forwarded_port, guest: 8285, host: 8285</span>
+        <span class="tag">    config.vm.network :forwarded_port, guest: 8472, host: 8472</span>
+        <span class="tag">    config.vm.network :forwarded_port, guest: 179, host: 179</span>
+        <span class="tag">    config.vm.network :forwarded_port, guest: 53, host: 53</span>
+        <span class="tag">    config.vm.network :forwarded_port, guest: 9090, host: 9090</span>
+        <span class="tag">    config.vm.network :forwarded_port, guest: 8082, host: 8082</span>
+        <span class="tag">    config.vm.network :forwarded_port, guest: 8080, host: 8080</span>
+        <span class="tag">    config.vm.provision :file, :source => "user-data.yml", :destination => "/tmp/vagrantfile-user-data"</span>
+        <span class="tag">    config.vm.provision :shell, :inline => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", :privileged => true</span>
         <span class="pln"></span>
-        <span class="tag">  config.vm.provision :file, source: "./certificats", destination: "/tmp/ssl"</span>
+        <span class="tag">    config.vm.provision :shell, :inline => "mkdir -p /home/core/template", :privileged => true</span>
+        <span class="tag">    config.vm.provision :shell, :inline => "chmod 777 -R /home/core/template", :privileged => true</span>
         <span class="pln"></span>
-		    <span class="tag">  config.vm.provision :shell, :inline => "mkdir -p /etc/kubernetes ;mv /tmp/ssl /etc/kubernetes/ssl", :privileged => true</span>
-	      <span class="tag">  config.vm.provision :shell, :inline => "chmod 600 /etc/kubernetes/ssl/*-key.pem", :privileged => true</span>
-	      <span class="tag">  config.vm.provision :shell, :inline => "chown -R root:root /etc/kubernetes/ssl", :privileged => true</span>
-	      <span class="tag">  config.vm.provision :shell, :inline => "cd /etc/kubernetes/ssl/; ln -s #PLANET_NAME-worker.pem worker.pem", :privileged => true</span>
-	      <span class="tag">  config.vm.provision :shell, :inline => "cd /etc/kubernetes/ssl/; ln -s #PLANET_NAME-worker-key.pem worker-key.pem", :privileged => true</span>
+        <span class="tag">    config.vm.provision :file, source: "./createMasterCertificats.sh", destination:"/home/core/template/createMasterCertificats.sh"</span>
+        <span class="tag">    config.vm.provision :file, source: "./initCluster.sh", destination:"/home/core/template/initCluster.sh"</span>
+        <span class="tag">    config.vm.provision :file, source: "./startCluster.sh", destination:"/home/core/startCluster.sh"	</span>
+        <span class="tag">    config.vm.provision :shell, :inline => "chmod +x /home/core/*.sh", :privileged => true</span>
+        <span class="tag">    config.vm.provision :file, source: "./certificats", destination: "/tmp/ssl"</span>
+        <span class="tag">    config.vm.provision :shell, :inline => "mkdir -p /etc/kubernetes/", :privileged => true</span>
+        <span class="tag">    config.vm.provision :shell, :inline => "mv /tmp/ssl /etc/kubernetes/ssl", :privileged => true</span>
+        <span class="tag">    config.vm.provision :shell, :inline => "chown -R root:root /etc/kubernetes/ssl", :privileged => true</span>
+        <span class="pln"></span>
         <span class="tag">end</span>
         <span class="pln"></span>
       </code>
@@ -91,7 +110,7 @@
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">       
         <span class="tag">#cloud-config</span> 
-        <span class="tag">hostname: "tatoone"</span> 
+        <span class="tag">hostname: "#PLANET_NAME"</span> 
         <span class="pln"></span>
         <span class="tag">write_files:</span> 
         <span class="tag">  - path: "/etc/flannel/options.env"</span> 
@@ -99,7 +118,7 @@
         <span class="tag">    owner: "root"</span> 
         <span class="tag">    content: |</span> 
         <span class="tag">      FLANNELD_IFACE=$public_ipv4</span> 
-        <span class="tag">      FLANNELD_ETCD_ENDPOINTS=#ETCD_URL</span> 
+        <span class="tag">      FLANNELD_ETCD_ENDPOINTS=#MASTER_URL</span> 
         <span class="tag">  - path: "/etc/kubernetes/cni/docker_opts_cni.env"</span> 
         <span class="tag">    permissions: "0644"</span> 
         <span class="tag">    owner: "root"</span> 
@@ -169,6 +188,7 @@
         <span class="tag">          - /hyperkube</span> 
         <span class="tag">          - proxy</span> 
         <span class="tag">          - --master=#MASTER_URL</span> 
+        <span class="tag">          - --cluster-cidr=10.2.0.0/16</span>
         <span class="tag">          - --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml</span> 
         <span class="tag">          securityContext:</span> 
         <span class="tag">            privileged: true</span> 
@@ -223,7 +243,7 @@
         <span class="tag">            content: |</span> 
         <span class="tag">              [Service]</span> 
         <span class="tag">              ExecStartPre=/usr/bin/ln -sf /etc/flannel/options.env /run/flannel/options.env</span> 
-        <span class="tag">        command: start        </span> 
+        <span class="tag">        command: start</span> 
         <span class="tag">      - name: docker.service</span> 
         <span class="tag">        drop-ins:</span> 
         <span class="tag">          - name: 40-flannel.conf</span> 
@@ -234,35 +254,6 @@
         <span class="tag">              [Service]</span> 
         <span class="tag">              EnvironmentFile=/etc/kubernetes/cni/docker_opts_cni.env</span> 
         <span class="tag">        command: start</span>  
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine14">
-      Change WORKER NAME and IP in createWorkerCertificats.sh
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine14">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">WORKER_IP=#WORKER_IP</span>
-        <span class="tag">WORKER_FQDN=#PLANET_NAME</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine15">
-      Generate certificates
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine15">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">./certificates/createWorkerCertificats.sh</span>
       </code>
     </pre>
   </md-card-content>
@@ -297,6 +288,36 @@
 </md-card>
 <md-card>
   <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine14">
+      Change WORKER NAME and IP in createWorkerCertificats.sh
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine14">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">vi /etc/kubernetes/ssl/createWorkerCertificats.sh</span>
+        <span class="tag">WORKER_IP=#WORKER_IP</span>
+        <span class="tag">WORKER_FQDN=#PLANET_NAME</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine15">
+      Generate certificates
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine15">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">sh /etc/kubernetes/ssl/createWorkerCertificats.sh</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
     <md-slide-toggle color="primary" [(ngModel)]="displayLine8">
       Start Flannel
     </md-slide-toggle>
@@ -304,7 +325,7 @@
   <md-card-content *ngIf="displayLine8">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">sudo systemctl start flanneld</span>
+        <span class="tag">sudo systemctl restart flanneld</span>
       </code>
     </pre>
   </md-card-content>
@@ -318,7 +339,7 @@
   <md-card-content *ngIf="displayLine9">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
         <code ng-non-bindable="">
-          <span class="tag">sudo systemctl start kubelet</span>
+          <span class="tag">sudo systemctl restart kubelet</span>
         </code>
     </pre>
   </md-card-content>
