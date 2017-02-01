@@ -231,6 +231,10 @@
         <span class="pln"></span>  
         <span class="tag">coreos:</span> 
         <span class="tag">    units:</span> 
+        <span class="tag">      - name: update-engine.service</span> 
+        <span class="tag">        command: stop</span> 
+        <span class="tag">      - name: locksmithd.service</span> 
+        <span class="tag">        command: stop</span> 
         <span class="tag">      - name: etcd2.service</span> 
         <span class="tag">        command: start</span> 
         <span class="tag">      - name: flanneld.service</span> 
@@ -250,6 +254,20 @@
         <span class="tag">              [Service]</span> 
         <span class="tag">              EnvironmentFile=/etc/kubernetes/cni/docker_opts_cni.env</span> 
         <span class="tag">        command: start</span>  
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine60">
+      Start your box
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine60">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">vagrant destroy</span>
       </code>
     </pre>
   </md-card-content>

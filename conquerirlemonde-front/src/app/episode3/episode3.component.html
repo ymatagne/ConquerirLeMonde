@@ -15,7 +15,7 @@
   <md-card-content *ngIf="displayLine1">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">touch user-data.yaml</span>
+        <span class="tag">touch user-data.yml</span>
       </code>
     </pre>
   </md-card-content>
@@ -69,6 +69,20 @@
         <span class="pln"></span>
         <span class="tag">end</span>
         <span class="pln"></span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine40">
+      Destroy your box
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine40">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">vagrant destroy</span>
       </code>
     </pre>
   </md-card-content>
@@ -153,6 +167,20 @@
 </md-card>
 <md-card>
   <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine20">
+      Validate user-data
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine20">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">Go to https://coreos.com/validate/ and copy your file</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
     <md-slide-toggle color="primary" [(ngModel)]="displayLine8">
       Change Vagrantfile
     </md-slide-toggle>
@@ -195,6 +223,20 @@
 </md-card>
 <md-card>
   <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine30">
+      Connect in your box
+    </md-slide-toggle>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine30">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">vagrant ssh</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
     <md-slide-toggle color="primary" [(ngModel)]="displayLine11">
       Verify Status
     </md-slide-toggle>
@@ -217,7 +259,7 @@
   <md-card-content *ngIf="displayLine12">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">touch luke.service</span>
+        <span class="tag">touch #YOUR_NAME.service</span>
       </code>
     </pre>
   </md-card-content>
@@ -237,11 +279,11 @@
         <span class="tag">Requires=docker.service</span>
         <span class="pln"></span>
         <span class="tag">[Service]</span>
-        <span class="tag">ExecStartPre=-/usr/bin/docker kill luke</span>
-        <span class="tag">ExecStartPre=-/usr/bin/docker rm luke</span>
+        <span class="tag">ExecStartPre=-/usr/bin/docker kill #YOUR_NAME</span>
+        <span class="tag">ExecStartPre=-/usr/bin/docker rm #YOUR_NAME</span>
         <span class="tag">ExecStartPre=/usr/bin/docker pull nginx</span>
-        <span class="tag">ExecStart=/usr/bin/docker run --name luke -p 0.0.0.0:80:80 nginx</span>
-        <span class="tag">ExecStop=/usr/bin/docker stop luke</span>
+        <span class="tag">ExecStart=/usr/bin/docker run --name #YOUR_NAME -p 0.0.0.0:80:80 nginx</span>
+        <span class="tag">ExecStop=/usr/bin/docker stop #YOUR_NAME</span>
       </code>
     </pre>
   </md-card-content>
@@ -255,7 +297,7 @@
   <md-card-content *ngIf="displayLine14">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">fleetctl start luke.service</span>
+        <span class="tag">fleetctl start #YOUR_NAME.service</span>
       </code>
     </pre>
   </md-card-content>
@@ -263,13 +305,13 @@
 <md-card>
   <md-card-header>
     <md-slide-toggle color="primary" [(ngModel)]="displayLine15">
-      Create your fleet discovery service
+      Create your trooper service
     </md-slide-toggle>
   </md-card-header>
   <md-card-content *ngIf="displayLine15">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">touch xwing.service</span>
+        <span class="tag">touch trooper-#NAME.service</span>
       </code>
     </pre>
   </md-card-content>
@@ -285,15 +327,15 @@
       <code ng-non-bindable="">
         <span class="tag">[Unit]</span>
         <span class="tag">Description=Go To your ship !</span>
-        <span class="tag">BindsTo=luke.service</span>
-        <span class="tag">After=luke.service</span>
+        <span class="tag">BindsTo=trooper-#NAME.service</span>
+        <span class="tag">After=trooper-#NAME</span>
         <span class="pln"></span>
         <span class="tag">[Service]</span>
         <span class="tag">{{"ExecStart=/bin/sh -c \"while true; do etcdctl set /conquerirlemonde/ship/xwing \'{ \"host\": \"%H\", \"port\": 80, \"version\": \"52c7248a14\" }\' --ttl 60;sleep 45;done"}}"</span>
         <span class="tag">ExecStop=/usr/bin/etcdctl rm /conquerirlemonde/ship/xwing</span>
         <span class="pln"></span>
         <span class="tag">[X-Fleet]</span>
-        <span class="tag">MachineOf=luke.service</span>
+        <span class="tag">MachineMetadata=hostname=#YOUR_PLANET</span>
       </code>
     </pre>
   </md-card-content>
@@ -307,7 +349,7 @@
   <md-card-content *ngIf="displayLine17">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">fleetctl start xwing.service</span>
+        <span class="tag">fleetctl start trooper-#NAME.service</span>
       </code>
     </pre>
   </md-card-content>

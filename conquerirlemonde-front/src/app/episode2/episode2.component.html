@@ -122,4 +122,18 @@
       </code>
     </pre>
   </md-card-content>
+  <md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine50">
+      Exit your box
+    </md-slide-toggle>
+    <md-card-title></md-card-title>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine50">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">exit</span>
+      </code>
+    </pre>
+  </md-card-content>
 </md-card>
