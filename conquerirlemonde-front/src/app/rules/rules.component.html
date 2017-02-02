@@ -67,6 +67,7 @@
       </md-card-content>
       <md-card-actions layout="row" layout-align="end center">
         <button md-button routerLink="/episode5" routerLinkActive="active">Show</button>
+        <button md-button routerLink="/slides/episode5" routerLinkActive="active" *ngIf="guard.isLoggued()">Slides</button>
       </md-card-actions>
     </md-card>
 
@@ -81,20 +82,36 @@
       </md-card-content>
       <md-card-actions layout="row" layout-align="end center">
         <button md-button routerLink="/episode6" routerLinkActive="active">Show</button>
+        <button md-button routerLink="/slides/episode6" routerLinkActive="active" *ngIf="guard.isLoggued()">Slides</button>
+      </md-card-actions>
+    </md-card>
+
+    <md-card>
+      <md-card-title-group>
+        <img md-card-lg-image src="assets/generalGrievous.png">
+        <md-card-title>Episode 7</md-card-title>
+        <md-card-subtitle>Ansible</md-card-subtitle>
+      </md-card-title-group>
+      <md-card-content>
+        Let's kill them all to dominate
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <button md-button routerLink="/episode7" routerLinkActive="active">Show</button>
+        <button md-button routerLink="/slides/episode7" routerLinkActive="active" *ngIf="guard.isLoggued()">Slides</button>
       </md-card-actions>
     </md-card>
 
     <md-card>
       <md-card-title-group>
         <img md-card-lg-image src="assets/imperator.png">
-        <md-card-title>Episode 7</md-card-title>
+        <md-card-title>Episode 8</md-card-title>
         <md-card-subtitle>Star is death</md-card-subtitle>
       </md-card-title-group>
       <md-card-content>
         Conclusion
       </md-card-content>
       <md-card-actions layout="row" layout-align="end center">
-        <button md-button routerLink="/slides/episode7" routerLinkActive="active" *ngIf="guard.isLoggued()">Slides</button>
+        <button md-button routerLink="/slides/episode8" routerLinkActive="active" *ngIf="guard.isLoggued()">Slides</button>
       </md-card-actions>
     </md-card>
 </div>

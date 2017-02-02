@@ -326,14 +326,17 @@
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">[Unit]</span>
-        <span class="tag">Description=Go To your ship !</span>
-        <span class="tag">BindsTo=trooper-#NAME.service</span>
-        <span class="tag">After=trooper-#NAME</span>
-        <span class="pln"></span>
+        <span class="tag">Description=trooper-#YOUR_NAME</span>
+        <span class="tag">After=docker.service</span>
+        <span class="tag">Requires=docker.service</span>
+        <span class="tag"></span>
         <span class="tag">[Service]</span>
-        <span class="tag">{{"ExecStart=/bin/sh -c \"while true; do etcdctl set /conquerirlemonde/ship/xwing \'{ \"host\": \"%H\", \"port\": 80, \"version\": \"52c7248a14\" }\' --ttl 60;sleep 45;done"}}"</span>
-        <span class="tag">ExecStop=/usr/bin/etcdctl rm /conquerirlemonde/ship/xwing</span>
-        <span class="pln"></span>
+        <span class="tag">ExecStartPre=-/usr/bin/docker kill trooper-#YOUR_NAME</span>
+        <span class="tag">ExecStartPre=-/usr/bin/docker rm trooper-#YOUR_NAME</span>
+        <span class="tag">ExecStartPre=/usr/bin/docker pull ymatagne/trooper</span>
+        <span class="tag">ExecStart=/usr/bin/docker run --name trooper-#YOUR_NAME -p 0.0.0.0:80:9000 -e PLANET_HOST=#MASTER_IP -e PLANET_PORT=#MASTER_PORT -e TROOPER_NAME=#YOUR_NAME -e TROOPER_HOST=#YOUR_IP -e TROOPER_PORT=#YOUR_PORT -e SPACESHIP=#YOUR_SPACESHIP trooper-#YOUR_NAME</span>
+        <span class="tag">ExecStop=/usr/bin/docker stop trooper-#YOUR_NAME</span>
+        <span class="tag"></span>
         <span class="tag">[X-Fleet]</span>
         <span class="tag">MachineMetadata=hostname=#YOUR_PLANET</span>
       </code>
@@ -349,7 +352,7 @@
   <md-card-content *ngIf="displayLine17">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">fleetctl start trooper-#NAME.service</span>
+        <span class="tag">fleetctl start trooper-#YOUR_NAME.service</span>
       </code>
     </pre>
   </md-card-content>

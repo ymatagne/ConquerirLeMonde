@@ -23,6 +23,7 @@ import { Episode6Component } from './episode6/episode6.component';
 import { LoginComponent } from './login/login.component';
 import {AuthGuard} from "./auth/auth.guard";
 import {AuthenticationService} from "./auth/authentication.service";
+import { Episode7Component } from './episode7/episode7.component';
 
 
 export const routes: Routes = [
@@ -36,6 +37,7 @@ export const routes: Routes = [
   { path: 'episode3', component: Episode3Component },
   { path: 'episode5', component: Episode5Component },
   { path: 'episode6', component: Episode6Component },
+  { path: 'episode7', component: Episode7Component },
   { path: 'slides/:id', component: SlidesComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent }
 ];
@@ -56,7 +58,8 @@ export const routes: Routes = [
     SafeUrlPipe,
     Episode5Component,
     Episode6Component,
-    LoginComponent
+    LoginComponent,
+    Episode7Component
   ],
   imports: [
     BrowserModule,

@@ -21,7 +21,7 @@ export class TrooperService {
   public dropTrooper(trooper: Trooper): Promise<boolean> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(environment.dropTrooperUrl, trooper, options)
+    return this.http.post("http://" + trooper.trooperHost + ":" + trooper.trooperPort + "/die", trooper, options)
       .toPromise()
       .then(this.extractData)
       .catch(this.handleError);
