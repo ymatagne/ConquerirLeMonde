@@ -5,3 +5,7 @@
   width: 100px;
   min-width: 80px;
 }
+md-card-content textarea {
+  width: 90%;
+}
+
