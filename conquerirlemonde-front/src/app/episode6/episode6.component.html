@@ -216,13 +216,29 @@
   <md-card-content *ngIf="displayLine15">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag"></span>  
-        <span class="tag"></span>  
-        <span class="tag"></span>  
-        <span class="tag"></span>  
-        <span class="tag"></span>  
-        <span class="tag"></span>  
-        <span class="tag"></span>  
+       <span class="tag">{{"{"}}</span>
+        <span class="tag">            "kind":"Service",</span>
+        <span class="tag">            "apiVersion":"v1",</span>
+        <span class="tag">{{"            \"metadata\":{"}}</span>
+        <span class="tag">                "name":"trooper-alderaan",</span>
+        <span class="tag">{{"                \"labels\":{"}}</span>
+        <span class="tag">                    "app":"trooper-alderaan"</span>
+        <span class="tag">{{"                }"}}</span>
+        <span class="tag">{{"            },"}}</span>
+        <span class="tag">{{"            \"spec\":{"}}</span>
+        <span class="tag">                "ports": [</span>
+        <span class="tag">{{"                {"}}</span>
+        <span class="tag">                    "port":9000,</span>
+        <span class="tag">                    "targetPort":"http-server",</span>
+        <span class="tag">                    "nodePort": 32201</span>
+        <span class="tag">{{"                }"}}</span>
+        <span class="tag">                ],</span>
+        <span class="tag">{{"                \"selector\":{"}}</span>
+        <span class="tag">                    "app":"trooper-alderaan"</span>
+        <span class="tag">{{"                },"}}</span>
+        <span class="tag">                "type": "LoadBalancer"</span>
+        <span class="tag">{{"            }"}}</span>
+        <span class="tag">{{"        }"}}</span> 
       </code>
     </pre>
   </md-card-content>
@@ -236,7 +252,7 @@
   <md-card-content *ngIf="displayLine15">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">./kubectl create -f trooper.service.yml</span>  
+        <span class="tag">./kubectl create -f trooper.deployement.yml</span>  
       </code>
     </pre>
   </md-card-content>
@@ -244,19 +260,75 @@
 <md-card>
   <md-card-header>
     <md-slide-toggle color="primary" [(ngModel)]="displayLine15">
-      Create file trooper.service.yml
+      Create file trooper.deployement.yml
     </md-slide-toggle>
   </md-card-header>
   <md-card-content *ngIf="displayLine15">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag"></span>  
-        <span class="tag"></span>  
-        <span class="tag"></span>  
-        <span class="tag"></span>  
-        <span class="tag"></span>  
-        <span class="tag"></span>  
-        <span class="tag"></span>  
+        <span class="tag">{{"{"}}</span>       
+        <span class="tag">          "kind":"ReplicationController",</span>
+        <span class="tag">          "apiVersion":"v1",</span>
+        <span class="tag">{{"          \"metadata\":{"}}</span>
+        <span class="tag">              "name":"trooper-alderaan",</span>
+        <span class="tag">{{"              \"labels\":{"}}</span>
+        <span class="tag">                  "app":"trooper-alderaan"</span>
+        <span class="tag">{{"              }"}}</span>
+        <span class="tag">{{"          },"}}</span>
+        <span class="tag">{{"          \"spec\":{"}}</span>
+        <span class="tag">              "replicas":20,</span>
+        <span class="tag">{{"              \"selector\":{"}}</span>
+        <span class="tag">                "app":"trooper-alderaan"</span>
+        <span class="tag">{{"              },"}}</span>
+        <span class="tag">{{"              \"template\":{"}}</span>
+        <span class="tag">{{"                  \"metadata\":{"}}</span>
+        <span class="tag">{{"                      \"labels\":{"}}</span>
+        <span class="tag">                            "app":"trooper-alderaan"</span>
+        <span class="tag">{{"                      }"}}</span>
+        <span class="tag">{{"                  },"}}</span>
+        <span class="tag">{{"              \"spec\":{"}}</span>
+        <span class="tag">                  "containers":[</span>
+        <span class="tag">{{"                      {"}}</span>
+        <span class="tag">                          "name":"trooper-alderaan",</span>
+        <span class="tag">                          "image":"ymatagne/trooper",</span>
+        <span class="tag">                          "ports":[</span>
+        <span class="tag">{{"                              {"}}</span>
+        <span class="tag">                                  "name":"http-server",</span>
+        <span class="tag">                                  "containerPort":9000</span>
+        <span class="tag">{{"                              }"}}</span>
+        <span class="tag">                          ],</span>
+        <span class="tag">			"env":[</span>
+        <span class="tag">{{"                              {"}}</span>
+        <span class="tag">                                  "name":"TROOPER_HOST",</span>
+        <span class="tag">                                  "value":"172.20.20.248"</span>
+        <span class="tag">{{"                              },"}}</span>
+        <span class="tag">{{"                              {"}}</span>
+        <span class="tag">                                  "name":"PLANET_HOST",</span>
+        <span class="tag">                                  "value":"172.20.20.57"</span>
+        <span class="tag">{{"                              },"}}</span>
+        <span class="tag">{{"                              {"}}</span>
+        <span class="tag">                                  "name":"TROOPER_PORT",</span>
+        <span class="tag">                                  "value":"32201"</span>
+        <span class="tag">{{"                              },"}}</span>
+        <span class="tag">{{"                              {"}}</span>
+        <span class="tag">                                  "name":"PLANET_PORT",</span>
+        <span class="tag">                                  "value":"8083"</span>
+        <span class="tag">{{"                              },"}}</span>
+        <span class="tag">{{"                              {"}}</span>
+        <span class="tag">                                  "name":"TROOPER_NAME",</span>
+        <span class="tag">                                  "value":"antoine"</span>
+        <span class="tag">{{"                              },"}}</span>
+        <span class="tag">{{"                              {"}}</span>
+        <span class="tag">                                  "name":"SPACESHIP",</span>
+        <span class="tag">                                  "value":"Corellian"</span>
+        <span class="tag">{{"                              }"}}</span>
+        <span class="tag">                          ]</span>
+        <span class="tag">{{"                      }"}}</span>
+        <span class="tag">                  ]</span>
+        <span class="tag">{{"              }"}}</span>
+        <span class="tag">{{"            }"}}</span>
+        <span class="tag">{{"          }"}}</span>
+        <span class="tag">{{"        }"}}</span>
       </code>
     </pre>
   </md-card-content>

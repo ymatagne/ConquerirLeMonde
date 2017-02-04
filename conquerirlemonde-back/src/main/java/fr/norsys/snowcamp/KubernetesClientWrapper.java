@@ -23,7 +23,7 @@ public class KubernetesClientWrapper {
 
     KubernetesClientWrapper() throws URISyntaxException {
         Config config = new ConfigBuilder()
-                .withMasterUrl("https://172.20.20.248:443")
+                .withMasterUrl("https://172.20.21.123:443")
                 .withCaCertFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-vagrant/episode5/queenbee/certificats/ca.pem")
                 .withClientCertFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-vagrant/episode5/queenbee/certificats/admin.pem")
                 .withClientKeyFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-vagrant/episode5/queenbee/certificats/admin-key.pem")

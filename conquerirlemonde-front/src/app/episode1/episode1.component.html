@@ -1,109 +1,238 @@
 <md-card>
   <md-card-content>
     <button color="primary" md-mini-fab routerLink="/rules" routerLinkActive="active">
-    <md-icon class="md-24">keyboard_arrow_left</md-icon>
-  </button>
+      <md-icon class="md-24">keyboard_arrow_left</md-icon>
+    </button>
     <h2 id="header"> Episode 1 : Vagrant and CoreOs</h2>
   </md-card-content>
 </md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
-      Copy files from usb key
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine1">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">cp USB/coreos_production_vagrant.box coreos_production_vagrant.box</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine2">
-      Create config file
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine2">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">touch Vagrantfile</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
-      This file contains
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine3">
-    <pre class="ng-scope undefined lang-rb prettyprinted">
-      <code>
-        <span class="tag" >{{"$forwarded_ports={80=>8080}"}}</span>
-        <span class="pln"></span>
-        <span class="tag">$update_channel = "alpha"</span>      
-        <span class="tag">Vagrant.configure("2") do |config|</span>
-        <span class="tag">config.vm.box = "coreos-%s" % $update_channel</span>
-	      <span class="tag">config.vm.box_url = "http://%s.release.core-os.net/amd64-usr/current/coreos_production_vagrant.json" % $update_channel</span>
-        <span class="pln"></span>
-        <span class="tag">  config.vm.network "private_network", ip: "192.168.33.10"</span>
-        <span class="pln"></span>
-        <span class="tag">  $forwarded_ports.each do |guest, host|</span>
-        <span class="pln"></span>
-        <span class="tag">    config.vm.network "forwarded_port", guest: guest, host: host, auto_correct: true</span>
-        <span class="pln"></span>
-        <span class="tag">  end</span>
-        <span class="pln"></span>
-        <span class="tag">end</span>
-        <span class="pln"></span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine4">
-      Create vagrant box
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine4">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">vagrant box add coreos-alpha coreos_production_vagrant.box</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine5">
-      Start your box
-    </md-slide-toggle>
-    <md-card-title></md-card-title>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine5">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">vagrant up</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine6">
-      Connect to your box
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine6">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">vagrant ssh</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <md-card>
+    <md-card-header>
+      <md-card-title>What do you use ?</md-card-title>
+    </md-card-header>
+    <md-card-content>
+      <md-radio-group [(ngModel)]="chosenOption">
+        <md-radio-button *ngFor="let option of options" [value]="option">
+          {{option}}
+        </md-radio-button>
+      </md-radio-group>
+    </md-card-content>
+  </md-card>
+</div>
+<div [ngSwitch]="chosenOption">
+  <div *ngSwitchCase="'Vagrant'">
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine2">
+          Create config file
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine2">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <code ng-non-bindable="">
+          <span class="tag">touch Vagrantfile</span>
+        </code>
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
+          This file contains
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine3">
+        <pre class="ng-scope undefined lang-rb prettyprinted">
+        <code>
+          <span class="tag" >{{"$forwarded_ports={80=>8080}"}}</span>
+          <span class="pln"></span>
+          <span class="tag">$update_channel = "alpha"</span>      
+          <span class="tag">Vagrant.configure("2") do |config|</span>
+          <span class="tag">config.vm.box = "coreos-%s" % $update_channel</span>
+          <span class="tag">config.vm.box_url = "http://%s.release.core-os.net/amd64-usr/current/coreos_production_vagrant.json" % $update_channel</span>
+          <span class="pln"></span>
+          <span class="tag">  config.vm.network "private_network", ip: "192.168.33.10"</span>
+          <span class="pln"></span>
+          <span class="tag">  $forwarded_ports.each do |guest, host|</span>
+          <span class="pln"></span>
+          <span class="tag">    config.vm.network "forwarded_port", guest: guest, host: host, auto_correct: true</span>
+          <span class="pln"></span>
+          <span class="tag">  end</span>
+          <span class="pln"></span>
+          <span class="tag">end</span>
+          <span class="pln"></span>
+        </code>
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine5">
+          Start your box
+        </md-slide-toggle>
+        <md-card-title></md-card-title>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine5">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <code ng-non-bindable="">
+          <span class="tag">vagrant up</span>
+        </code>
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine6">
+          Connect to your box
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine6">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <code ng-non-bindable="">
+          <span class="tag">vagrant ssh</span>
+        </code>
+      </pre>
+      </md-card-content>
+    </md-card>
+  </div>
+  <div *ngSwitchCase="'Aws'">
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine30">
+          Download Aws Cli
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine30">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <code ng-non-bindable="">
+          <span class="tag">For Windows : https://s3.amazonaws.com/aws-cli/AWSCLI64.msi</span>
+          <span class="tag">For Linux/OS X : </span>
+          <span class="tag">  cd /tmp</span>
+          <span class="tag">  curl -O https://bootstrap.pypa.io/get-pip.py</span>
+          <span class="tag">  sudo python get-pip.py</span>
+          <span class="tag">  sudo pip install awscli --ignore-installed six</span>
+          <span class="tag">  aws help</span>
+        </code>
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine34">
+          Configure Aws cli
+        </md-slide-toggle>
+        <md-card-title></md-card-title>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine34">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <code ng-non-bindable="">
+          <span class="tag">aws configure</span>
+          <span class="tag">Enter input : </span>
+         <span class="tag">AWS Access Key ID [None]: AKIAJQ4GXKA6RGCABHSA</span>
+         <span class="tag">AWS Secret Access Key [None]: *****************</span>
+         <span class="tag">Default region name [None]: eu-west-1</span>
+         <span class="tag">Default output format [None]: text</span>
+
+        </code>
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine31">
+          Create User Data
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine31">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <code ng-non-bindable="">
+          <span class="tag">touch user-data.yml</span>
+        </code>
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine32">
+          Contents of this file
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine32">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+
+        <textarea rows="15">
+#cloud-config
+hostname: "naboo"
+users:
+  - name: "jarjar"
+    passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."
+    groups:
+      - "sudo"
+      - "docker"
+        
+        </textarea>  
+                </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine35">
+          Start your VM
+        </md-slide-toggle>
+        <md-card-title></md-card-title>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine35">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <code ng-non-bindable="">
+          <span class="tag">response=$(aws ec2 run-instances --image-id ami-188dd67e --count 1 --instance-type t1.micro --security-groups snowcamp --user-data file://user-data.yml)</span>
+        </code>
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine36">
+          Get your Instance id
+        </md-slide-toggle>
+        <md-card-title></md-card-title>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine36">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <code ng-non-bindable="">
+          <span class="tag">echo $response | grep InstanceId</span>
+        </code>
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine37">
+          Get your Public Ip
+        </md-slide-toggle>
+        <md-card-title></md-card-title>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine37">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <code ng-non-bindable="">
+          <span class="tag">aws ec2 describe-instances --instance-ids #YOUR_INSTANCE_ID | grep PublicIpAddress</span>
+        </code>
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine38">
+          Connect to your VM
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine38">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <code ng-non-bindable="">
+          <span class="tag">ssh jarjar@#YOUR_IP</span>
+        </code>
+      </pre>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>
