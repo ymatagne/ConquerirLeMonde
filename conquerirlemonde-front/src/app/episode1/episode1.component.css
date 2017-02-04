@@ -7,3 +7,6 @@
   textarea{
       width: 400px;
   }
+md-card-content textarea {
+  width: 90%;
+}
