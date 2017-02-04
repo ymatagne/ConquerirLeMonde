@@ -7,7 +7,10 @@ import io.fabric8.kubernetes.client.Config;
 import io.fabric8.kubernetes.client.ConfigBuilder;
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.net.URISyntaxException;
@@ -18,20 +21,19 @@ import java.util.stream.Collectors;
 @Component
 public class KubernetesClientWrapper {
 
-    @Value("${kubernetesIp}")
-    String kubernetesIp;
 
-    @Value("${certPath}")
-    String certPath;
+    @Autowired
+    private Environment env;
 
     KubernetesClient client;
 
     KubernetesClientWrapper() throws URISyntaxException {
+
         Config config = new ConfigBuilder()
-                .withMasterUrl(kubernetesIp)
-                .withCaCertFile(certPath+"/ca.pem")
-                .withClientCertFile(certPath+"/admin.pem")
-                .withClientKeyFile(certPath +"/admin-key.pem")
+                .withMasterUrl("https://54.154.157.5:443")
+                .withCaCertFile("/tmp/certificats/ca.pem")
+                .withClientCertFile("/tmp/certificats/admin.pem")
+                .withClientKeyFile("/tmp/certificats/admin-key.pem")
                 .build();
         client = new DefaultKubernetesClient(config);
     }

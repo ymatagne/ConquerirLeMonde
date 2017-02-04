@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URI;
@@ -26,13 +27,10 @@ import java.util.stream.Collectors;
 /**
  * Created by luya on 30/12/16.
  */
-@Component
 @Slf4j
+@Service
 public class PlanetsService {
     private AtomicInteger counter = new AtomicInteger(0);
-
-    @Value("${etcdUri}")
-    String etcdUri;
 
     @Autowired
     PlanetsFleetHandler planetsFleetHandler;
@@ -46,14 +44,14 @@ public class PlanetsService {
     EtcdClient etcd;
 
     PlanetsService(){
-        this.etcd = new EtcdClient(URI.create(etcdUri));
+        this.etcd = new EtcdClient(URI.create("http://54.194.247.99:4001"));
     }
     List<Planet> planets;
 
 
     private void connectEtcd() {
         if (etcd == null) {
-            etcd = new EtcdClient(URI.create(etcdUri));
+            etcd = new EtcdClient(URI.create("http://54.194.247.99:4001"));
         }
     }
 

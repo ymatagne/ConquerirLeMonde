@@ -5,6 +5,7 @@ services:
     working_dir: /app
     volumes:
         - ./conquerirlemonde-back/target/conquerirlemonde.jar:/app/conquerirlemonde.jar
+        - ./conquerirlemonde-aws/certificats:/tmp/certificats
     command: java -jar /app/conquerirlemonde.jar
     expose: 
         - "8080"
