@@ -125,6 +125,10 @@ export class GamesComponent implements AfterViewInit {
     }
   }
 
+  go(){
+    let trooper = new Trooper("me","localhost", "8080", "Corellian");
+    this.launchEnnemy(trooper);
+  }
   // Spawn a new wave of enemies
   launchEnnemy(trooper:Trooper) {
     var enemy = this.enemyPool.get(this.nextEnemyX, this.nextEnemyY, 2);
@@ -139,7 +143,7 @@ export class GamesComponent implements AfterViewInit {
       this.enemyYIndex++;
       this.enemyXIndex = 0;
     }
-    if (this.enemyYIndex % 10 == 0) {
+    if (this.enemyYIndex % 8 == 0) {
       this.nextEnemyX = 100;
       this.nextEnemyY = 250;
       this.enemyYIndex = 1;
