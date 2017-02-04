@@ -125,10 +125,6 @@ export class GamesComponent implements AfterViewInit {
     }
   }
 
-  go(){
-    let trooper = new Trooper("me","localhost", "8080", "Corellian");
-    this.launchEnnemy(trooper);
-  }
   // Spawn a new wave of enemies
   launchEnnemy(trooper:Trooper) {
     var enemy = this.enemyPool.get(this.nextEnemyX, this.nextEnemyY, 2);
