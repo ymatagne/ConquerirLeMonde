@@ -35,3 +35,16 @@ coreos:
           ExecStartPre=/usr/bin/docker pull 984828126579.dkr.ecr.eu-west-1.amazonaws.com/snowcamp-api:latest
           ExecStart=/usr/bin/docker run --name snowcamp-api -p 0.0.0.0:8080:8080 984828126579.dkr.ecr.eu-west-1.amazonaws.com/snowcamp-api:latest
           ExecStop=/usr/bin/docker stop snowcamp-api 
+      - name: snowcamp.service
+        command: start
+        content: |
+          [Unit]
+          Description=Snowcamp
+          After=docker.service
+          [Service]
+          Restart=always
+          ExecStartPre=-/usr/bin/docker kill snowcamp-front
+          ExecStartPre=-/usr/bin/docker rm snowcamp-front
+          ExecStartPre=/usr/bin/docker pull 984828126579.dkr.ecr.eu-west-1.amazonaws.com/snowcamp-front:latest
+          ExecStart=/usr/bin/docker run --name snowcamp-front -p 0.0.0.0:80:80 984828126579.dkr.ecr.eu-west-1.amazonaws.com/snowcamp-front:latest
+          ExecStop=/usr/bin/docker stop snowcamp-front 
