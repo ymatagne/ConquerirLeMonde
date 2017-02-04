@@ -7,26 +7,31 @@ import io.fabric8.kubernetes.client.Config;
 import io.fabric8.kubernetes.client.ConfigBuilder;
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.net.URISyntaxException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Component
 public class KubernetesClientWrapper {
 
+    @Value("${kubernetesIp}")
+    String kubernetesIp;
+
+    @Value("${certPath}")
+    String certPath;
+
     KubernetesClient client;
 
     KubernetesClientWrapper() throws URISyntaxException {
         Config config = new ConfigBuilder()
-                .withMasterUrl("https://172.20.21.123:443")
-                .withCaCertFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-vagrant/episode5/queenbee/certificats/ca.pem")
-                .withClientCertFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-vagrant/episode5/queenbee/certificats/admin.pem")
-                .withClientKeyFile("/Users/luya/Workspace/conquerirlemonde/conquerirlemonde-vagrant/episode5/queenbee/certificats/admin-key.pem")
+                .withMasterUrl(kubernetesIp)
+                .withCaCertFile(certPath+"/ca.pem")
+                .withClientCertFile(certPath+"/admin.pem")
+                .withClientKeyFile(certPath +"/admin-key.pem")
                 .build();
         client = new DefaultKubernetesClient(config);
     }

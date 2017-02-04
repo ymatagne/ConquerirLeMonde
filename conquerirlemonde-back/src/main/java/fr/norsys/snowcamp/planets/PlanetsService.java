@@ -9,6 +9,7 @@ import mousio.etcd4j.responses.EtcdAuthenticationException;
 import mousio.etcd4j.responses.EtcdException;
 import mousio.etcd4j.responses.EtcdKeysResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +31,9 @@ import java.util.stream.Collectors;
 public class PlanetsService {
     private AtomicInteger counter = new AtomicInteger(0);
 
+    @Value("${etcdUri}")
+    String etcdUri;
+
     @Autowired
     PlanetsFleetHandler planetsFleetHandler;
 
@@ -42,14 +46,14 @@ public class PlanetsService {
     EtcdClient etcd;
 
     PlanetsService(){
-        this.etcd = new EtcdClient(URI.create("http://192.168.33.10:4001"));
+        this.etcd = new EtcdClient(URI.create(etcdUri));
     }
     List<Planet> planets;
 
 
     private void connectEtcd() {
         if (etcd == null) {
-            etcd = new EtcdClient(URI.create("http://192.168.33.10:4001"));
+            etcd = new EtcdClient(URI.create(etcdUri));
         }
     }
 

@@ -43,7 +43,6 @@ public class ConquerirlemondeApplication extends WebSecurityConfigurerAdapter {
 		config.addAllowedMethod("DELETE");
 		config.addAllowedMethod("PATCH");
 		source.registerCorsConfiguration("/**", config);
-		// return new CorsFilter(source);
 		final FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
 		bean.setOrder(0);
 		return bean;
