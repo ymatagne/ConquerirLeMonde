@@ -6,354 +6,542 @@
     <h2 id="header"> Episode 3 : Fleet</h2>
   </md-card-content>
 </md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
-      Create user-data's file
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine1">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">touch user-data.yml</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine2">
-      Contents of this file
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine2">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">#cloud-config</span>
-        <span class="tag">hostname: "naboo"</span>
-        <span class="tag">users:</span>
-        <span class="tag">  - name: "jarjar"</span>
-        <span class="tag">    passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."</span>
-        <span class="tag">    groups:</span>
-        <span class="tag">      - "sudo"</span>
-        <span class="tag">      - "docker"</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
-      Load user-data with VagrantFile
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine3">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code>
-        <span class="tag" >{{"$forwarded_ports={80=>8080}"}}</span>
-        <span class="pln"></span>
-        <span class="tag">Vagrant.configure("2") do |config|</span>
-        <span class="pln"></span>
-        <span class="tag">  config.vm.box = "coreos-alpha"</span>
-        <span class="pln"></span>
-        <span class="tag">  config.vm.network "private_network", ip: "192.168.33.10"</span>
-        <span class="pln"></span>
-        <span class="tag">  $forwarded_ports.each do |guest, host|</span>
-        <span class="pln"></span>
-        <span class="tag">    config.vm.network "forwarded_port", guest: guest, host: host, auto_correct: true</span>
-        <span class="pln"></span>    
-        <span class="tag">  end</span>
-        <span class="tag">  config.vm.provision :file, :source => "user-data.yml", :destination => "/tmp/vagrantfile-user-data"</span>
-        <span class="pln"></span>
-        <span class="tag">  config.vm.provision :shell, :inline => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", :privileged => true</span>
-        <span class="pln"></span>
-        <span class="tag">end</span>
-        <span class="pln"></span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine40">
-      Destroy your box
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine40">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">vagrant destroy</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine4">
-      Start your box
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine4">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">vagrant up</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine5">
-      Connect to your box
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine5">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">user : jarjar</span>
-        <span class="tag">pass : binks</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine6">
-      Verify service status
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine6">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">systemctl status fleet</span>
-        <span class="tag">systemctl status etcd2</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine7">
-      Change User data
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine7">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
+
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <md-card>
+    <md-card-header>
+      <md-card-title>What do you use ?</md-card-title>
+    </md-card-header>
+    <md-card-content>
+      <md-radio-group [(ngModel)]="chosenOption">
+        <md-radio-button *ngFor="let option of options" [value]="option">
+          {{option}}
+        </md-radio-button>
+      </md-radio-group>
+    </md-card-content>
+  </md-card>
+</div>
+
+<div [ngSwitch]="chosenOption">
+  <div *ngSwitchCase="'Vagrant'">
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
+          Create user-data's file
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine1">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">touch user-data.yml</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine2">
+          Contents of this file
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine2">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">#cloud-config</span>
+            <span class="tag">hostname: "naboo"</span>
+            <span class="tag">users:</span>
+            <span class="tag">  - name: "jarjar"</span>
+            <span class="tag">    passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."</span>
+            <span class="tag">    groups:</span>
+            <span class="tag">      - "sudo"</span>
+            <span class="tag">      - "docker"</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
+          Load user-data with VagrantFile
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine3">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code>
+            <span class="tag" >{{"$forwarded_ports={80=>8080}"}}</span>
+            <span class="pln"></span>
+            <span class="tag">Vagrant.configure("2") do |config|</span>
+            <span class="pln"></span>
+            <span class="tag">  config.vm.box = "coreos-alpha"</span>
+            <span class="pln"></span>
+            <span class="tag">  config.vm.network "private_network", ip: "192.168.33.10"</span>
+            <span class="pln"></span>
+            <span class="tag">  $forwarded_ports.each do |guest, host|</span>
+            <span class="pln"></span>
+            <span class="tag">    config.vm.network "forwarded_port", guest: guest, host: host, auto_correct: true</span>
+            <span class="pln"></span>
+            <span class="tag">  end</span>
+            <span class="tag">  config.vm.provision :file, :source => "user-data.yml", :destination => "/tmp/vagrantfile-user-data"</span>
+            <span class="pln"></span>
+            <span class="tag">  config.vm.provision :shell, :inline => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", :privileged => true</span>
+            <span class="pln"></span>
+            <span class="tag">end</span>
+            <span class="pln"></span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine40">
+          Destroy your box
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine40">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">vagrant destroy</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine4">
+          Start your box
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine4">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">vagrant up</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine5">
+          Connect to your box
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine5">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">user : jarjar</span>
+            <span class="tag">pass : binks</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine6">
+          Verify service status
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine6">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">systemctl status fleet</span>
+            <span class="tag">systemctl status etcd2</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine7">
+          Change User data
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine7">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+    <textarea rows="25">
+#cloud-config
+hostname: "naboo"
+users:
+  - name: "jarjar"
+    passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."
+    groups:
+      - "sudo"
+      - "docker"
+coreos:
+  fleet:
+    etcd_servers:"http://IP_MASTER:4001"
+    metadata: "hostname=naboo"
+    public-ip: $public_ipv4
+  etcd2:
+    name: "naboo"
+    initial-cluster-token: starwars
+  units:
+    - name: fleet.service
+      command: start
+    - name: etcd2.service
+      command: start
+    </textarea>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine20">
+          Validate user-data
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine20">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">Go to https://coreos.com/validate/ and copy your file</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine8">
+          Change Vagrantfile
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine8">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">{{"$forwarded_ports={80=>8080,2380=>2380,4001=>4001,7001=>7001,2379=>2379}"}}</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine9">
+          Destroy your box
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine9">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">vagrant destroy</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine10">
+          Start your box
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine10">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">vagrant up</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine30">
+          Connect in your box
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine30">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">vagrant ssh</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine11">
+          Verify Status
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine11">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">systemctl status fleet</span>
+            <span class="tag">systemctl status etcd2</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine12">
+          Create your fleet service
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine12">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">touch #YOUR_NAME.service</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine13">
+          This file content:
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine13">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">[Unit]</span>
+            <span class="tag">Description=My Trooper</span>
+            <span class="tag">After=docker.service</span>
+            <span class="tag">Requires=docker.service</span>
+            <span class="pln"></span>
+            <span class="tag">[Service]</span>
+            <span class="tag">ExecStartPre=-/usr/bin/docker kill #YOUR_NAME</span>
+            <span class="tag">ExecStartPre=-/usr/bin/docker rm #YOUR_NAME</span>
+            <span class="tag">ExecStartPre=/usr/bin/docker pull nginx</span>
+            <span class="tag">ExecStart=/usr/bin/docker run --name #YOUR_NAME -p 0.0.0.0:80:80 nginx</span>
+            <span class="tag">ExecStop=/usr/bin/docker stop #YOUR_NAME</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine14">
+          Start your service
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine14">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">fleetctl start #YOUR_NAME.service</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine15">
+          Create your trooper service
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine15">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">touch trooper-#NAME.service</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine16">
+          This file content:
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine16">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">[Unit]</span>
+            <span class="tag">Description=trooper-#YOUR_NAME</span>
+            <span class="tag">After=docker.service</span>
+            <span class="tag">Requires=docker.service</span>
+            <span class="tag"></span>
+            <span class="tag">[Service]</span>
+            <span class="tag">ExecStartPre=-/usr/bin/docker kill trooper-#YOUR_NAME</span>
+            <span class="tag">ExecStartPre=-/usr/bin/docker rm trooper-#YOUR_NAME</span>
+            <span class="tag">ExecStartPre=/usr/bin/docker pull ymatagne/trooper</span>
+            <span class="tag">ExecStart=/usr/bin/docker run --name trooper-#YOUR_NAME -p 0.0.0.0:80:9000 -e PLANET_HOST=#MASTER_IP -e PLANET_PORT=#MASTER_PORT -e TROOPER_NAME=#YOUR_NAME -e TROOPER_HOST=#YOUR_IP -e TROOPER_PORT=#YOUR_PORT -e SPACESHIP=#YOUR_SPACESHIP trooper-#YOUR_NAME</span>
+            <span class="tag">ExecStop=/usr/bin/docker stop trooper-#YOUR_NAME</span>
+            <span class="tag"></span>
+            <span class="tag">[X-Fleet]</span>
+            <span class="tag">MachineMetadata=hostname=#YOUR_PLANET</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine17">
+          Start your service
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine17">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">fleetctl start trooper-#YOUR_NAME.service</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+  </div>
+
+
+  <div *ngSwitchCase="'Aws'">
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
+          Create user-data's file
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine1">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">touch user-data.yml</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine7">
+          Change User data
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine7">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+    <textarea rows="25">
+#cloud-config
+hostname: "naboo"
+users:
+  - name: "jarjar"
+    passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."
+    groups:
+      - "sudo"
+      - "docker"
+coreos:
+  fleet:
+    etcd_servers: "http://IP_MASTER:4001"
+    metadata: "hostname=naboo"
+    public-ip: $public_ipv4
+  etcd2:
+    name: "naboo"
+    initial-cluster-token: starwars
+  units:
+    - name: fleet.service
+      command: start
+    - name: etcd2.service
+      command: start
+    </textarea>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine35">
+          Start your VM
+        </md-slide-toggle>
+        <md-card-title></md-card-title>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine35">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
         <code ng-non-bindable="">
-          <span class="tag">#cloud-config</span>
-          <span class="tag">hostname: "naboo"</span>
-          <span class="tag">users:</span>
-          <span class="tag">  - name: "jarjar"</span>
-          <span class="tag">    passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."</span>
-          <span class="tag">    groups:</span>
-          <span class="tag">      - "sudo"</span>
-          <span class="tag">      - "docker"</span>
-          <span class="tag">coreos:</span>
-          <span class="tag">  fleet:</span>
-          <span class="tag">{{"    etcd_servers:\"http\:\/\/IP_MASTER\:4001\""}}</span>
-          <span class="tag">    metadata: "hostname=naboo"</span>
-          <span class="tag">    public-ip: $public_ipv4    </span>
-          <span class="tag">  etcd2:</span>
-          <span class="tag">    name: "naboo"</span>
-          <span class="tag">    initial-cluster-token: starwars</span>
-          <span class="tag">  units:</span>
-          <span class="tag">    - name: fleet.service</span>
-          <span class="tag">      command: start</span>
-          <span class="tag">    - name: etcd2.service</span>
-          <span class="tag">      command: start</span>
+          <span class="tag">response=$(aws ec2 run-instances --image-id ami-188dd67e --count 1 --instance-type t1.micro --security-groups snowcamp --user-data file://user-data.yml)</span>
         </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine20">
-      Validate user-data
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine20">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">Go to https://coreos.com/validate/ and copy your file</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine8">
-      Change Vagrantfile
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine8">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">{{"$forwarded_ports={80=>8080,2380=>2380,4001=>4001,7001=>7001,2379=>2379}"}}</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine9">
-      Destroy your box
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine9">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">vagrant destroy</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine10">
-      Start your box
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine10">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">vagrant up</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine30">
-      Connect in your box
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine30">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">vagrant ssh</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine11">
-      Verify Status
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine11">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">systemctl status fleet</span>
-        <span class="tag">systemctl status etcd2</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine12">
-      Create your fleet service
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine12">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">touch #YOUR_NAME.service</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine13">
-      This file content:
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine13">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">[Unit]</span>
-        <span class="tag">Description=My Trooper</span>
-        <span class="tag">After=docker.service</span>
-        <span class="tag">Requires=docker.service</span>
-        <span class="pln"></span>
-        <span class="tag">[Service]</span>
-        <span class="tag">ExecStartPre=-/usr/bin/docker kill #YOUR_NAME</span>
-        <span class="tag">ExecStartPre=-/usr/bin/docker rm #YOUR_NAME</span>
-        <span class="tag">ExecStartPre=/usr/bin/docker pull nginx</span>
-        <span class="tag">ExecStart=/usr/bin/docker run --name #YOUR_NAME -p 0.0.0.0:80:80 nginx</span>
-        <span class="tag">ExecStop=/usr/bin/docker stop #YOUR_NAME</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine14">
-      Start your service
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine14">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">fleetctl start #YOUR_NAME.service</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine15">
-      Create your trooper service
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine15">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">touch trooper-#NAME.service</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine16">
-      This file content:
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine16">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">[Unit]</span>
-        <span class="tag">Description=trooper-#YOUR_NAME</span>
-        <span class="tag">After=docker.service</span>
-        <span class="tag">Requires=docker.service</span>
-        <span class="tag"></span>
-        <span class="tag">[Service]</span>
-        <span class="tag">ExecStartPre=-/usr/bin/docker kill trooper-#YOUR_NAME</span>
-        <span class="tag">ExecStartPre=-/usr/bin/docker rm trooper-#YOUR_NAME</span>
-        <span class="tag">ExecStartPre=/usr/bin/docker pull ymatagne/trooper</span>
-        <span class="tag">ExecStart=/usr/bin/docker run --name trooper-#YOUR_NAME -p 0.0.0.0:80:9000 -e PLANET_HOST=#MASTER_IP -e PLANET_PORT=#MASTER_PORT -e TROOPER_NAME=#YOUR_NAME -e TROOPER_HOST=#YOUR_IP -e TROOPER_PORT=#YOUR_PORT -e SPACESHIP=#YOUR_SPACESHIP trooper-#YOUR_NAME</span>
-        <span class="tag">ExecStop=/usr/bin/docker stop trooper-#YOUR_NAME</span>
-        <span class="tag"></span>
-        <span class="tag">[X-Fleet]</span>
-        <span class="tag">MachineMetadata=hostname=#YOUR_PLANET</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine17">
-      Start your service
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine17">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">fleetctl start trooper-#YOUR_NAME.service</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine36">
+          Get your Instance id
+        </md-slide-toggle>
+        <md-card-title></md-card-title>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine36">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <code ng-non-bindable="">
+          <span class="tag">echo $response | grep InstanceId</span>
+        </code>
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine37">
+          Get your Public Ip
+        </md-slide-toggle>
+        <md-card-title></md-card-title>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine37">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <code ng-non-bindable="">
+          <span class="tag">aws ec2 describe-instances --instance-ids #YOUR_INSTANCE_ID | grep PublicIpAddress</span>
+        </code>
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine38">
+          Connect to your VM
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine38">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <code ng-non-bindable="">
+          <span class="tag">ssh jarjar@#YOUR_IP</span>
+        </code>
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine15">
+          Create your trooper service
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine15">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">touch trooper-#NAME.service</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine16">
+          This file content:
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine16">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <textarea rows="20">
+
+[Unit]
+Description=trooper-#YOUR_NAME
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill trooper-#YOUR_NAME
+ExecStartPre=-/usr/bin/docker rm trooper-#YOUR_NAME
+ExecStartPre=/usr/bin/docker pull ymatagne/trooper
+ExecStart=/usr/bin/docker run --name trooper-#YOUR_NAME -p 0.0.0.0:80:9000 -e PLANET_HOST=#MASTER_IP -e PLANET_PORT=#MASTER_PORT -e TROOPER_NAME=#YOUR_NAME -e TROOPER_HOST=#YOUR_IP -e TROOPER_PORT=#YOUR_PORT -e SPACESHIP=#YOUR_SPACESHIP trooper-#YOUR_NAME
+ExecStop=/usr/bin/docker stop trooper-#YOUR_NAME
+
+[X-Fleet]
+MachineMetadata=hostname=#YOUR_PLANET
+        </textarea>
+
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine17">
+          Start your service
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine17">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">fleetctl start trooper-#YOUR_NAME.service</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>
