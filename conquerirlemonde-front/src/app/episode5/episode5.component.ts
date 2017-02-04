@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Episode5Component implements OnInit {
 
+  options = ['Aws','Vagrant'];
+  chosenOption: string = 'Aws';
+
   constructor() { }
 
   ngOnInit() {

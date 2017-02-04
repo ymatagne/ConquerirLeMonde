@@ -6,483 +6,913 @@
     <h2 id="header">Episode 5 : Install Kubernetes</h2>
   </md-card-content>
 </md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
-      Get certificates
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine1">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">{{"cp USB/certificates ."}}</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine2">
-      Create Vagrantfile
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine2">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">touch Vagrantfile</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
-      This File content
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine3">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code>
-        <span class="pln"></span>
-        <span class="tag">$update_channel = "alpha"</span>      
-        <span class="tag">Vagrant.configure("2") do |config|</span>
-        <span class="tag">    config.vm.box = "coreos-%s" % $update_channel</span>
-	      <span class="tag">    config.vm.box_url = "http://%s.release.core-os.net/amd64-usr/current/coreos_production_vagrant.json" % $update_channel</span>
-	      <span class="tag">    config.vm.network "public_network",bridge: "#YOUR_INTERFACE", ip: "#YOUR_IP"</span>
-	      <span class="tag">    config.vm.hostname = "#YOUR_PLANET_NAME"</span>
-        <span class="tag">    config.vm.network :forwarded_port, guest: 80, host: 80</span>
-  	    <span class="tag">    config.vm.network :forwarded_port, guest: 443, host: 443	</span>
-	      <span class="tag">    config.vm.network :forwarded_port, guest: 2379, host: 2379</span>
-        <span class="tag">    config.vm.network :forwarded_port, guest: 15441, host: 15441</span>
-        <span class="tag">    config.vm.network :forwarded_port, guest: 10250, host: 10250</span>
-        <span class="tag">    config.vm.network :forwarded_port, guest: 10053, host: 10053</span>
-        <span class="tag">    config.vm.network :forwarded_port, guest: 8081, host: 8081</span>
-        <span class="tag">    config.vm.network :forwarded_port, guest: 8001, host: 8001</span>
-        <span class="tag">    config.vm.network :forwarded_port, guest: 8285, host: 8285</span>
-        <span class="tag">    config.vm.network :forwarded_port, guest: 8472, host: 8472</span>
-        <span class="tag">    config.vm.network :forwarded_port, guest: 179, host: 179</span>
-        <span class="tag">    config.vm.network :forwarded_port, guest: 53, host: 53</span>
-        <span class="tag">    config.vm.network :forwarded_port, guest: 9090, host: 9090</span>
-        <span class="tag">    config.vm.network :forwarded_port, guest: 8082, host: 8082</span>
-        <span class="tag">    config.vm.network :forwarded_port, guest: 8080, host: 8080</span>
-        <span class="tag">    config.vm.provision :file, :source => "user-data.yml", :destination => "/tmp/vagrantfile-user-data"</span>
-        <span class="tag">    config.vm.provision :shell, :inline => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", :privileged => true</span>
-        <span class="pln"></span>
-        <span class="tag">    config.vm.provision :shell, :inline => "mkdir -p /home/core/template", :privileged => true</span>
-        <span class="tag">    config.vm.provision :shell, :inline => "chmod 777 -R /home/core/template", :privileged => true</span>
-        <span class="pln"></span>
-        <span class="tag">    config.vm.provision :file, source: "./certificats", destination: "/tmp/ssl"</span>
-        <span class="tag">    config.vm.provision :shell, :inline => "mkdir -p /etc/kubernetes/", :privileged => true</span>
-        <span class="tag">    config.vm.provision :shell, :inline => "mv /tmp/ssl /etc/kubernetes/ssl", :privileged => true</span>
-        <span class="tag">    config.vm.provision :shell, :inline => "chown -R root:root /etc/kubernetes/ssl", :privileged => true</span>
-        <span class="pln"></span>
-        <span class="tag">end</span>
-        <span class="pln"></span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
-      Create user-data file
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine3">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">touch user-data.yml</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine4">
-      This file content :
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine4">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">       
-        <span class="tag">#cloud-config</span> 
-        <span class="tag">hostname: "#PLANET_NAME"</span> 
-        <span class="tag">users:</span>
-        <span class="tag">  - name: "jarjar"</span>
-        <span class="tag">    passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."</span>
-        <span class="tag">    groups:</span>
-        <span class="tag">      - "sudo"</span>
-        <span class="tag">      - "docker"</span>
-        <span class="pln"></span>
-        <span class="tag">write_files:</span> 
-        <span class="tag">  - path: "/etc/flannel/options.env"</span> 
-        <span class="tag">    permissions: "0644"</span> 
-        <span class="tag">    owner: "root"</span> 
-        <span class="tag">    content: |</span> 
-        <span class="tag">      FLANNELD_IFACE=$public_ipv4</span> 
-        <span class="tag">      FLANNELD_ETCD_ENDPOINTS=#MASTER_URL</span> 
-        <span class="tag">  - path: "/etc/kubernetes/cni/docker_opts_cni.env"</span> 
-        <span class="tag">    permissions: "0644"</span> 
-        <span class="tag">    owner: "root"</span> 
-        <span class="tag">    content: |</span> 
-        <span class="tag">      DOCKER_OPT_BIP=""</span> 
-        <span class="tag">      DOCKER_OPT_IPMASQ=""    </span> 
-        <span class="tag">  - path: "/etc/kubernetes/cni/net.d/10-flannel.conf"</span> 
-        <span class="tag">    permissions: "0644"</span> 
-        <span class="tag">    owner: "root"</span> 
-        <span class="tag">    content: |</span> 
-        <span class="tag">{{"      {"}}</span> 
-        <span class="tag">          "name": "podnet",</span> 
-        <span class="tag">          "type": "flannel",</span> 
-        <span class="tag">          "delegate": {{"{"}}</span> 
-        <span class="tag">              "isDefaultGateway": true</span> 
-        <span class="tag">{{"          }"}}</span> 
-        <span class="tag">{{"      }"}}</span> 
-        <span class="tag">  - path: "/etc/systemd/system/kubelet.service"</span> 
-        <span class="tag">    permissions: "0644"</span> 
-        <span class="tag">    owner: "root"</span> 
-        <span class="tag">    content: |</span> 
-        <span class="tag">      [Service]</span> 
-        <span class="tag">      Environment=KUBELET_VERSION=v1.5.1_coreos.0</span> 
-        <span class="tag">      Environment="RKT_OPTS=--uuid-file-save=/var/run/kubelet-pod.uuid \</span> 
-        <span class="tag">        --volume dns,kind=host,source=/etc/resolv.conf \</span> 
-        <span class="tag">        --mount volume=dns,target=/etc/resolv.conf \</span> 
-        <span class="tag">        --volume var-log,kind=host,source=/var/log \</span> 
-        <span class="tag">        --mount volume=var-log,target=/var/log"</span> 
-        <span class="tag">      ExecStartPre=/usr/bin/mkdir -p /etc/kubernetes/manifests</span> 
-        <span class="tag">      ExecStartPre=/usr/bin/mkdir -p /var/log/containers</span> 
-        <span class="tag">      ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/run/kubelet-pod.uuid</span> 
-        <span class="tag">      ExecStart=/usr/lib/coreos/kubelet-wrapper \</span> 
-        <span class="tag">        --api-servers=#MASTER_URL \</span> 
-        <span class="tag">        --cni-conf-dir=/etc/kubernetes/cni/net.d \</span> 
-        <span class="tag">        --network-plugin=cni \</span> 
-        <span class="tag">        --container-runtime=docker \</span> 
-        <span class="tag">        --register-node=true \</span> 
-        <span class="tag">        --allow-privileged=true \</span> 
-        <span class="tag">        --pod-manifest-path=/etc/kubernetes/manifests \</span> 
-        <span class="tag">        --hostname-override=$public_ipv4 \</span> 
-        <span class="tag">        --cluster_dns=10.3.0.10 \</span> 
-        <span class="tag">        --cluster_domain=cluster.local \</span> 
-        <span class="tag">        --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml \</span> 
-        <span class="tag">        --tls-cert-file=/etc/kubernetes/ssl/worker.pem \</span> 
-        <span class="tag">        --tls-private-key-file=/etc/kubernetes/ssl/worker-key.pem</span> 
-        <span class="tag">      ExecStop=-/usr/bin/rkt stop --uuid-file=/var/run/kubelet-pod.uuid</span> 
-        <span class="tag">      Restart=always</span> 
-        <span class="tag">      RestartSec=10</span> 
-        <span class="pln"></span>
-        <span class="tag">      [Install]</span> 
-        <span class="tag">      WantedBy=multi-user.target</span> 
-        <span class="tag">  - path: "/etc/kubernetes/manifests/kube-proxy.yaml"</span> 
-        <span class="tag">    permissions: "0644"</span> 
-        <span class="tag">    owner: "root"</span> 
-        <span class="tag">    content: |</span> 
-        <span class="tag">      apiVersion: v1</span> 
-        <span class="tag">      kind: Pod</span> 
-        <span class="tag">      metadata:</span> 
-        <span class="tag">        name: kube-proxy</span> 
-        <span class="tag">        namespace: kube-system</span> 
-        <span class="tag">      spec:</span> 
-        <span class="tag">        hostNetwork: true</span> 
-        <span class="tag">        containers:</span> 
-        <span class="tag">        - name: kube-proxy</span> 
-        <span class="tag">          image: quay.io/coreos/hyperkube:v1.5.1_coreos.0</span> 
-        <span class="tag">          command:</span> 
-        <span class="tag">          - /hyperkube</span> 
-        <span class="tag">          - proxy</span> 
-        <span class="tag">          - --master=#MASTER_URL</span> 
-        <span class="tag">          - --cluster-cidr=10.2.0.0/16</span>
-        <span class="tag">          - --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml</span> 
-        <span class="tag">          securityContext:</span> 
-        <span class="tag">            privileged: true</span> 
-        <span class="tag">          volumeMounts:</span> 
-        <span class="tag">          - mountPath: /etc/ssl/certs</span> 
-        <span class="tag">            name: "ssl-certs"</span> 
-        <span class="tag">          - mountPath: /etc/kubernetes/worker-kubeconfig.yaml</span> 
-        <span class="tag">            name: "kubeconfig"</span> 
-        <span class="tag">            readOnly: true</span> 
-        <span class="tag">          - mountPath: /etc/kubernetes/ssl</span> 
-        <span class="tag">            name: "etc-kube-ssl"</span> 
-        <span class="tag">            readOnly: true</span> 
-        <span class="tag">        volumes:</span> 
-        <span class="tag">        - name: "ssl-certs"</span> 
-        <span class="tag">          hostPath:</span> 
-        <span class="tag">            path: "/usr/share/ca-certificates"</span> 
-        <span class="tag">        - name: "kubeconfig"</span> 
-        <span class="tag">          hostPath:</span> 
-        <span class="tag">            path: "/etc/kubernetes/worker-kubeconfig.yaml"</span> 
-        <span class="tag">        - name: "etc-kube-ssl"</span> 
-        <span class="tag">          hostPath:</span> 
-        <span class="tag">            path: "/etc/kubernetes/ssl"                   </span> 
-        <span class="tag">  - path: "/etc/kubernetes/worker-kubeconfig.yaml"</span> 
-        <span class="tag">    permissions: "0644"</span> 
-        <span class="tag">    owner: "root"</span> 
-        <span class="tag">    content: |</span> 
-        <span class="tag">      apiVersion: v1</span> 
-        <span class="tag">      kind: Config</span> 
-        <span class="tag">      clusters:</span> 
-        <span class="tag">      - name: local</span> 
-        <span class="tag">        cluster:</span> 
-        <span class="tag">          certificate-authority: /etc/kubernetes/ssl/ca.pem</span> 
-        <span class="tag">      users:</span> 
-        <span class="tag">      - name: kubelet</span> 
-        <span class="tag">        user:</span> 
-        <span class="tag">          client-certificate: /etc/kubernetes/ssl/worker.pem</span> 
-        <span class="tag">          client-key: /etc/kubernetes/ssl/worker-key.pem</span> 
-        <span class="tag">      contexts:</span> 
-        <span class="tag">      - context:</span> 
-        <span class="tag">          cluster: local</span> 
-        <span class="tag">          user: kubelet</span> 
-        <span class="tag">        name: kubelet-context</span> 
-        <span class="tag">      current-context: kubelet-context    </span> 
-        <span class="pln"></span>  
-        <span class="tag">coreos:</span> 
-        <span class="tag">    units:</span> 
-        <span class="tag">      - name: update-engine.service</span> 
-        <span class="tag">        command: stop</span> 
-        <span class="tag">      - name: locksmithd.service</span> 
-        <span class="tag">        command: stop</span> 
-        <span class="tag">      - name: etcd2.service</span> 
-        <span class="tag">        command: start</span> 
-        <span class="tag">      - name: flanneld.service</span> 
-        <span class="tag">        drop-ins:</span> 
-        <span class="tag">          - name: 40-ExecStartPre-symlink.conf</span> 
-        <span class="tag">            content: |</span> 
-        <span class="tag">              [Service]</span> 
-        <span class="tag">              ExecStartPre=/usr/bin/ln -sf /etc/flannel/options.env /run/flannel/options.env</span> 
-        <span class="tag">        command: start</span> 
-        <span class="tag">      - name: docker.service</span> 
-        <span class="tag">        drop-ins:</span> 
-        <span class="tag">          - name: 40-flannel.conf</span> 
-        <span class="tag">            content: |</span> 
-        <span class="tag">              [Unit]</span> 
-        <span class="tag">              Requires=flanneld.service</span> 
-        <span class="tag">              After=flanneld.service</span> 
-        <span class="tag">              [Service]</span> 
-        <span class="tag">              EnvironmentFile=/etc/kubernetes/cni/docker_opts_cni.env</span> 
-        <span class="tag">        command: start</span>  
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine60">
-      Start your box
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine60">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">vagrant destroy</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine6">
-      Start your box
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine6">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">vagrant up</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine7">
-      Connect to your box
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine7">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">vagrant ssh</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine24">
-      Get your ip
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine24">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">ifconfig</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine25">
-      Connect to sudo
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine25">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">sudo su</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine14">
-      Change WORKER NAME and IP in createWorkerCertificats.sh
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine14">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">vi /etc/kubernetes/ssl/createWorkerCertificats.sh</span>
-        <span class="tag">WORKER_IP=#WORKER_IP</span>
-        <span class="tag">WORKER_FQDN=#PLANET_NAME</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine15">
-      Generate certificates
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine15">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">cd /etc/kubernetes/ssl/ ; sh createWorkerCertificats.sh</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine8">
-      Start Flannel
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine8">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">sudo systemctl restart flanneld</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine9">
-      Change ip of master and your ip
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine9">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
+
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <md-card>
+    <md-card-header>
+      <md-card-title>What do you use ?</md-card-title>
+    </md-card-header>
+    <md-card-content>
+      <md-radio-group [(ngModel)]="chosenOption">
+        <md-radio-button *ngFor="let option of options" [value]="option">
+          {{option}}
+        </md-radio-button>
+      </md-radio-group>
+    </md-card-content>
+  </md-card>
+</div>
+
+<div [ngSwitch]="chosenOption">
+  <div *ngSwitchCase="'Vagrant'">
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
+          Get certificates
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine1">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">{{"cp USB/certificates ."}}</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine2">
+          Create Vagrantfile
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine2">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">touch Vagrantfile</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
+          This File content
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine3">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code>
+            <span class="pln"></span>
+            <span class="tag">$update_channel = "alpha"</span>
+            <span class="tag">Vagrant.configure("2") do |config|</span>
+            <span class="tag">    config.vm.box = "coreos-%s" % $update_channel</span>
+            <span class="tag">    config.vm.box_url = "http://%s.release.core-os.net/amd64-usr/current/coreos_production_vagrant.json" % $update_channel</span>
+            <span class="tag">    config.vm.network "public_network",bridge: "#YOUR_INTERFACE", ip: "#YOUR_IP"</span>
+            <span class="tag">    config.vm.hostname = "#YOUR_PLANET_NAME"</span>
+            <span class="tag">    config.vm.network :forwarded_port, guest: 80, host: 80</span>
+            <span class="tag">    config.vm.network :forwarded_port, guest: 443, host: 443	</span>
+            <span class="tag">    config.vm.network :forwarded_port, guest: 2379, host: 2379</span>
+            <span class="tag">    config.vm.network :forwarded_port, guest: 15441, host: 15441</span>
+            <span class="tag">    config.vm.network :forwarded_port, guest: 10250, host: 10250</span>
+            <span class="tag">    config.vm.network :forwarded_port, guest: 10053, host: 10053</span>
+            <span class="tag">    config.vm.network :forwarded_port, guest: 8081, host: 8081</span>
+            <span class="tag">    config.vm.network :forwarded_port, guest: 8001, host: 8001</span>
+            <span class="tag">    config.vm.network :forwarded_port, guest: 8285, host: 8285</span>
+            <span class="tag">    config.vm.network :forwarded_port, guest: 8472, host: 8472</span>
+            <span class="tag">    config.vm.network :forwarded_port, guest: 179, host: 179</span>
+            <span class="tag">    config.vm.network :forwarded_port, guest: 53, host: 53</span>
+            <span class="tag">    config.vm.network :forwarded_port, guest: 9090, host: 9090</span>
+            <span class="tag">    config.vm.network :forwarded_port, guest: 8082, host: 8082</span>
+            <span class="tag">    config.vm.network :forwarded_port, guest: 8080, host: 8080</span>
+            <span class="tag">    config.vm.provision :file, :source => "user-data.yml", :destination => "/tmp/vagrantfile-user-data"</span>
+            <span class="tag">    config.vm.provision :shell, :inline => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", :privileged => true</span>
+            <span class="pln"></span>
+            <span class="tag">    config.vm.provision :shell, :inline => "mkdir -p /home/core/template", :privileged => true</span>
+            <span class="tag">    config.vm.provision :shell, :inline => "chmod 777 -R /home/core/template", :privileged => true</span>
+            <span class="pln"></span>
+            <span class="tag">    config.vm.provision :file, source: "./certificats", destination: "/tmp/ssl"</span>
+            <span class="tag">    config.vm.provision :shell, :inline => "mkdir -p /etc/kubernetes/", :privileged => true</span>
+            <span class="tag">    config.vm.provision :shell, :inline => "mv /tmp/ssl /etc/kubernetes/ssl", :privileged => true</span>
+            <span class="tag">    config.vm.provision :shell, :inline => "chown -R root:root /etc/kubernetes/ssl", :privileged => true</span>
+            <span class="pln"></span>
+            <span class="tag">end</span>
+            <span class="pln"></span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
+          Create user-data file
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine3">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">touch user-data.yml</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine4">
+          This file content :
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine4">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">#cloud-config</span>
+            <span class="tag">hostname: "#PLANET_NAME"</span>
+            <span class="tag">users:</span>
+            <span class="tag">  - name: "jarjar"</span>
+            <span class="tag">    passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."</span>
+            <span class="tag">    groups:</span>
+            <span class="tag">      - "sudo"</span>
+            <span class="tag">      - "docker"</span>
+            <span class="pln"></span>
+            <span class="tag">write_files:</span>
+            <span class="tag">  - path: "/etc/flannel/options.env"</span>
+            <span class="tag">    permissions: "0644"</span>
+            <span class="tag">    owner: "root"</span>
+            <span class="tag">    content: |</span>
+            <span class="tag">      FLANNELD_IFACE=$public_ipv4</span>
+            <span class="tag">      FLANNELD_ETCD_ENDPOINTS=#MASTER_URL</span>
+            <span class="tag">  - path: "/etc/kubernetes/cni/docker_opts_cni.env"</span>
+            <span class="tag">    permissions: "0644"</span>
+            <span class="tag">    owner: "root"</span>
+            <span class="tag">    content: |</span>
+            <span class="tag">      DOCKER_OPT_BIP=""</span>
+            <span class="tag">      DOCKER_OPT_IPMASQ=""    </span>
+            <span class="tag">  - path: "/etc/kubernetes/cni/net.d/10-flannel.conf"</span>
+            <span class="tag">    permissions: "0644"</span>
+            <span class="tag">    owner: "root"</span>
+            <span class="tag">    content: |</span>
+            <span class="tag">{{"      {"}}</span>
+            <span class="tag">          "name": "podnet",</span>
+            <span class="tag">          "type": "flannel",</span>
+            <span class="tag">          "delegate": {{"{"}}</span>
+            <span class="tag">              "isDefaultGateway": true</span>
+            <span class="tag">{{"          }"}}</span>
+            <span class="tag">{{"      }"}}</span>
+            <span class="tag">  - path: "/etc/systemd/system/kubelet.service"</span>
+            <span class="tag">    permissions: "0644"</span>
+            <span class="tag">    owner: "root"</span>
+            <span class="tag">    content: |</span>
+            <span class="tag">      [Service]</span>
+            <span class="tag">      Environment=KUBELET_VERSION=v1.5.1_coreos.0</span>
+            <span class="tag">      Environment="RKT_OPTS=--uuid-file-save=/var/run/kubelet-pod.uuid \</span>
+            <span class="tag">        --volume dns,kind=host,source=/etc/resolv.conf \</span>
+            <span class="tag">        --mount volume=dns,target=/etc/resolv.conf \</span>
+            <span class="tag">        --volume var-log,kind=host,source=/var/log \</span>
+            <span class="tag">        --mount volume=var-log,target=/var/log"</span>
+            <span class="tag">      ExecStartPre=/usr/bin/mkdir -p /etc/kubernetes/manifests</span>
+            <span class="tag">      ExecStartPre=/usr/bin/mkdir -p /var/log/containers</span>
+            <span class="tag">      ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/run/kubelet-pod.uuid</span>
+            <span class="tag">      ExecStart=/usr/lib/coreos/kubelet-wrapper \</span>
+            <span class="tag">        --api-servers=#MASTER_URL \</span>
+            <span class="tag">        --cni-conf-dir=/etc/kubernetes/cni/net.d \</span>
+            <span class="tag">        --network-plugin=cni \</span>
+            <span class="tag">        --container-runtime=docker \</span>
+            <span class="tag">        --register-node=true \</span>
+            <span class="tag">        --allow-privileged=true \</span>
+            <span class="tag">        --pod-manifest-path=/etc/kubernetes/manifests \</span>
+            <span class="tag">        --hostname-override=$public_ipv4 \</span>
+            <span class="tag">        --cluster_dns=10.3.0.10 \</span>
+            <span class="tag">        --cluster_domain=cluster.local \</span>
+            <span class="tag">        --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml \</span>
+            <span class="tag">        --tls-cert-file=/etc/kubernetes/ssl/worker.pem \</span>
+            <span class="tag">        --tls-private-key-file=/etc/kubernetes/ssl/worker-key.pem</span>
+            <span class="tag">      ExecStop=-/usr/bin/rkt stop --uuid-file=/var/run/kubelet-pod.uuid</span>
+            <span class="tag">      Restart=always</span>
+            <span class="tag">      RestartSec=10</span>
+            <span class="pln"></span>
+            <span class="tag">      [Install]</span>
+            <span class="tag">      WantedBy=multi-user.target</span>
+            <span class="tag">  - path: "/etc/kubernetes/manifests/kube-proxy.yaml"</span>
+            <span class="tag">    permissions: "0644"</span>
+            <span class="tag">    owner: "root"</span>
+            <span class="tag">    content: |</span>
+            <span class="tag">      apiVersion: v1</span>
+            <span class="tag">      kind: Pod</span>
+            <span class="tag">      metadata:</span>
+            <span class="tag">        name: kube-proxy</span>
+            <span class="tag">        namespace: kube-system</span>
+            <span class="tag">      spec:</span>
+            <span class="tag">        hostNetwork: true</span>
+            <span class="tag">        containers:</span>
+            <span class="tag">        - name: kube-proxy</span>
+            <span class="tag">          image: quay.io/coreos/hyperkube:v1.5.1_coreos.0</span>
+            <span class="tag">          command:</span>
+            <span class="tag">          - /hyperkube</span>
+            <span class="tag">          - proxy</span>
+            <span class="tag">          - --master=#MASTER_URL</span>
+            <span class="tag">          - --cluster-cidr=10.2.0.0/16</span>
+            <span class="tag">          - --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml</span>
+            <span class="tag">          securityContext:</span>
+            <span class="tag">            privileged: true</span>
+            <span class="tag">          volumeMounts:</span>
+            <span class="tag">          - mountPath: /etc/ssl/certs</span>
+            <span class="tag">            name: "ssl-certs"</span>
+            <span class="tag">          - mountPath: /etc/kubernetes/worker-kubeconfig.yaml</span>
+            <span class="tag">            name: "kubeconfig"</span>
+            <span class="tag">            readOnly: true</span>
+            <span class="tag">          - mountPath: /etc/kubernetes/ssl</span>
+            <span class="tag">            name: "etc-kube-ssl"</span>
+            <span class="tag">            readOnly: true</span>
+            <span class="tag">        volumes:</span>
+            <span class="tag">        - name: "ssl-certs"</span>
+            <span class="tag">          hostPath:</span>
+            <span class="tag">            path: "/usr/share/ca-certificates"</span>
+            <span class="tag">        - name: "kubeconfig"</span>
+            <span class="tag">          hostPath:</span>
+            <span class="tag">            path: "/etc/kubernetes/worker-kubeconfig.yaml"</span>
+            <span class="tag">        - name: "etc-kube-ssl"</span>
+            <span class="tag">          hostPath:</span>
+            <span class="tag">            path: "/etc/kubernetes/ssl"                   </span>
+            <span class="tag">  - path: "/etc/kubernetes/worker-kubeconfig.yaml"</span>
+            <span class="tag">    permissions: "0644"</span>
+            <span class="tag">    owner: "root"</span>
+            <span class="tag">    content: |</span>
+            <span class="tag">      apiVersion: v1</span>
+            <span class="tag">      kind: Config</span>
+            <span class="tag">      clusters:</span>
+            <span class="tag">      - name: local</span>
+            <span class="tag">        cluster:</span>
+            <span class="tag">          certificate-authority: /etc/kubernetes/ssl/ca.pem</span>
+            <span class="tag">      users:</span>
+            <span class="tag">      - name: kubelet</span>
+            <span class="tag">        user:</span>
+            <span class="tag">          client-certificate: /etc/kubernetes/ssl/worker.pem</span>
+            <span class="tag">          client-key: /etc/kubernetes/ssl/worker-key.pem</span>
+            <span class="tag">      contexts:</span>
+            <span class="tag">      - context:</span>
+            <span class="tag">          cluster: local</span>
+            <span class="tag">          user: kubelet</span>
+            <span class="tag">        name: kubelet-context</span>
+            <span class="tag">      current-context: kubelet-context    </span>
+            <span class="pln"></span>
+            <span class="tag">coreos:</span>
+            <span class="tag">    units:</span>
+            <span class="tag">      - name: update-engine.service</span>
+            <span class="tag">        command: stop</span>
+            <span class="tag">      - name: locksmithd.service</span>
+            <span class="tag">        command: stop</span>
+            <span class="tag">      - name: etcd2.service</span>
+            <span class="tag">        command: start</span>
+            <span class="tag">      - name: flanneld.service</span>
+            <span class="tag">        drop-ins:</span>
+            <span class="tag">          - name: 40-ExecStartPre-symlink.conf</span>
+            <span class="tag">            content: |</span>
+            <span class="tag">              [Service]</span>
+            <span class="tag">              ExecStartPre=/usr/bin/ln -sf /etc/flannel/options.env /run/flannel/options.env</span>
+            <span class="tag">        command: start</span>
+            <span class="tag">      - name: docker.service</span>
+            <span class="tag">        drop-ins:</span>
+            <span class="tag">          - name: 40-flannel.conf</span>
+            <span class="tag">            content: |</span>
+            <span class="tag">              [Unit]</span>
+            <span class="tag">              Requires=flanneld.service</span>
+            <span class="tag">              After=flanneld.service</span>
+            <span class="tag">              [Service]</span>
+            <span class="tag">              EnvironmentFile=/etc/kubernetes/cni/docker_opts_cni.env</span>
+            <span class="tag">        command: start</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine60">
+          Start your box
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine60">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">vagrant destroy</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine6">
+          Start your box
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine6">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">vagrant up</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine7">
+          Connect to your box
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine7">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">vagrant ssh</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine24">
+          Get your ip
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine24">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">ifconfig</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine25">
+          Connect to sudo
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine25">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">sudo su</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine14">
+          Change WORKER NAME and IP in createWorkerCertificats.sh
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine14">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">vi /etc/kubernetes/ssl/createWorkerCertificats.sh</span>
+            <span class="tag">WORKER_IP=#WORKER_IP</span>
+            <span class="tag">WORKER_FQDN=#PLANET_NAME</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine15">
+          Generate certificates
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine15">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">cd /etc/kubernetes/ssl/ ; sh createWorkerCertificats.sh</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine8">
+          Start Flannel
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine8">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">sudo systemctl restart flanneld</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine9">
+          Change ip of master and your ip
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine9">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+            <code ng-non-bindable="">
+              <span class="tag">sudo vi /etc/systemd/system/kubelet.service</span>
+            </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine9">
+          Start Kubernetes
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine9">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+            <code ng-non-bindable="">
+              <span class="tag">sudo systemctl restart kubelet</span>
+            </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine10">
+          Check if Kubernetes worker is great
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine10">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">journalctl -xf -u kubelet</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine20">
+          Exit box
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine20">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">exit</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine11">
+          Get kubectl script
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine11">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">for linux : curl -O https://storage.googleapis.com/kubernetes-release/release/v1.5.2/bin/linux/amd64/kubectl</span>
+            <span class="tag">for macos : curl -O https://storage.googleapis.com/kubernetes-release/release/v1.5.2/bin/darwin/amd64/kubectl</span>
+            <span class="tag">for windows : curl -O https://storage.googleapis.com/kubernetes-release/release/v1.5.2/bin/windows/amd64/kubectl.exe</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine12">
+          Configure kubectl
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine12">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag"></span>
+            <span class="tag">export MASTER_HOST=#MASTER_HOST</span>
+            <span class="tag">export CA_CERT=CERTIFICATS_PATH/ca.pem</span>
+            <span class="tag">export ADMIN_KEY=CERTIFICATS_PATH/admin-key.pem</span>
+            <span class="tag">export ADMIN_CERT=CERTIFICATS_PATH/admin.pem</span>
+            <span class="tag"></span>
+            <span class="tag">{{"./kubectl config set-cluster default-cluster --server=https://${MASTER_HOST} --certificate-authority=${CA_CERT}"}}</span>
+            <span class="tag">{{"./kubectl config set-credentials default-admin --certificate-authority=${CA_CERT} --client-key=${ADMIN_KEY} --client-certificate=${ADMIN_CERT}"}}</span>
+            <span class="tag">{{"./kubectl config set-context default-system --cluster=default-cluster --user=default-admin"}}</span>
+            <span class="tag">{{"./kubectl config use-context default-system"}}</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine13">
+          Check if kubectl is great
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine13">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+           <code ng-non-bindable="">
+            <span class="tag">./kubectl get nodes</span>
+           </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+  </div>
+
+
+  <div *ngSwitchCase="'Aws'">
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
+          Create user-data's file
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine1">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">touch user-data.yml</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine7">
+          Change User data
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine7">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+    <textarea rows="150">
+#cloud-config
+hostname: "#YOUR_PLANET"
+users:
+  - name: "jarjar"
+    passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."
+    groups:
+      - "sudo"
+      - "docker
+write_files:
+  - path: "/etc/flannel/options.env"
+    permissions: "0644"
+    owner: "root"
+    content: |
+      FLANNELD_IFACE=$public_ipv4
+      FLANNELD_ETCD_ENDPOINTS=http://#MASTER_IP:2379
+  - path: "/etc/kubernetes/cni/docker_opts_cni.env"
+    permissions: "0644"
+    owner: "root"
+    content: |
+      DOCKER_OPT_BIP=""
+      DOCKER_OPT_IPMASQ=""
+  - path: "/etc/kubernetes/cni/net.d/10-flannel.conf"
+    permissions: "0644"
+    owner: "root"
+    content: |
+      {
+          "name": "podnet",
+          "type": "flannel",
+          "delegate": {
+              "isDefaultGateway": true
+          }
+      }
+  - path: "/etc/systemd/system/kubelet.service"
+    permissions: "0644"
+    owner: "root"
+    content: |
+      [Service]
+      Environment=KUBELET_VERSION=v1.5.2_coreos.0
+      Environment="RKT_OPTS=--uuid-file-save=/var/run/kubelet-pod.uuid \
+        --volume dns,kind=host,source=/etc/resolv.conf \
+        --mount volume=dns,target=/etc/resolv.conf \
+        --volume var-log,kind=host,source=/var/log \
+        --mount volume=var-log,target=/var/log"
+      ExecStartPre=/usr/bin/mkdir -p /etc/kubernetes/manifests
+      ExecStartPre=/usr/bin/mkdir -p /var/log/containers
+      ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/run/kubelet-pod.uuid
+      ExecStart=/usr/lib/coreos/kubelet-wrapper \
+        --api-servers=https://#MASTER_IP \
+        --cni-conf-dir=/etc/kubernetes/cni/net.d \
+        --network-plugin=cni \
+        --container-runtime=docker \
+        --register-node=true \
+        --allow-privileged=true \
+        --pod-manifest-path=/etc/kubernetes/manifests \
+        --hostname-override=$private_ipv4 \
+        --cluster_dns=10.3.0.10 \
+        --cluster_domain=cluster.local \
+        --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml \
+        --tls-cert-file=/etc/kubernetes/ssl/worker.pem \
+        --tls-private-key-file=/etc/kubernetes/ssl/worker-key.pem
+      ExecStop=-/usr/bin/rkt stop --uuid-file=/var/run/kubelet-pod.uuid
+      Restart=always
+      RestartSec=10
+
+      [Install]
+      WantedBy=multi-user.target
+  - path: "/etc/kubernetes/manifests/kube-proxy.yaml"
+    permissions: "0644"
+    owner: "root"
+    content: |
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: kube-proxy
+        namespace: kube-system
+      spec:
+        hostNetwork: true
+        containers:
+        - name: kube-proxy
+          image: quay.io/coreos/hyperkube:v1.5.2_coreos.0
+          command:
+          - /hyperkube
+          - proxy
+          - --master=https://#MASTER_IP
+          - --cluster-cidr=10.2.0.0/16
+          - --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml
+          securityContext:
+            privileged: true
+          volumeMounts:
+          - mountPath: /etc/ssl/certs
+            name: "ssl-certs"
+          - mountPath: /etc/kubernetes/worker-kubeconfig.yaml
+            name: "kubeconfig"
+            readOnly: true
+          - mountPath: /etc/kubernetes/ssl
+            name: "etc-kube-ssl"
+            readOnly: true
+        volumes:
+        - name: "ssl-certs"
+          hostPath:
+            path: "/usr/share/ca-certificates"
+        - name: "kubeconfig"
+          hostPath:
+            path: "/etc/kubernetes/worker-kubeconfig.yaml"
+        - name: "etc-kube-ssl"
+          hostPath:
+            path: "/etc/kubernetes/ssl"
+  - path: "/etc/kubernetes/ssl/WorkerCertificats.sh"
+    permissions: "0644"
+    owner: "root"
+    content: |
+      #!/bin/bash
+      WORKER_IP=private_ipv4
+      WORKER_FQDN=YOUR_PLANET
+      cp worker-openssl.cnf.template worker-openssl.cnf
+      sed -i s/WORKER_IP/$WORKER_IP/g worker-openssl.cnf
+      openssl genrsa -out ${WORKER_FQDN}-worker-key.pem 2048
+      WORKER_IP=${WORKER_IP} openssl req -new -key ${WORKER_FQDN}-worker-key.pem -out ${WORKER_FQDN}-worker.csr -subj "/CN=${WORKER_FQDN}" -config worker-openssl.cnf
+      WORKER_IP=${WORKER_IP} openssl x509 -req -in ${WORKER_FQDN}-worker.csr -CA ca.pem -CAkey ca-key.pem -CAcreateserial -out ${WORKER_FQDN}-worker.pem -days 365 -extensions v3_req -extfile worker-openssl.cnf
+  - path: "/etc/kubernetes/worker-kubeconfig.yaml"
+    permissions: "0644"
+    owner: "root"
+    content: |
+      apiVersion: v1
+      kind: Config
+      clusters:
+      - name: local
+        cluster:
+          certificate-authority: /etc/kubernetes/ssl/ca.pem
+      users:
+      - name: kubelet
+        user:
+          client-certificate: /etc/kubernetes/ssl/worker.pem
+          client-key: /etc/kubernetes/ssl/worker-key.pem
+      contexts:
+      - context:
+          cluster: local
+          user: kubelet
+        name: kubelet-context
+      current-context: kubelet-context
+
+coreos:
+    units:
+      - name: etcd2.service
+        command: start
+      - name: flanneld.service
+        drop-ins:
+          - name: 40-ExecStartPre-symlink.conf
+            content: |
+              [Service]
+              ExecStartPre=/usr/bin/ln -sf /etc/flannel/options.env /run/flannel/options.env
+        command: start
+      - name: docker.service
+        drop-ins:
+          - name: 40-flannel.conf
+            content: |
+              [Unit]
+              Requires=flanneld.service
+              After=flanneld.service
+              [Service]
+              EnvironmentFile=/etc/kubernetes/cni/docker_opts_cni.env
+        command: start
+    </textarea>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine35">
+          Start your VM
+        </md-slide-toggle>
+        <md-card-title></md-card-title>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine35">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
         <code ng-non-bindable="">
-          <span class="tag">sudo vi /etc/systemd/system/kubelet.service</span>
+          <span class="tag">response=$(aws ec2 run-instances --image-id ami-188dd67e --count 1 --instance-type t1.micro --security-groups snowcamp --user-data file://user-data.yml)</span>
         </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine9">
-      Start Kubernetes
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine9">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine36">
+          Get your Instance id
+        </md-slide-toggle>
+        <md-card-title></md-card-title>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine36">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
         <code ng-non-bindable="">
-          <span class="tag">sudo systemctl restart kubelet</span>
+          <span class="tag">echo $response | grep InstanceId</span>
         </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine10">
-      Check if Kubernetes worker is great
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine10">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">journalctl -xf -u kubelet</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine20">
-      Exit box
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine20">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">exit</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine11">
-      Get kubectl script
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine11">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">for linux : curl -O https://storage.googleapis.com/kubernetes-release/release/v1.5.2/bin/linux/amd64/kubectl</span>
-        <span class="tag">for macos : curl -O https://storage.googleapis.com/kubernetes-release/release/v1.5.2/bin/darwin/amd64/kubectl</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine12">
-      Configure kubectl
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine12">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag"></span>
-        <span class="tag">export MASTER_HOST=#MASTER_HOST</span>
-        <span class="tag">export CA_CERT=CERTIFICATS_PATH/ca.pem</span>
-        <span class="tag">export ADMIN_KEY=CERTIFICATS_PATH/admin-key.pem</span>
-        <span class="tag">export ADMIN_CERT=CERTIFICATS_PATH/admin.pem</span>
-        <span class="tag"></span>
-        <span class="tag">{{"./kubectl config set-cluster default-cluster --server=https://${MASTER_HOST} --certificate-authority=${CA_CERT}"}}</span>
-        <span class="tag">{{"./kubectl config set-credentials default-admin --certificate-authority=${CA_CERT} --client-key=${ADMIN_KEY} --client-certificate=${ADMIN_CERT}"}}</span>
-        <span class="tag">{{"./kubectl config set-context default-system --cluster=default-cluster --user=default-admin"}}</span>
-        <span class="tag">{{"./kubectl config use-context default-system"}}</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine13">
-      Check if kubectl is great
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine13">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-       <code ng-non-bindable="">
-        <span class="tag">./kubectl get nodes</span>
-       </code>
-    </pre>
-  </md-card-content>
-</md-card>
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine37">
+          Get your Public Ip
+        </md-slide-toggle>
+        <md-card-title></md-card-title>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine37">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <code ng-non-bindable="">
+          <span class="tag">aws ec2 describe-instances --instance-ids #YOUR_INSTANCE_ID | grep PublicIpAddress</span>
+        </code>
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine38">
+          Connect to your VM
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine38">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+        <code ng-non-bindable="">
+          <span class="tag">ssh jarjar@#YOUR_IP</span>
+        </code>
+      </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
+          Get certificates
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine1">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">{{"cd /etc/kubernetes/ssl/ ; wget --content-disposition https://github.com/ymatagne/ConquerirLeMonde/blob/master/conquerirlemonde-front/src/assets/kubernetes/certificats.zip?raw=true"}}</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
+          Extract and generate certificates
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine1">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">{{"unzip certificats.zip ; ./createWorkerCertificats.sh"}}</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
+          Link certificates for kubernetes
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine1">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">{{"ln -s #YOUR_PLANET-worker.pem worker.pem ; ln -s #YOUR_PLANET-worker-key.pem worker-key.pem"}}</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+
+
+
+
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine8">
+          Start Flannel
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine8">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">systemctl restart flanneld</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine9">
+          Start Kubernetes
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine9">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+            <code ng-non-bindable="">
+              <span class="tag">systemctl restart kubelet</span>
+            </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine10">
+          Check if Kubernetes worker is great
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine10">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">journalctl -xf -u kubelet</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine20">
+          Exit box
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine20">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">exit</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine11">
+          Get kubectl script
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine11">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">for linux : curl -O https://storage.googleapis.com/kubernetes-release/release/v1.5.2/bin/linux/amd64/kubectl</span>
+            <span class="tag">for macos : curl -O https://storage.googleapis.com/kubernetes-release/release/v1.5.2/bin/darwin/amd64/kubectl</span>
+            <span class="tag">for windows : curl -O https://storage.googleapis.com/kubernetes-release/release/v1.5.2/bin/windows/amd64/kubectl.exe</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine12">
+          Configure kubectl
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine12">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag"></span>
+            <span class="tag">export MASTER_HOST=#MASTER_HOST</span>
+            <span class="tag">export CA_CERT=CERTIFICATS_PATH/ca.pem</span>
+            <span class="tag">export ADMIN_KEY=CERTIFICATS_PATH/admin-key.pem</span>
+            <span class="tag">export ADMIN_CERT=CERTIFICATS_PATH/admin.pem</span>
+            <span class="tag"></span>
+            <span class="tag">{{"./kubectl config set-cluster default-cluster --server=https://${MASTER_HOST} --certificate-authority=${CA_CERT}"}}</span>
+            <span class="tag">{{"./kubectl config set-credentials default-admin --certificate-authority=${CA_CERT} --client-key=${ADMIN_KEY} --client-certificate=${ADMIN_CERT}"}}</span>
+            <span class="tag">{{"./kubectl config set-context default-system --cluster=default-cluster --user=default-admin"}}</span>
+            <span class="tag">{{"./kubectl config use-context default-system"}}</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine13">
+          Check if kubectl is great
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine13">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+           <code ng-non-bindable="">
+            <span class="tag">./kubectl get nodes</span>
+           </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+
+  </div>
+</div>
+
