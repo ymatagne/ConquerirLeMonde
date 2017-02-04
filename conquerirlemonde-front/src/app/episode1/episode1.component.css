@@ -1,12 +1,9 @@
 #header{
     display: inline;
 }
-  md-radio-button {
-    margin: 8px;
-  }
-  textarea{
-      width: 400px;
-  }
+md-radio-button {
+  margin: 8px;
+}
 md-card-content textarea {
   width: 90%;
 }
