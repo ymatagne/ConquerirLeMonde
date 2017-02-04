@@ -47,7 +47,7 @@
         <code>
           <span class="tag" >{{"$forwarded_ports={80=>8080}"}}</span>
           <span class="pln"></span>
-          <span class="tag">$update_channel = "alpha"</span>      
+          <span class="tag">$update_channel = "alpha"</span>
           <span class="tag">Vagrant.configure("2") do |config|</span>
           <span class="tag">config.vm.box = "coreos-%s" % $update_channel</span>
           <span class="tag">config.vm.box_url = "http://%s.release.core-os.net/amd64-usr/current/coreos_production_vagrant.json" % $update_channel</span>
@@ -132,7 +132,7 @@
          <span class="tag">AWS Access Key ID [None]: AKIAJQ4GXKA6RGCABHSA</span>
          <span class="tag">AWS Secret Access Key [None]: *****************</span>
          <span class="tag">Default region name [None]: eu-west-1</span>
-         <span class="tag">Default output format [None]: text</span>
+         <span class="tag">Default output format [None]: json</span>
 
         </code>
       </pre>
@@ -170,8 +170,8 @@ users:
     groups:
       - "sudo"
       - "docker"
-        
-        </textarea>  
+
+        </textarea>
                 </pre>
       </md-card-content>
     </md-card>
