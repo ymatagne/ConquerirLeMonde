@@ -25,6 +25,7 @@ import {AuthGuard} from "./auth/auth.guard";
 import {AuthenticationService} from "./auth/authentication.service";
 import { Episode7Component } from './episode7/episode7.component';
 import {IndentityComponent} from "./identity/identity.component";
+import {IdentityService} from "./identity.service";
 
 
 export const routes: Routes = [
@@ -73,7 +74,8 @@ export const routes: Routes = [
   ],
   providers: [
     AuthGuard,
-    AuthenticationService
+    AuthenticationService,
+    IdentityService
   ],
   bootstrap: [AppComponent]
 })

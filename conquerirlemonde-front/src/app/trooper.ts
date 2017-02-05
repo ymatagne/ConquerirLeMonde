@@ -1,3 +1,6 @@
 export class Trooper {
-    constructor(public name = '', public trooperHost = '', public trooperPort = '', public image = '') { }
+
+  static shipAvailable = ['Corellian', 'DroidStarFighter', 'JediStarFighter', 'MilleniumFalcon', 'NabooBomber', 'NabooStarFighter', 'RebublicCruiser', 'Tibirium', 'TieFighter', 'Xwing', 'YWing']
+
+  constructor(public name = '', public trooperHost = '', public trooperPort = '', public image = '') { }
 }

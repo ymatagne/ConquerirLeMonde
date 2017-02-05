@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {IdentityService} from "../identity.service";
+import {Identity} from "../identity";
+import {Observable} from "rxjs";
+import {Planet} from "../planet";
+import {Trooper} from "../trooper";
 
 @Component({
   selector: 'identity',
@@ -7,10 +12,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndentityComponent implements OnInit {
 
+  planetAvailable = Planet.available;
+  shipAvailable = Trooper.shipAvailable;
 
-  constructor() { }
+  constructor(private identityService: IdentityService) {
+  }
 
   ngOnInit() {
+  }
+
+  save(){
+    this.identityService.save();
   }
 
 }

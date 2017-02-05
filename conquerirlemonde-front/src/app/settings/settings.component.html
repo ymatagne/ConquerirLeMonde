@@ -1,16 +1,16 @@
 <div fxLayout="row" fxLayoutAlign="space-around start">
   <md-card>
     <md-card-title-group>
-      <img md-card-lg-image src="/assets/planets/{{srcPlanetImg}}.png">
+      <img md-card-lg-image src="/assets/planets/{{identityService.identity.planet}}.png">
       <md-card-title>Your planet is</md-card-title>
-      <md-card-subtitle>{{srcPlanetImg}}</md-card-subtitle>
+      <md-card-subtitle>{{identityService.identity.planet}}</md-card-subtitle>
     </md-card-title-group>
   </md-card>
   <md-card>
     <md-card-title-group>
-      <img md-card-lg-image src="/assets/games/imgs/ship/big/{{srcShipImg}}.png">
+      <img md-card-lg-image src="/assets/games/imgs/ship/big/{{identityService.identity.spaceship}}.png">
       <md-card-title>Your ship is</md-card-title>
-      <md-card-subtitle>{{srcShipImg}}</md-card-subtitle>
+      <md-card-subtitle>{{identityService.identity.spaceship}}</md-card-subtitle>
     </md-card-title-group>
   </md-card>
 </div>

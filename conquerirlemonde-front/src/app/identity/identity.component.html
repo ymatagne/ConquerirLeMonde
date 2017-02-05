@@ -9,11 +9,34 @@
           <tr>
             <td>
               <md-input-container class="example-full-width">
-                <input md-input placeholder="First name">
+                <input [(ngModel)]="identityService.identity.pseudo" md-input placeholder="Pseudo" />
               </md-input-container>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img md-card-lg-image src="/assets/planets/{{identityService.identity.planet}}.png">
+              <md-select placeholder="Planet" [(ngModel)]="identityService.identity.planet" >
+                <md-option *ngFor="let planet of planetAvailable" [value]="planet">
+                  {{ planet }}
+                </md-option>
+              </md-select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img md-card-lg-image src="/assets/games/imgs/ship/big/{{identityService.identity.spaceship}}.png">
+              <md-select placeholder="Spaceship" [(ngModel)]="identityService.identity.spaceship" >
+                <md-option *ngFor="let ship of shipAvailable" [value]="ship">
+                  {{ ship }}
+                </md-option>
+              </md-select>
             </td>
           </tr>
         </table>
       </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <button md-button (click)="save()">Save</button>
+      </md-card-actions>
     </md-card>
 

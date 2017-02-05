@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Planet} from "../planet";
+import {Trooper} from "../trooper";
+import {IdentityService} from "../identity.service";
 
 @Component({
   selector: 'app-settings',
@@ -7,24 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  srcPlanetImg = 'ko';
 
-  srcShipImg = 'Corellian';
+  planets = Planet.available;
+  ships = Trooper.shipAvailable;
 
-  planets = ['alderaan', 'bespin', 'coruscant', 'dagobah', 'endor', 'hoth', 'jakku', 'kashyyyk', 'mandalore', 'naboo', 'tatooine', 'yavin']
-  ships = ['Corellian', 'DroidStarFighter', 'JediStarFighter', 'MilleniumFalcon', 'NabooBomber', 'NabooStarFighter', 'RebublicCruiser', 'Tibirium', 'TieFighter', 'Xwing', 'YWing']
-
-  constructor() { }
+  constructor(private identityService: IdentityService) { }
 
   ngOnInit() {
   }
 
   showPlanet(planet) {
-    this.srcPlanetImg = planet;
+    this.identityService.identity.planet = planet;
   }
 
   showShip(ship) {
-    this.srcShipImg = ship;
+    this.identityService.identity.spaceship = ship;
   }
 
 }
