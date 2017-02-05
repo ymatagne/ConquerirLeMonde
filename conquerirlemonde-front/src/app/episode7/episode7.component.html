@@ -7,95 +7,151 @@
   </md-card-content>
 </md-card>
 <md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
-      Download and install ansible
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine1">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
+  <md-card>
+    <md-card-header>
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
+        Download and install ansible
+      </md-slide-toggle>
+    </md-card-header>
+    <md-card-content *ngIf="displayLine1">
+      <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">http://docs.ansible.com/ansible/intro_installation.html#installing-the-control-machine</span>
       </code>
     </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine2">
-      Modify Host file
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine2">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
+    </md-card-content>
+  </md-card>
+  <md-card>
+    <md-card-header>
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine20">
+        Connect in your planet
+      </md-slide-toggle>
+    </md-card-header>
+    <md-card-content *ngIf="displayLine20">
+      <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">ssh jarjar@YOUR_IP_PLANET</span>
+      </code>
+    </pre>
+    </md-card-content>
+  </md-card>
+  <md-card>
+    <md-card-header>
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine21">
+        Install pypy
+      </md-slide-toggle>
+    </md-card-header>
+    <md-card-content *ngIf="displayLine21">
+      <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">docker run -it --rm -v /home/jarjar:/home/host-core sergeyzh/coreos-pypy</span>
+      </code>
+    </pre>
+    </md-card-content>
+  </md-card>
+    <md-card>
+    <md-card-header>
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine22">
+        Link lib if you have error
+      </md-slide-toggle>
+    </md-card-header>
+    <md-card-content *ngIf="displayLine22">
+      <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">cd /home/jarjar/pypy/bin ;ln -s /lib64/libncurses.so.5.9 libtinfo.so.5</span>
+      </code>
+    </pre>
+    </md-card-content>
+  </md-card>
+  <md-card>
+    <md-card-header>
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine2">
+        Modify Host file
+      </md-slide-toggle>
+    </md-card-header>
+    <md-card-content *ngIf="displayLine2">
+      <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">vi /etc/ansible/hosts</span>
       </code>
     </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
-      Add all planets in your file
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine3">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
+    </md-card-content>
+  </md-card>
+  <md-card>
+    <md-card-header>
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
+        Add all planets in your file
+      </md-slide-toggle>
+    </md-card-header>
+    <md-card-content *ngIf="displayLine3">
+      <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">[all:vars]</span>
-        <span class="tag">ansible_connection=ssh </span>
-        <span class="tag">ansible_user=jarjar </span>
-        <span class="tag">ansible_pass=binks</span>
-        <span></span>
+        <span class="tag">fleet ansible_host=54.194.247.99 ansible_port=22 ansible_user=jarjar</span>
+        <span class="tag"></span>
         <span class="tag">[planets]</span>
-        <span class="tag">#PLANET_NAME ansible_host=#PLANET_IP ansible_port=22 ansible_user=jarjar</span>
+        <span class="tag">fleet</span>
+        <span class="tag"></span>
+        <span class="tag">[planets:vars]</span>
+        <span class="tag">ansible_ssh_user=jarjar</span>
+        <span class="tag">ansible_python_interpreter="/home/jarjar/pypy/bin/pypy"</span>
       </code>
     </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine4">
-      Ping all planets
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine4">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag"> ansible all -m ping</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine5">
-      View all docker
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine5">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">ansible all -s -m shell -a 'docker ps'</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
-<md-card>
-  <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine6">
-      Kill all docker
-    </md-slide-toggle>
-  </md-card-header>
-  <md-card-content *ngIf="displayLine6">
-    <pre class="ng-scope undefined lang-bsh prettyprinted">
-      <code ng-non-bindable="">
-        <span class="tag">ansible all -s -m shell -a 'docker kill #TROOPER_NAME'</span>
-      </code>
-    </pre>
-  </md-card-content>
-</md-card>
+    </md-card-content>
+  </md-card>
 
-
+  <md-card>
+    <md-card-header>
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine30">
+        List all planets
+      </md-slide-toggle>
+    </md-card-header>
+    <md-card-content *ngIf="displayLine30">
+      <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">ansible -i hosts planets --list-hosts</span>
+      </code>
+    </pre>
+    </md-card-content>
+  </md-card>
+  <md-card>
+    <md-card-header>
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine4">
+        Ping all planets
+      </md-slide-toggle>
+    </md-card-header>
+    <md-card-content *ngIf="displayLine4">
+      <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag"> ansible planets -i hosts -m ping --ask-pass --sudo</span>
+      </code>
+    </pre>
+    </md-card-content>
+  </md-card>
+  <md-card>
+    <md-card-header>
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine5">
+        View all docker
+      </md-slide-toggle>
+    </md-card-header>
+    <md-card-content *ngIf="displayLine5">
+      <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag"> ansible all -i hosts -m shell -a 'docker ps' --ask-pass --sudo</span>
+      </code>
+    </pre>
+    </md-card-content>
+  </md-card>
+  <md-card>
+    <md-card-header>
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine6">
+        Kill all docker
+      </md-slide-toggle>
+    </md-card-header>
+    <md-card-content *ngIf="displayLine6">
+      <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">ansible fleet -i hosts -m shell -a 'docker stop #MY_TROOPER' --ask-pass --sudo</span>
+      </code>
+    </pre>
+    </md-card-content>
+  </md-card>
