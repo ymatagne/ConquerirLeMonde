@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {IdentityService} from "../identity.service";
 
 @Component({
   selector: 'app-episode1',
@@ -10,7 +11,7 @@ export class Episode1Component implements OnInit {
   options = ['Aws','Vagrant'];
   chosenOption: string = 'Aws';
 
-  constructor() { }
+  constructor(private identityService: IdentityService) { }
 
   ngOnInit() {
   }

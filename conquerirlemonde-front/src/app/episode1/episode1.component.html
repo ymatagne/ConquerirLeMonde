@@ -162,7 +162,7 @@ end
 
         <textarea rows="15">
 #cloud-config
-hostname: "naboo"
+hostname: "{{this.identityService.identity.planet}}"
 users:
   - name: "jarjar"
     passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."
@@ -228,7 +228,7 @@ users:
       <md-card-content *ngIf="displayLine38">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
         <code ng-non-bindable="">
-          <span class="tag">ssh jarjar@#YOUR_IP</span>
+          <span class="tag">ssh jarjar@{{identityService.identity.yourIp}}</span>
         </code>
       </pre>
       </md-card-content>

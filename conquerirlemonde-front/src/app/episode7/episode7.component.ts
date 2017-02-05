@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {IdentityService} from "../identity.service";
 
 @Component({
   selector: 'app-episode7',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Episode7Component implements OnInit {
 
-  constructor() { }
+  constructor(private identityService: IdentityService) { }
 
   ngOnInit() {
   }

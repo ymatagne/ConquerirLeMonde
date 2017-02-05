@@ -66,8 +66,8 @@
             <span class="tag">Vagrant.configure("2") do |config|</span>
             <span class="tag">    config.vm.box = "coreos-%s" % $update_channel</span>
             <span class="tag">    config.vm.box_url = "http://%s.release.core-os.net/amd64-usr/current/coreos_production_vagrant.json" % $update_channel</span>
-            <span class="tag">    config.vm.network "public_network",bridge: "#YOUR_INTERFACE", ip: "#YOUR_IP"</span>
-            <span class="tag">    config.vm.hostname = "#YOUR_PLANET_NAME"</span>
+            <span class="tag">    config.vm.network "public_network",bridge: "#YOUR_INTERFACE", ip: "{{this.identityService.identity.yourIp}}"</span>
+            <span class="tag">    config.vm.hostname = "{{this.identityService.identity.planet}}"</span>
             <span class="tag">    config.vm.network :forwarded_port, guest: 80, host: 80</span>
             <span class="tag">    config.vm.network :forwarded_port, guest: 443, host: 443	</span>
             <span class="tag">    config.vm.network :forwarded_port, guest: 2379, host: 2379</span>
@@ -124,7 +124,7 @@
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">#cloud-config</span>
-            <span class="tag">hostname: "#PLANET_NAME"</span>
+            <span class="tag">hostname: "{{this.identityService.identity.planet}}"</span>
             <span class="tag">users:</span>
             <span class="tag">  - name: "jarjar"</span>
             <span class="tag">    passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."</span>
@@ -138,7 +138,7 @@
             <span class="tag">    owner: "root"</span>
             <span class="tag">    content: |</span>
             <span class="tag">      FLANNELD_IFACE=$public_ipv4</span>
-            <span class="tag">      FLANNELD_ETCD_ENDPOINTS=#MASTER_URL</span>
+            <span class="tag">      FLANNELD_ETCD_ENDPOINTS=https://{{this.identityService.identity.masterIp}}</span>
             <span class="tag">  - path: "/etc/kubernetes/cni/docker_opts_cni.env"</span>
             <span class="tag">    permissions: "0644"</span>
             <span class="tag">    owner: "root"</span>
@@ -171,7 +171,7 @@
             <span class="tag">      ExecStartPre=/usr/bin/mkdir -p /var/log/containers</span>
             <span class="tag">      ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/run/kubelet-pod.uuid</span>
             <span class="tag">      ExecStart=/usr/lib/coreos/kubelet-wrapper \</span>
-            <span class="tag">        --api-servers=#MASTER_URL \</span>
+            <span class="tag">        --api-servers=https://{{this.identityService.identity.masterIp}} \</span>
             <span class="tag">        --cni-conf-dir=/etc/kubernetes/cni/net.d \</span>
             <span class="tag">        --network-plugin=cni \</span>
             <span class="tag">        --container-runtime=docker \</span>
@@ -207,7 +207,7 @@
             <span class="tag">          command:</span>
             <span class="tag">          - /hyperkube</span>
             <span class="tag">          - proxy</span>
-            <span class="tag">          - --master=#MASTER_URL</span>
+            <span class="tag">          - --master=https://{{this.identityService.identity.masterIp}}</span>
             <span class="tag">          - --cluster-cidr=10.2.0.0/16</span>
             <span class="tag">          - --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml</span>
             <span class="tag">          securityContext:</span>
@@ -362,8 +362,8 @@
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">vi /etc/kubernetes/ssl/createWorkerCertificats.sh</span>
-            <span class="tag">WORKER_IP=#WORKER_IP</span>
-            <span class="tag">WORKER_FQDN=#PLANET_NAME</span>
+            <span class="tag">WORKER_IP={{this.identityService.identity.yourIp}}</span>
+            <span class="tag">WORKER_FQDN={{this.identityService.identity.planet}}</span>
           </code>
         </pre>
       </md-card-content>
@@ -478,7 +478,7 @@
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag"></span>
-            <span class="tag">export MASTER_HOST=#MASTER_HOST</span>
+            <span class="tag">export MASTER_HOST={{this.identityService.identity.masterIp}}</span>
             <span class="tag">export CA_CERT=CERTIFICATS_PATH/ca.pem</span>
             <span class="tag">export ADMIN_KEY=CERTIFICATS_PATH/admin-key.pem</span>
             <span class="tag">export ADMIN_CERT=CERTIFICATS_PATH/admin.pem</span>
@@ -533,7 +533,7 @@
         <pre class="ng-scope undefined lang-bsh prettyprinted">
     <textarea rows="150">
 #cloud-config
-hostname: "#YOUR_PLANET"
+hostname: "{{this.identityService.identity.planet}}"
 users:
   - name: "jarjar"
     passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."
@@ -545,8 +545,8 @@ write_files:
     permissions: "0644"
     owner: "root"
     content: |
-      FLANNELD_IFACE=$public_ipv4
-      FLANNELD_ETCD_ENDPOINTS=http://#MASTER_IP:2379
+      FLANNELD_IFACE=$private_ipv4
+      FLANNELD_ETCD_ENDPOINTS=http://{{this.identityService.identity.masterIp}}:2379
   - path: "/etc/kubernetes/cni/docker_opts_cni.env"
     permissions: "0644"
     owner: "root"
@@ -579,14 +579,14 @@ write_files:
       ExecStartPre=/usr/bin/mkdir -p /var/log/containers
       ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/run/kubelet-pod.uuid
       ExecStart=/usr/lib/coreos/kubelet-wrapper \
-        --api-servers=https://#MASTER_IP \
+        --api-servers=https://{{this.identityService.identity.masterIp}} \
         --cni-conf-dir=/etc/kubernetes/cni/net.d \
         --network-plugin=cni \
         --container-runtime=docker \
         --register-node=true \
         --allow-privileged=true \
         --pod-manifest-path=/etc/kubernetes/manifests \
-        --hostname-override=$private_ipv4 \
+        --hostname-override=$public_ipv4 \
         --cluster_dns=10.3.0.10 \
         --cluster_domain=cluster.local \
         --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml \
@@ -615,7 +615,7 @@ write_files:
           command:
           - /hyperkube
           - proxy
-          - --master=https://#MASTER_IP
+          - --master=https://{{this.identityService.identity.masterIp}}
           - --cluster-cidr=10.2.0.0/16
           - --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml
           securityContext:
@@ -644,8 +644,8 @@ write_files:
     owner: "root"
     content: |
       #!/bin/bash
-      WORKER_IP=private_ipv4
-      WORKER_FQDN=YOUR_PLANET
+      WORKER_IP=$public_ipv4
+      WORKER_FQDN={{this.identityService.identity.planet}}
       cp worker-openssl.cnf.template worker-openssl.cnf
       sed -i s/WORKER_IP/$WORKER_IP/g worker-openssl.cnf
       openssl genrsa -out ${WORKER_FQDN}-worker-key.pem 2048
@@ -752,18 +752,18 @@ coreos:
       <md-card-content *ngIf="displayLine38">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
         <code ng-non-bindable="">
-          <span class="tag">ssh jarjar@#YOUR_IP</span>
+          <span class="tag">ssh jarjar@{{this.identityService.identity.yourIp}}</span>
         </code>
       </pre>
       </md-card-content>
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine100">
           Get certificates
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine1">
+      <md-card-content *ngIf="displayLine100">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">{{"cd /etc/kubernetes/ssl/ ; wget --content-disposition https://github.com/ymatagne/ConquerirLeMonde/blob/master/conquerirlemonde-front/src/assets/kubernetes/certificats.zip?raw=true"}}</span>
@@ -773,11 +773,11 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine101">
           Extract and generate certificates
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine1">
+      <md-card-content *ngIf="displayLine101">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">{{"unzip certificats.zip ; ./createWorkerCertificats.sh"}}</span>
@@ -787,14 +787,14 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine102">
           Link certificates for kubernetes
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine1">
+      <md-card-content *ngIf="displayLine102">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
-            <span class="tag">{{"ln -s #YOUR_PLANET-worker.pem worker.pem ; ln -s #YOUR_PLANET-worker-key.pem worker-key.pem"}}</span>
+            <span class="tag">"ln -s {{this.identityService.identity.planet}}-worker.pem worker.pem ; ln -s {{this.identityService.identity.planet}}-worker-key.pem worker-key.pem"</span>
           </code>
         </pre>
       </md-card-content>
@@ -885,7 +885,7 @@ coreos:
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag"></span>
-            <span class="tag">export MASTER_HOST=#MASTER_HOST</span>
+            <span class="tag">export MASTER_HOST={{this.identityService.identity.masterIp}}</span>
             <span class="tag">export CA_CERT=CERTIFICATS_PATH/ca.pem</span>
             <span class="tag">export ADMIN_KEY=CERTIFICATS_PATH/admin-key.pem</span>
             <span class="tag">export ADMIN_CERT=CERTIFICATS_PATH/admin.pem</span>

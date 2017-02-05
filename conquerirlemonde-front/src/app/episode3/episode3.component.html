@@ -48,7 +48,7 @@
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">#cloud-config</span>
-            <span class="tag">hostname: "naboo"</span>
+            <span class="tag">hostname: "{{this.identityService.identity.planet}}"</span>
             <span class="tag">users:</span>
             <span class="tag">  - name: "jarjar"</span>
             <span class="tag">    passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."</span>
@@ -159,7 +159,7 @@
         <pre class="ng-scope undefined lang-bsh prettyprinted">
     <textarea rows="25">
 #cloud-config
-hostname: "naboo"
+hostname: "{{this.identityService.identity.planet}}"
 users:
   - name: "jarjar"
     passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."
@@ -168,11 +168,11 @@ users:
       - "docker"
 coreos:
   fleet:
-    etcd_servers:"http://IP_MASTER:4001"
-    metadata: "hostname=naboo"
+    etcd_servers:"http://{{identityService.identity.masterIp}}:4001"
+    metadata: "hostname={{this.identityService.identity.planet}}"
     public-ip: $public_ipv4
   etcd2:
-    name: "naboo"
+    name: "{{this.identityService.identity.planet}}"
     initial-cluster-token: starwars
   units:
     - name: fleet.service
@@ -277,7 +277,7 @@ coreos:
       <md-card-content *ngIf="displayLine12">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
-            <span class="tag">touch #YOUR_NAME.service</span>
+            <span class="tag">touch {{this.identityService.identity.pseudo}}.service</span>
           </code>
         </pre>
       </md-card-content>
@@ -297,11 +297,11 @@ coreos:
             <span class="tag">Requires=docker.service</span>
             <span class="pln"></span>
             <span class="tag">[Service]</span>
-            <span class="tag">ExecStartPre=-/usr/bin/docker kill #YOUR_NAME</span>
-            <span class="tag">ExecStartPre=-/usr/bin/docker rm #YOUR_NAME</span>
+            <span class="tag">ExecStartPre=-/usr/bin/docker kill {{this.identityService.identity.pseudo}}</span>
+            <span class="tag">ExecStartPre=-/usr/bin/docker rm {{this.identityService.identity.pseudo}}</span>
             <span class="tag">ExecStartPre=/usr/bin/docker pull nginx</span>
-            <span class="tag">ExecStart=/usr/bin/docker run --name #YOUR_NAME -p 0.0.0.0:80:80 nginx</span>
-            <span class="tag">ExecStop=/usr/bin/docker stop #YOUR_NAME</span>
+            <span class="tag">ExecStart=/usr/bin/docker run --name {{this.identityService.identity.pseudo}} -p 0.0.0.0:80:80 nginx</span>
+            <span class="tag">ExecStop=/usr/bin/docker stop {{this.identityService.identity.pseudo}}</span>
           </code>
         </pre>
       </md-card-content>
@@ -315,7 +315,7 @@ coreos:
       <md-card-content *ngIf="displayLine14">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
-            <span class="tag">fleetctl start #YOUR_NAME.service</span>
+            <span class="tag">fleetctl start {{this.identityService.identity.pseudo}}.service</span>
           </code>
         </pre>
       </md-card-content>
@@ -329,7 +329,7 @@ coreos:
       <md-card-content *ngIf="displayLine15">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
-            <span class="tag">touch trooper-#NAME.service</span>
+            <span class="tag">touch trooper-{{this.identityService.identity.pseudo}}.service</span>
           </code>
         </pre>
       </md-card-content>
@@ -344,19 +344,19 @@ coreos:
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">[Unit]</span>
-            <span class="tag">Description=trooper-#YOUR_NAME</span>
+            <span class="tag">Description=trooper-{{this.identityService.identity.pseudo}}</span>
             <span class="tag">After=docker.service</span>
             <span class="tag">Requires=docker.service</span>
             <span class="tag"></span>
             <span class="tag">[Service]</span>
-            <span class="tag">ExecStartPre=-/usr/bin/docker kill trooper-#YOUR_NAME</span>
-            <span class="tag">ExecStartPre=-/usr/bin/docker rm trooper-#YOUR_NAME</span>
+            <span class="tag">ExecStartPre=-/usr/bin/docker kill trooper-{{this.identityService.identity.pseudo}}</span>
+            <span class="tag">ExecStartPre=-/usr/bin/docker rm trooper-{{this.identityService.identity.pseudo}}</span>
             <span class="tag">ExecStartPre=/usr/bin/docker pull ymatagne/trooper</span>
-            <span class="tag">ExecStart=/usr/bin/docker run --name trooper-#YOUR_NAME -p 0.0.0.0:80:9000 -e PLANET_HOST=#MASTER_IP -e PLANET_PORT=#MASTER_PORT -e TROOPER_NAME=#YOUR_NAME -e TROOPER_HOST=#YOUR_IP -e TROOPER_PORT=#YOUR_PORT -e SPACESHIP=#YOUR_SPACESHIP trooper-#YOUR_NAME</span>
-            <span class="tag">ExecStop=/usr/bin/docker stop trooper-#YOUR_NAME</span>
+            <span class="tag">ExecStart=/usr/bin/docker run --name trooper-{{this.identityService.identity.pseudo}} -p 0.0.0.0:80:9000 -e PLANET_HOST={{identityService.identity.masterIp}} -e PLANET_PORT=8080 -e TROOPER_NAME={{this.identityService.identity.pseudo}} -e TROOPER_HOST={{identityService.identity.yourIp}} -e TROOPER_PORT=#YOUR_COREOS_PORT_BINDING -e SPACESHIP={{this.identityService.identity.spaceship}} ymatagne/trooper</span>
+            <span class="tag">ExecStop=/usr/bin/docker stop trooper-{{this.identityService.identity.pseudo}}</span>
             <span class="tag"></span>
             <span class="tag">[X-Fleet]</span>
-            <span class="tag">MachineMetadata=hostname=#YOUR_PLANET</span>
+            <span class="tag">MachineMetadata=hostname={{this.identityService.identity.planet}}</span>
           </code>
         </pre>
       </md-card-content>
@@ -370,7 +370,7 @@ coreos:
       <md-card-content *ngIf="displayLine17">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
-            <span class="tag">fleetctl start trooper-#YOUR_NAME.service</span>
+            <span class="tag">fleetctl start trooper-{{this.identityService.identity.pseudo}}.service</span>
           </code>
         </pre>
       </md-card-content>
@@ -403,7 +403,7 @@ coreos:
         <pre class="ng-scope undefined lang-bsh prettyprinted">
     <textarea rows="25">
 #cloud-config
-hostname: "naboo"
+hostname: "{{this.identityService.identity.planet}}"
 users:
   - name: "jarjar"
     passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."
@@ -412,8 +412,8 @@ users:
       - "docker"
 coreos:
   fleet:
-    etcd_servers: "http://IP_MASTER:4001"
-    metadata: "hostname=naboo"
+    etcd_servers: "http://{{this.identityService.identity.masterIp}}:4001"
+    metadata: "hostname={{this.identityService.identity.planet}}"
     public-ip: $public_ipv4
   etcd2:
     name: "naboo"
@@ -481,7 +481,7 @@ coreos:
       <md-card-content *ngIf="displayLine38">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
         <code ng-non-bindable="">
-          <span class="tag">ssh jarjar@#YOUR_IP</span>
+          <span class="tag">ssh jarjar@{{this.identityService.identity.yourIp}}</span>
         </code>
       </pre>
       </md-card-content>
@@ -495,7 +495,7 @@ coreos:
       <md-card-content *ngIf="displayLine15">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
-            <span class="tag">touch trooper-#NAME.service</span>
+            <span class="tag">touch trooper-{{this.identityService.identity.pseudo}}.service</span>
           </code>
         </pre>
       </md-card-content>
@@ -511,19 +511,19 @@ coreos:
         <textarea rows="20">
 
 [Unit]
-Description=trooper-#YOUR_NAME
+Description=trooper-{{this.identityService.identity.pseudo}}
 After=docker.service
 Requires=docker.service
 
 [Service]
-ExecStartPre=-/usr/bin/docker kill trooper-#YOUR_NAME
-ExecStartPre=-/usr/bin/docker rm trooper-#YOUR_NAME
+ExecStartPre=-/usr/bin/docker kill trooper-{{this.identityService.identity.pseudo}}
+ExecStartPre=-/usr/bin/docker rm trooper-{{this.identityService.identity.pseudo}}
 ExecStartPre=/usr/bin/docker pull ymatagne/trooper
-ExecStart=/usr/bin/docker run --name trooper-#YOUR_NAME -p 0.0.0.0:80:9000 -e PLANET_HOST=#MASTER_IP -e PLANET_PORT=#MASTER_PORT -e TROOPER_NAME=#YOUR_NAME -e TROOPER_HOST=#YOUR_IP -e TROOPER_PORT=#YOUR_PORT -e SPACESHIP=#YOUR_SPACESHIP trooper-#YOUR_NAME
-ExecStop=/usr/bin/docker stop trooper-#YOUR_NAME
+ExecStart=/usr/bin/docker run --name trooper-{{this.identityService.identity.pseudo}} -p 0.0.0.0:80:9000 -e PLANET_HOST={{this.identityService.identity.masterIp}} -e PLANET_PORT=8080 -e TROOPER_NAME={{this.identityService.identity.pseudo}} -e TROOPER_HOST={{this.identityService.identity.yourIp}} -e TROOPER_PORT=#YOUR_COREOS_PORT_BINDING -e SPACESHIP={{this.identityService.identity.spaceship}} ymatagne/trooper
+ExecStop=/usr/bin/docker stop trooper-{{this.identityService.identity.pseudo}}
 
 [X-Fleet]
-MachineMetadata=hostname=#YOUR_PLANET
+MachineMetadata=hostname={{this.identityService.identity.planet}}
         </textarea>
 
         </pre>
@@ -538,7 +538,7 @@ MachineMetadata=hostname=#YOUR_PLANET
       <md-card-content *ngIf="displayLine17">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
-            <span class="tag">fleetctl start trooper-#YOUR_NAME.service</span>
+            <span class="tag">fleetctl start trooper-{{this.identityService.identity.pseudo}}.service</span>
           </code>
         </pre>
       </md-card-content>

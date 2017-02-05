@@ -30,7 +30,7 @@
     <md-card-content *ngIf="displayLine20">
       <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">ssh jarjar@YOUR_IP_PLANET</span>
+        <span class="tag">ssh jarjar@{{this.identityService.identity.yourIp}}</span>
       </code>
     </pre>
     </md-card-content>
