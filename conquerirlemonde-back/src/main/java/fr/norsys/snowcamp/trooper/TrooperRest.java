@@ -3,10 +3,7 @@ package fr.norsys.snowcamp.trooper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
@@ -16,11 +13,14 @@ public class TrooperRest {
 
     @Autowired
     TrooperHandler shipHandler;
+    @Autowired
+    TrooperCountHandler countHandler;
 
     @PostMapping("/trooper/launch")
     public void launchTrooper(@RequestBody Trooper trooper){
         log.info("Launch "+trooper.getName()+" start : " + trooper.getTrooperHost());
         shipHandler.sendTrooper(trooper);
+        countHandler.add();
     }
 
     @PostMapping("/trooper/die")

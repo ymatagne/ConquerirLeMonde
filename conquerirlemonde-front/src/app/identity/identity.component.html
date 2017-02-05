@@ -22,7 +22,21 @@
       <tr>
         <td>
           <md-input-container class="example-full-width">
+            <input [(ngModel)]="identityService.identity.masterPort" md-input placeholder="Master's port" />
+          </md-input-container>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <md-input-container class="example-full-width">
             <input [(ngModel)]="identityService.identity.yourIp" md-input placeholder="Your CoreOs Ip" />
+          </md-input-container>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <md-input-container class="example-full-width">
+            <input [(ngModel)]="identityService.identity.nodePort" md-input placeholder="Your kubernetes node port 322XX" />
           </md-input-container>
         </td>
       </tr>

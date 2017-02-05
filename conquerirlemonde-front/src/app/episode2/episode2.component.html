@@ -101,7 +101,7 @@ ENTRYPOINT ["node",  "node_modules/trooper/trooper.js"]
   <md-card-content *ngIf="displayLine5">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">docker run -d -p 80:9000 -e PLANET_HOST={{identityService.identity.masterIp}} -e PLANET_PORT=8080 -e TROOPER_NAME={{this.identityService.identity.pseudo}} -e TROOPER_HOST={{identityService.identity.yourIp}} -e TROOPER_PORT=#YOUR_COREOS_PORT_BINDING -e SPACESHIP={{this.identityService.identity.spaceship}} trooper</span>
+        <span class="tag">docker run -d -p 80:9000 -e PLANET_HOST={{identityService.identity.masterIp}} -e PLANET_PORT={{identityService.identity.masterPort}} -e TROOPER_NAME={{this.identityService.identity.pseudo}} -e TROOPER_HOST={{identityService.identity.yourIp}} -e TROOPER_PORT=#YOUR_COREOS_PORT_BINDING -e SPACESHIP={{this.identityService.identity.spaceship}} trooper</span>
       </code>
     </pre>
   </md-card-content>

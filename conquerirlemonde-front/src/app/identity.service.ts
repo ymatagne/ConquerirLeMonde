@@ -1,6 +1,6 @@
-import {Injectable, OnChanges, SimpleChange} from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import {Injectable} from '@angular/core';
 
+import { environment } from '../environments/environment';
 
 import {Identity} from "./identity";
 
@@ -21,6 +21,8 @@ export class IdentityService {
     this.identity = JSON.parse(localStorage.getItem('identity'));
     if(!this.identity){
       this.identity = new Identity();
+      this.identity.masterIp = environment.masterIp;
+      this.identity.masterPort = environment.masterPort;
       this.save();
     }
   }

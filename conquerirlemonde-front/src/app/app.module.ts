@@ -26,6 +26,7 @@ import {AuthenticationService} from "./auth/authentication.service";
 import { Episode7Component } from './episode7/episode7.component';
 import {IndentityComponent} from "./identity/identity.component";
 import {IdentityService} from "./identity.service";
+import {Episode8Component} from "./episode8/episode8.component";
 
 
 export const routes: Routes = [
@@ -40,6 +41,7 @@ export const routes: Routes = [
   { path: 'episode5', component: Episode5Component },
   { path: 'episode6', component: Episode6Component },
   { path: 'episode7', component: Episode7Component },
+  { path: 'episode8', component: Episode8Component },
   { path: 'slides/:id', component: SlidesComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent }
 ];
@@ -62,6 +64,7 @@ export const routes: Routes = [
     Episode6Component,
     LoginComponent,
     Episode7Component,
+    Episode8Component,
     IndentityComponent
   ],
   imports: [

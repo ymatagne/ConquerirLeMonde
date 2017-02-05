@@ -5,9 +5,12 @@
 
 export const environment = {
   production: false,
-  wsPlanetsKubernetes: 'ws://172.20.20.57:8083/ws/planets/kubernetes',
-  wsPlanetsFleet: 'ws://172.20.20.57:8083/ws/planets/fleet',
-  newTrooperUrl: 'ws://172.20.20.57:8083/ws/trooper',
-  dropTrooperUrl: 'http://172.20.20.57:8083/trooper/die',
-  loginUrl: 'http://172.20.20.57:8083/api/authenticate'
+  wsPlanetsKubernetes: 'ws://localhost:8083/ws/planets/kubernetes',
+  wsPlanetsFleet: 'ws://localhost:8083/ws/planets/fleet',
+  newTrooperUrl: 'ws://localhost:8083/ws/trooper',
+  countTrooperUrl: 'ws://localhost:8083/ws/trooper/count',
+  dropTrooperUrl: 'http://localhost:8083/trooper/die',
+  loginUrl: 'http://localhost:8083/api/authenticate',
+  masterIp: 'localhost',
+  masterPort : '8083'
 };

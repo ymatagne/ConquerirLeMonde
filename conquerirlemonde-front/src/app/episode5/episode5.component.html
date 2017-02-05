@@ -102,11 +102,11 @@
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine4">
           Create user-data file
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine3">
+      <md-card-content *ngIf="displayLine4">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">touch user-data.yml</span>
@@ -116,11 +116,11 @@
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine4">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine5">
           This file content :
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine4">
+      <md-card-content *ngIf="displayLine5">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">#cloud-config</span>
@@ -326,11 +326,11 @@
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine24">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine8">
           Get your ip
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine24">
+      <md-card-content *ngIf="displayLine8">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">ifconfig</span>
@@ -340,11 +340,11 @@
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine25">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine9">
           Connect to sudo
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine25">
+      <md-card-content *ngIf="displayLine9">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">sudo su</span>
@@ -354,11 +354,11 @@
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine14">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine10">
           Change WORKER NAME and IP in createWorkerCertificats.sh
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine14">
+      <md-card-content *ngIf="displayLine10">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">vi /etc/kubernetes/ssl/createWorkerCertificats.sh</span>
@@ -370,11 +370,11 @@
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine15">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine11">
           Generate certificates
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine15">
+      <md-card-content *ngIf="displayLine11">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">cd /etc/kubernetes/ssl/ ; sh createWorkerCertificats.sh</span>
@@ -384,11 +384,11 @@
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine8">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine12">
           Start Flannel
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine8">
+      <md-card-content *ngIf="displayLine12">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">sudo systemctl restart flanneld</span>
@@ -398,11 +398,11 @@
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine9">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine13">
           Change ip of master and your ip
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine9">
+      <md-card-content *ngIf="displayLine13">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
             <code ng-non-bindable="">
               <span class="tag">sudo vi /etc/systemd/system/kubelet.service</span>
@@ -412,11 +412,11 @@
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine9">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine14">
           Start Kubernetes
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine9">
+      <md-card-content *ngIf="displayLine14">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
             <code ng-non-bindable="">
               <span class="tag">sudo systemctl restart kubelet</span>
@@ -426,11 +426,11 @@
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine10">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine15">
           Check if Kubernetes worker is great
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine10">
+      <md-card-content *ngIf="displayLine15">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">journalctl -xf -u kubelet</span>
@@ -440,11 +440,11 @@
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine20">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine16">
           Exit box
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine20">
+      <md-card-content *ngIf="displayLine16">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">exit</span>
@@ -454,11 +454,11 @@
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine11">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine17">
           Get kubectl script
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine11">
+      <md-card-content *ngIf="displayLine17">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">for linux : curl -O https://storage.googleapis.com/kubernetes-release/release/v1.5.2/bin/linux/amd64/kubectl</span>
@@ -470,11 +470,11 @@
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine12">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine18">
           Configure kubectl
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine12">
+      <md-card-content *ngIf="displayLine18">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag"></span>
@@ -493,11 +493,11 @@
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine13">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine19">
           Check if kubectl is great
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine13">
+      <md-card-content *ngIf="displayLine19">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
            <code ng-non-bindable="">
             <span class="tag">./kubectl get nodes</span>
@@ -511,11 +511,11 @@
   <div *ngSwitchCase="'Aws'">
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine20">
           Create user-data's file
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine1">
+      <md-card-content *ngIf="displayLine20">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">touch user-data.yml</span>
@@ -525,11 +525,11 @@
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine7">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine21">
           Change User data
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine7">
+      <md-card-content *ngIf="displayLine21">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
     <textarea rows="150">
 #cloud-config
@@ -700,12 +700,12 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine35">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine22">
           Start your VM
         </md-slide-toggle>
         <md-card-title></md-card-title>
       </md-card-header>
-      <md-card-content *ngIf="displayLine35">
+      <md-card-content *ngIf="displayLine22">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
         <code ng-non-bindable="">
           <span class="tag">response=$(aws ec2 run-instances --image-id ami-188dd67e --count 1 --instance-type t1.micro --security-groups snowcamp --user-data file://user-data.yml)</span>
@@ -715,12 +715,12 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine36">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine23">
           Get your Instance id
         </md-slide-toggle>
         <md-card-title></md-card-title>
       </md-card-header>
-      <md-card-content *ngIf="displayLine36">
+      <md-card-content *ngIf="displayLine23">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
         <code ng-non-bindable="">
           <span class="tag">echo $response | grep InstanceId</span>
@@ -730,12 +730,12 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine37">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine24">
           Get your Public Ip
         </md-slide-toggle>
         <md-card-title></md-card-title>
       </md-card-header>
-      <md-card-content *ngIf="displayLine37">
+      <md-card-content *ngIf="displayLine24">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
         <code ng-non-bindable="">
           <span class="tag">aws ec2 describe-instances --instance-ids #YOUR_INSTANCE_ID | grep PublicIpAddress</span>
@@ -745,11 +745,11 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine38">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine25">
           Connect to your VM
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine38">
+      <md-card-content *ngIf="displayLine25">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
         <code ng-non-bindable="">
           <span class="tag">ssh jarjar@{{this.identityService.identity.yourIp}}</span>
@@ -759,11 +759,11 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine100">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine26">
           Get certificates
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine100">
+      <md-card-content *ngIf="displayLine26">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">{{"cd /etc/kubernetes/ssl/ ; wget --content-disposition https://github.com/ymatagne/ConquerirLeMonde/blob/master/conquerirlemonde-front/src/assets/kubernetes/certificats.zip?raw=true"}}</span>
@@ -773,11 +773,11 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine101">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine27">
           Extract and generate certificates
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine101">
+      <md-card-content *ngIf="displayLine27">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">{{"unzip certificats.zip ; ./createWorkerCertificats.sh"}}</span>
@@ -787,11 +787,11 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine102">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine28">
           Link certificates for kubernetes
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine102">
+      <md-card-content *ngIf="displayLine28">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">"ln -s {{this.identityService.identity.planet}}-worker.pem worker.pem ; ln -s {{this.identityService.identity.planet}}-worker-key.pem worker-key.pem"</span>
@@ -805,11 +805,11 @@ coreos:
 
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine8">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine29">
           Start Flannel
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine8">
+      <md-card-content *ngIf="displayLine29">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">systemctl restart flanneld</span>
@@ -819,11 +819,11 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine9">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine30">
           Start Kubernetes
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine9">
+      <md-card-content *ngIf="displayLine30">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
             <code ng-non-bindable="">
               <span class="tag">systemctl restart kubelet</span>
@@ -833,11 +833,11 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine10">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine31">
           Check if Kubernetes worker is great
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine10">
+      <md-card-content *ngIf="displayLine31">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">journalctl -xf -u kubelet</span>
@@ -847,11 +847,11 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine20">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine32">
           Exit box
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine20">
+      <md-card-content *ngIf="displayLine32">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">exit</span>
@@ -861,11 +861,11 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine11">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine33">
           Get kubectl script
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine11">
+      <md-card-content *ngIf="displayLine33">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">for linux : curl -O https://storage.googleapis.com/kubernetes-release/release/v1.5.2/bin/linux/amd64/kubectl</span>
@@ -877,11 +877,11 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine12">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine34">
           Configure kubectl
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine12">
+      <md-card-content *ngIf="displayLine34">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag"></span>
@@ -900,11 +900,11 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
-        <md-slide-toggle color="primary" [(ngModel)]="displayLine13">
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine35">
           Check if kubectl is great
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine13">
+      <md-card-content *ngIf="displayLine35">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
            <code ng-non-bindable="">
             <span class="tag">./kubectl get nodes</span>

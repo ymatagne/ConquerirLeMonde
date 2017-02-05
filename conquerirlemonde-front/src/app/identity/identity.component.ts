@@ -1,7 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IdentityService} from "../identity.service";
-import {Identity} from "../identity";
-import {Observable} from "rxjs";
 import {Planet} from "../planet";
 import {Trooper} from "../trooper";
 
