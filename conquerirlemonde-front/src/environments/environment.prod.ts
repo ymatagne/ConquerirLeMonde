@@ -5,9 +5,9 @@
 
 export const environment = {
   production: false,
-  wsPlanetsKubernetes: 'ws://54.154.192.138:8080/ws/planets/kubernetes',
-  wsPlanetsFleet: 'ws://54.154.192.138:8080/ws/planets/fleet',
-  newTrooperUrl: 'ws://54.154.192.138:8080/ws/trooper',
-  dropTrooperUrl: 'http://54.154.192.138:8080/trooper/die',
-  loginUrl: 'http://54.154.192.138:8080/api/authenticate'
+  wsPlanetsKubernetes: 'ws://54.194.0.197:8080/ws/planets/kubernetes',
+  wsPlanetsFleet: 'ws://54.194.0.197:8080/ws/planets/fleet',
+  newTrooperUrl: 'ws://54.194.0.197:8080/ws/trooper',
+  dropTrooperUrl: 'http://54.194.0.197:8080/trooper/die',
+  loginUrl: 'http://54.194.0.197:8080/api/authenticate'
 };
