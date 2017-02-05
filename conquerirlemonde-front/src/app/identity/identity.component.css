@@ -1,0 +1,12 @@
+.example-card {
+  width: 400px;
+}
+
+.example-header-image {
+  background-image: url('assets/trooper.png');
+  background-size: cover;
+}
+.example-full-width {
+  width: 100%;
+}
+

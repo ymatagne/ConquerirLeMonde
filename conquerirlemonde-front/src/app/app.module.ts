@@ -24,6 +24,7 @@ import { LoginComponent } from './login/login.component';
 import {AuthGuard} from "./auth/auth.guard";
 import {AuthenticationService} from "./auth/authentication.service";
 import { Episode7Component } from './episode7/episode7.component';
+import {IndentityComponent} from "./identity/identity.component";
 
 
 export const routes: Routes = [
@@ -59,7 +60,8 @@ export const routes: Routes = [
     Episode5Component,
     Episode6Component,
     LoginComponent,
-    Episode7Component
+    Episode7Component,
+    IndentityComponent
   ],
   imports: [
     BrowserModule,

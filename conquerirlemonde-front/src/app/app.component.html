@@ -1,36 +1,47 @@
-<md-toolbar color="primary">
-  <span>Conquerir le monde avec CoreOs</span>
+<md-sidenav-container>
 
-  <span class="example-fill-remaining-space"></span>
+  <md-sidenav #sidenav class="example-sidenav">
+    <identity></identity>
+  </md-sidenav>
 
-  <span routerLink="/login" routerLinkActive="active">SnowCamp 2017</span>
-</md-toolbar>
+  <md-toolbar color="primary">
+    <md-icon (click)="sidenav.open()" style="cursor: pointer;"> view_headline</md-icon>
+    <span>Conquerir le monde avec CoreOs</span>
 
-<md-tab-group (focusChange)="changeTab($event)" [selectedIndex]="selectedIndex()">
-  <md-tab>
-    <template md-tab-label>
-      <md-icon>home</md-icon> Home
-    </template>
-  </md-tab>
+    <span class="example-fill-remaining-space"></span>
+
+    <span routerLink="/login" routerLinkActive="active">SnowCamp 2017</span>
+  </md-toolbar>
+
+  <md-tab-group (focusChange)="changeTab($event)" [selectedIndex]="selectedIndex()">
     <md-tab>
-    <template md-tab-label>
-      <md-icon>settings</md-icon> Settings
-    </template>
-  </md-tab>
-  <md-tab>
-    <template md-tab-label>
-      <md-icon>play_circle_filled</md-icon> Rules
-    </template>
-  </md-tab>
-  <md-tab>
-    <template md-tab-label>
-      <md-icon>language</md-icon> Planets
-    </template>
-  </md-tab>
-  <md-tab  *ngIf="guard.isLoggued()">
-    <template md-tab-label>
-      <md-icon>videogame_asset</md-icon> Game
-    </template>
-  </md-tab>
-</md-tab-group>
-<router-outlet></router-outlet>
+      <template md-tab-label>
+        <md-icon>home</md-icon> Home
+      </template>
+    </md-tab>
+      <md-tab>
+      <template md-tab-label>
+        <md-icon>settings</md-icon> Settings
+      </template>
+    </md-tab>
+    <md-tab>
+      <template md-tab-label>
+        <md-icon>play_circle_filled</md-icon> Rules
+      </template>
+    </md-tab>
+    <md-tab>
+      <template md-tab-label>
+        <md-icon>language</md-icon> Planets
+      </template>
+    </md-tab>
+    <md-tab  *ngIf="guard.isLoggued()">
+      <template md-tab-label>
+        <md-icon>videogame_asset</md-icon> Game
+      </template>
+    </md-tab>
+  </md-tab-group>
+
+  <div class="demo-sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+</md-sidenav-container>
