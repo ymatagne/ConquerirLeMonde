@@ -14,4 +14,10 @@ md-card{
         margin-top:10px;
     }
 }
+body{
+      background:black;
+}
+html{
+      background:black;
+}
 @include angular-material-theme($theme);
