@@ -36,7 +36,7 @@
     <div class="flex-item" *ngFor="let planet of kubernetesPlanets">
       <md-card>
         <md-card-title-group>
-          <img md-card-sm-image src="assets/planets/{{planet.name}}.png" (error)="updateBrokenImage($event)">
+          <img md-card-sm-image src="assets/planets/{{planet.name}}.png" onError="this.src='/assets/planets/ko.png'">
           <md-card-title>{{ planet.name }}</md-card-title>
           <md-card-subtitle>{{ planet.ip }}</md-card-subtitle>
         </md-card-title-group>

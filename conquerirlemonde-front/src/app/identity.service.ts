@@ -23,6 +23,7 @@ export class IdentityService {
       this.identity = new Identity();
       this.identity.masterIp = environment.masterIp;
       this.identity.masterPort = environment.masterPort;
+      this.identity.awsKey=environment.awsKey;
       this.save();
     }
   }
