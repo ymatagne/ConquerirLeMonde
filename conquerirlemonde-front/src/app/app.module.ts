@@ -42,7 +42,7 @@ export const routes: Routes = [
   { path: 'episode6', component: Episode6Component },
   { path: 'episode7', component: Episode7Component },
   { path: 'episode8', component: Episode8Component },
-  { path: 'slides/:id', component: SlidesComponent, canActivate: [AuthGuard] },
+  { path: 'slides/:id', component: SlidesComponent },
   { path: 'login', component: LoginComponent }
 ];
 
