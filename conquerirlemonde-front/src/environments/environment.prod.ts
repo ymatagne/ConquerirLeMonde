@@ -13,5 +13,5 @@ export const environment = {
   loginUrl: 'http://54.194.0.197:8080/api/authenticate',
   masterIp: '54.194.0.197',
   masterPort : '8080',
-  awsKey : 'HhDHfdhIp0eYVgWYiAjtY01rS5tQhiA/UcDz0d46'
+  awsKey : ''
 };
