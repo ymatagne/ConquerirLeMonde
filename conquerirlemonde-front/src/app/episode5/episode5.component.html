@@ -138,7 +138,7 @@
             <span class="tag">    owner: "root"</span>
             <span class="tag">    content: |</span>
             <span class="tag">      FLANNELD_IFACE=$public_ipv4</span>
-            <span class="tag">      FLANNELD_ETCD_ENDPOINTS=https://{{this.identityService.identity.masterIp}}</span>
+            <span class="tag">      FLANNELD_ETCD_ENDPOINTS=https://54.154.157.5</span>
             <span class="tag">  - path: "/etc/kubernetes/cni/docker_opts_cni.env"</span>
             <span class="tag">    permissions: "0644"</span>
             <span class="tag">    owner: "root"</span>
@@ -171,7 +171,7 @@
             <span class="tag">      ExecStartPre=/usr/bin/mkdir -p /var/log/containers</span>
             <span class="tag">      ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/run/kubelet-pod.uuid</span>
             <span class="tag">      ExecStart=/usr/lib/coreos/kubelet-wrapper \</span>
-            <span class="tag">        --api-servers=https://{{this.identityService.identity.masterIp}} \</span>
+            <span class="tag">        --api-servers=https://54.154.157.5 \</span>
             <span class="tag">        --cni-conf-dir=/etc/kubernetes/cni/net.d \</span>
             <span class="tag">        --network-plugin=cni \</span>
             <span class="tag">        --container-runtime=docker \</span>
@@ -207,7 +207,7 @@
             <span class="tag">          command:</span>
             <span class="tag">          - /hyperkube</span>
             <span class="tag">          - proxy</span>
-            <span class="tag">          - --master=https://{{this.identityService.identity.masterIp}}</span>
+            <span class="tag">          - --master=https://54.154.157.5</span>
             <span class="tag">          - --cluster-cidr=10.2.0.0/16</span>
             <span class="tag">          - --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml</span>
             <span class="tag">          securityContext:</span>
@@ -478,7 +478,7 @@
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag"></span>
-            <span class="tag">export MASTER_HOST={{this.identityService.identity.masterIp}}</span>
+            <span class="tag">export MASTER_HOST=54.154.157.5</span>
             <span class="tag">export CA_CERT=CERTIFICATS_PATH/ca.pem</span>
             <span class="tag">export ADMIN_KEY=CERTIFICATS_PATH/admin-key.pem</span>
             <span class="tag">export ADMIN_CERT=CERTIFICATS_PATH/admin.pem</span>
@@ -539,14 +539,14 @@ users:
     passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."
     groups:
       - "sudo"
-      - "docker
+      - "docker"
 write_files:
   - path: "/etc/flannel/options.env"
     permissions: "0644"
     owner: "root"
     content: |
       FLANNELD_IFACE=$private_ipv4
-      FLANNELD_ETCD_ENDPOINTS=http://{{this.identityService.identity.masterIp}}:2379
+      FLANNELD_ETCD_ENDPOINTS=http:/54.154.157.5:2379
   - path: "/etc/kubernetes/cni/docker_opts_cni.env"
     permissions: "0644"
     owner: "root"
@@ -579,7 +579,7 @@ write_files:
       ExecStartPre=/usr/bin/mkdir -p /var/log/containers
       ExecStartPre=-/usr/bin/rkt rm --uuid-file=/var/run/kubelet-pod.uuid
       ExecStart=/usr/lib/coreos/kubelet-wrapper \
-        --api-servers=https://{{this.identityService.identity.masterIp}} \
+        --api-servers=https://54.154.157.5 \
         --cni-conf-dir=/etc/kubernetes/cni/net.d \
         --network-plugin=cni \
         --container-runtime=docker \
@@ -615,7 +615,7 @@ write_files:
           command:
           - /hyperkube
           - proxy
-          - --master=https://{{this.identityService.identity.masterIp}}
+          - --master=https://54.154.157.5
           - --cluster-cidr=10.2.0.0/16
           - --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml
           securityContext:
@@ -759,6 +759,20 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine86">
+          Connect with sudo user
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine86">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">sudo su</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
         <md-slide-toggle color="primary" [(ngModel)]="displayLine26">
           Get certificates
         </md-slide-toggle>
@@ -780,7 +794,7 @@ coreos:
       <md-card-content *ngIf="displayLine27">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
-            <span class="tag">{{"unzip certificats.zip ; ./createWorkerCertificats.sh"}}</span>
+            <span class="tag">{{"unzip certificats.zip ;chmod +x ./WorkerCertificats.sh ; ./WorkerCertificats.sh"}}</span>
           </code>
         </pre>
       </md-card-content>
@@ -794,14 +808,11 @@ coreos:
       <md-card-content *ngIf="displayLine28">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
-            <span class="tag">"ln -s {{this.identityService.identity.planet}}-worker.pem worker.pem ; ln -s {{this.identityService.identity.planet}}-worker-key.pem worker-key.pem"</span>
+            <span class="tag">ln -s {{this.identityService.identity.planet}}-worker.pem worker.pem ; ln -s {{this.identityService.identity.planet}}-worker-key.pem worker-key.pem</span>
           </code>
         </pre>
       </md-card-content>
     </md-card>
-
-
-
 
     <md-card>
       <md-card-header>
@@ -877,6 +888,34 @@ coreos:
     </md-card>
     <md-card>
       <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine96">
+          Get certificates
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine96">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">{{"wget --content-disposition https://github.com/ymatagne/ConquerirLeMonde/blob/master/conquerirlemonde-front/src/assets/kubernetes/certificats.zip?raw=true"}}</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine97">
+          Extract certificates
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine97">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">{{"unzip certificats.zip"}}</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
         <md-slide-toggle color="primary" [(ngModel)]="displayLine34">
           Configure kubectl
         </md-slide-toggle>
@@ -885,7 +924,7 @@ coreos:
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag"></span>
-            <span class="tag">export MASTER_HOST={{this.identityService.identity.masterIp}}</span>
+            <span class="tag">export MASTER_HOST=54.154.157.5</span>
             <span class="tag">export CA_CERT=CERTIFICATS_PATH/ca.pem</span>
             <span class="tag">export ADMIN_KEY=CERTIFICATS_PATH/admin-key.pem</span>
             <span class="tag">export ADMIN_CERT=CERTIFICATS_PATH/admin.pem</span>
@@ -915,4 +954,3 @@ coreos:
 
   </div>
 </div>
-

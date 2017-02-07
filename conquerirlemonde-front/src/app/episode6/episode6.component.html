@@ -11,7 +11,7 @@
 <md-card>
   <md-card-header>
     <md-slide-toggle color="primary" [(ngModel)]="displayLine150">
-      Create file trooper.service.yml
+      Create file trooper-{{this.identityService.identity.pseudo}}.service.yml
     </md-slide-toggle>
   </md-card-header>
   <md-card-content *ngIf="displayLine150">
@@ -53,7 +53,7 @@
   <md-card-content *ngIf="displayLine151">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">./kubectl create -f trooper.service.yml</span>
+        <span class="tag">./kubectl create -f trooper-{{this.identityService.identity.planet}}.service.yml</span>
       </code>
     </pre>
   </md-card-content>
@@ -61,7 +61,7 @@
 <md-card>
   <md-card-header>
     <md-slide-toggle color="primary" [(ngModel)]="displayLine152">
-      Create file trooper.deployement.yml
+      Create file trooper-{{this.identityService.identity.planet}}.deployement.yml
     </md-slide-toggle>
   </md-card-header>
   <md-card-content *ngIf="displayLine152">
@@ -77,7 +77,7 @@
         <span class="tag">{{"              }"}}</span>
         <span class="tag">{{"          },"}}</span>
         <span class="tag">{{"          \"spec\":{"}}</span>
-        <span class="tag">              "replicas":20,</span>
+        <span class="tag">              "replicas":10,</span>
         <span class="tag">{{"              \"selector\":{"}}</span>
         <span class="tag">                "app":"trooper-{{this.identityService.identity.planet}}"</span>
         <span class="tag">{{"              },"}}</span>
@@ -101,7 +101,7 @@
         <span class="tag">			"env":[</span>
         <span class="tag">{{"                              {"}}</span>
         <span class="tag">                                  "name":"TROOPER_HOST",</span>
-        <span class="tag">                                  "value":"{{this.identityService.identity.yourIp}}"</span>
+        <span class="tag">                                  "value":"54.154.157.5"</span>
         <span class="tag">{{"                              },"}}</span>
         <span class="tag">{{"                              {"}}</span>
         <span class="tag">                                  "name":"PLANET_HOST",</span>
@@ -137,13 +137,13 @@
 <md-card>
   <md-card-header>
     <md-slide-toggle color="primary" [(ngModel)]="displayLine16">
-      Create nodePort
+      Create trooper
     </md-slide-toggle>
   </md-card-header>
   <md-card-content *ngIf="displayLine16">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">./kubectl create -f trooper.deployement.yml</span>
+        <span class="tag">./kubectl create -f trooper-{{this.identityService.identity.planet}}.deployement.yml</span>
       </code>
     </pre>
   </md-card-content>

@@ -71,7 +71,7 @@ users:
       - "docker"
 coreos:
   fleet:
-    etcd_servers:"http://{{identityService.identity.masterIp}}:4001"
+    etcd_servers: "http://54.194.247.99:4001"
     metadata: "hostname={{this.identityService.identity.planet}}"
     public-ip: $public_ipv4
   etcd2:
@@ -211,7 +211,7 @@ coreos:
             <span class="tag">ExecStartPre=-/usr/bin/docker kill trooper-{{this.identityService.identity.pseudo}}</span>
             <span class="tag">ExecStartPre=-/usr/bin/docker rm trooper-{{this.identityService.identity.pseudo}}</span>
             <span class="tag">ExecStartPre=/usr/bin/docker pull ymatagne/trooper</span>
-            <span class="tag">ExecStart=/usr/bin/docker run --name trooper-{{this.identityService.identity.pseudo}} -p 0.0.0.0:80:9000 -e PLANET_HOST={{identityService.identity.masterIp}} -e PLANET_PORT={{identityService.identity.masterPort}} -e TROOPER_NAME={{this.identityService.identity.pseudo}} -e TROOPER_HOST={{identityService.identity.yourIp}} -e TROOPER_PORT=#YOUR_COREOS_PORT_BINDING -e SPACESHIP={{this.identityService.identity.spaceship}} ymatagne/trooper</span>
+            <span class="tag">ExecStart=/usr/bin/docker run --name trooper-{{this.identityService.identity.pseudo}} -p 0.0.0.0:80:9000 -e PLANET_HOST={{identityService.identity.masterIp}} -e PLANET_PORT={{identityService.identity.masterPort}} -e TROOPER_NAME={{this.identityService.identity.pseudo}} -e TROOPER_HOST={{identityService.identity.yourIp}} -e TROOPER_PORT=80 -e SPACESHIP={{this.identityService.identity.spaceship}} ymatagne/trooper</span>
             <span class="tag">ExecStop=/usr/bin/docker stop trooper-{{this.identityService.identity.pseudo}}</span>
             <span class="tag"></span>
             <span class="tag">[X-Fleet]</span>
@@ -271,11 +271,11 @@ users:
       - "docker"
 coreos:
   fleet:
-    etcd_servers: "http://{{this.identityService.identity.masterIp}}:4001"
+    etcd_servers: "http://54.194.247.99:4001"
     metadata: "hostname={{this.identityService.identity.planet}}"
     public-ip: $public_ipv4
   etcd2:
-    name: "naboo"
+    name: "{{this.identityService.identity.planet}}"
     initial-cluster-token: starwars
   units:
     - name: fleet.service
@@ -378,7 +378,7 @@ Requires=docker.service
 ExecStartPre=-/usr/bin/docker kill trooper-{{this.identityService.identity.pseudo}}
 ExecStartPre=-/usr/bin/docker rm trooper-{{this.identityService.identity.pseudo}}
 ExecStartPre=/usr/bin/docker pull ymatagne/trooper
-ExecStart=/usr/bin/docker run --name trooper-{{this.identityService.identity.pseudo}} -p 0.0.0.0:80:9000 -e PLANET_HOST={{this.identityService.identity.masterIp}} -e PLANET_PORT={{this.identityService.identity.masterPort}} -e TROOPER_NAME={{this.identityService.identity.pseudo}} -e TROOPER_HOST={{this.identityService.identity.yourIp}} -e TROOPER_PORT=#YOUR_COREOS_PORT_BINDING -e SPACESHIP={{this.identityService.identity.spaceship}} ymatagne/trooper
+ExecStart=/usr/bin/docker run --name trooper-{{this.identityService.identity.pseudo}} -p 0.0.0.0:80:9000 -e PLANET_HOST={{this.identityService.identity.masterIp}} -e PLANET_PORT={{this.identityService.identity.masterPort}} -e TROOPER_NAME={{this.identityService.identity.pseudo}} -e TROOPER_HOST={{this.identityService.identity.yourIp}} -e TROOPER_PORT=80 -e SPACESHIP={{this.identityService.identity.spaceship}} ymatagne/trooper
 ExecStop=/usr/bin/docker stop trooper-{{this.identityService.identity.pseudo}}
 
 [X-Fleet]
@@ -397,7 +397,40 @@ MachineMetadata=hostname={{this.identityService.identity.planet}}
       <md-card-content *ngIf="displayLine26">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
-            <span class="tag">fleetctl start trooper-{{this.identityService.identity.pseudo}}.service</span>
+            <span class="tag">sudo fleetctl start trooper-{{this.identityService.identity.pseudo}}.service</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine56">
+          Exit vm
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine56">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">exit</span>
+          </code>
+        </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine57">
+          Going Further and More
+        </md-slide-toggle>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine57">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+          <code ng-non-bindable="">
+            <span class="tag">Add Retry to systemd service</span>
+            <span class="tag">use fleetctl list-units</span>
+            <span class="tag">use fleetctl list-machines</span>
+            <span class="tag">use fleetctl cat #YOUR_SERVICE</span>
+            <span class="tag">Play with systemd and ExecStart</span>
+            <span class="tag">What is "=-" ?</span>
           </code>
         </pre>
       </md-card-content>
