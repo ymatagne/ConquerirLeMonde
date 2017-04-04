@@ -74,7 +74,7 @@ export const routes: Routes = [
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
-    FlexLayoutModule.forRoot(),
+    FlexLayoutModule,
     RouterModule.forRoot(routes)
   ],
   providers: [

@@ -1,10 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/core/theming/all-theme';
-@include md-core();
-$primary: md-palette($md-orange, 800);
-$accent:  md-palette($md-light-blue, 600, A100, A400);
-$warn:    md-palette($md-red, 600);
-$theme: md-light-theme($primary, $accent, $warn);
+@import '~@angular/material/_theming.scss';
+
+@include  mat-core();
+$primary: mat-palette($mat-orange, 800);
+$accent:  mat-palette($mat-light-blue, 600, A100, A400);
+$warn:    mat-palette($mat-red, 600);
+$theme: mat-light-theme($primary, $accent, $warn);
 
 md-card{
     margin-bottom: 15px;
