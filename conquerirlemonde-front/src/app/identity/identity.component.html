@@ -8,41 +8,40 @@
       <tr>
         <td>
           <md-input-container class="example-full-width">
-            <input [(ngModel)]="identityService.identity.pseudo" md-input placeholder="Pseudo" />
+            <input [(ngModel)]="identityService.identity.pseudo" mdInput placeholder="Pseudo" />
           </md-input-container>
         </td>
       </tr>
       <tr>
         <td>
           <md-input-container class="example-full-width">
-            <input [(ngModel)]="identityService.identity.masterIp" md-input placeholder="Master's IP" />
+            <input [(ngModel)]="identityService.identity.masterIp" mdInput placeholder="Master's IP" />
           </md-input-container>
         </td>
       </tr>
       <tr>
         <td>
           <md-input-container class="example-full-width">
-            <input [(ngModel)]="identityService.identity.masterPort" md-input placeholder="Master's port" />
+            <input [(ngModel)]="identityService.identity.masterPort" mdInput placeholder="Master's port" />
           </md-input-container>
         </td>
       </tr>
       <tr>
         <td>
           <md-input-container class="example-full-width">
-            <input [(ngModel)]="identityService.identity.yourIp" md-input placeholder="Your CoreOs Ip" />
+            <input [(ngModel)]="identityService.identity.yourIp" mdInput placeholder="Your CoreOs Ip" />
           </md-input-container>
         </td>
       </tr>
       <tr>
         <td>
           <md-input-container class="example-full-width">
-            <input [(ngModel)]="identityService.identity.nodePort" md-input placeholder="Your kubernetes node port 322XX" />
+            <input [(ngModel)]="identityService.identity.nodePort" mdInput placeholder="Your kubernetes node port 322XX" />
           </md-input-container>
         </td>
       </tr>
       <tr>
         <td>
-          <img md-card-lg-image src="/assets/planets/{{identityService.identity.planet}}.png">
           <md-select placeholder="Planet" [(ngModel)]="identityService.identity.planet">
             <md-option *ngFor="let planet of planetAvailable" [value]="planet">
               {{ planet }}
@@ -52,7 +51,11 @@
       </tr>
       <tr>
         <td>
-          <img md-card-lg-image src="/assets/games/imgs/ship/big/{{identityService.identity.spaceship}}.png">
+          <img md-card-md-image src="/assets/planets/{{identityService.identity.planet}}.png">
+        </td>
+      </tr>
+      <tr>
+        <td>
           <md-select placeholder="Spaceship" [(ngModel)]="identityService.identity.spaceship">
             <md-option *ngFor="let ship of shipAvailable" [value]="ship">
               {{ ship }}
@@ -60,6 +63,10 @@
           </md-select>
         </td>
       </tr>
+      <tr>
+        <td>
+          <img md-card-md-image src="/assets/games/imgs/ship/big/{{identityService.identity.spaceship}}.png">
+        </td>
     </table>
   </md-card-content>
   <md-card-actions layout="row" layout-align="end center">
