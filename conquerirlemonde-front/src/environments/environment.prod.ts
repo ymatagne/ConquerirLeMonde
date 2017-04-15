@@ -5,13 +5,13 @@
 
 export const environment = {
   production: false,
-  wsPlanetsKubernetes: 'ws://54.93.98.2:8080/ws/planets/kubernetes',
-  wsPlanetsFleet: 'ws://54.93.98.2:8080/ws/planets/fleet',
-  newTrooperUrl: 'ws://54.93.98.2:8080/ws/trooper',
-  countTrooperUrl: 'ws://54.93.98.2:8080/ws/trooper/count',
-  dropTrooperUrl: 'http://54.93.98.2:8080/trooper/die',
-  loginUrl: 'http://54.93.98.2:8080/api/authenticate',
-  gameIp: '54.93.98.2',
+  wsPlanetsKubernetes: 'ws://52.57.69.116:8080/ws/planets/kubernetes',
+  wsPlanetsFleet: 'ws://52.57.69.116:8080/ws/planets/fleet',
+  newTrooperUrl: 'ws://52.57.69.116:8080/ws/trooper',
+  countTrooperUrl: 'ws://52.57.69.116:8080/ws/trooper/count',
+  dropTrooperUrl: 'http://52.57.69.116:8080/trooper/die',
+  loginUrl: 'http://52.57.69.116:8080/api/authenticate',
+  gameIp: '52.57.69.116',
   gamePort : '8080',
   awsKey : ''
 };

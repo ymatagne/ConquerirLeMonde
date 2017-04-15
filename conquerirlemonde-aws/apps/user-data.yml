@@ -20,7 +20,7 @@ coreos:
           Restart=always
           ExecStartPre=-/usr/bin/docker kill mixit-api
           ExecStartPre=-/usr/bin/docker rm mixit-api
-          ExecStartPre=/usr/bin/docker pull ymatagne/snowcamp-api:latest
+          ExecStartPre=/usr/bin/docker pull ymatagne/mixit-api:latest
           ExecStart=/usr/bin/docker run --name mixit-api -p 0.0.0.0:8080:8080 ymatagne/mixit-api:latest
           ExecStop=/usr/bin/docker stop mixit-api 
       - name: mixit.service
