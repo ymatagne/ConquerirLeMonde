@@ -105,7 +105,7 @@
         <span class="tag">{{"                              },"}}</span>
         <span class="tag">{{"                              {"}}</span>
         <span class="tag">                                  "name":"PLANET_HOST",</span>
-        <span class="tag">                                  "value":"{{this.identityService.identity.masterIp}}"</span>
+        <span class="tag">                                  "value":"{{this.identityService.identity.gameIp}}"</span>
         <span class="tag">{{"                              },"}}</span>
         <span class="tag">{{"                              {"}}</span>
         <span class="tag">                                  "name":"TROOPER_PORT",</span>
@@ -113,7 +113,7 @@
         <span class="tag">{{"                              },"}}</span>
         <span class="tag">{{"                              {"}}</span>
         <span class="tag">                                  "name":"PLANET_PORT",</span>
-        <span class="tag">                                  "value":"{{this.identityService.identity.masterPort}}"</span>
+        <span class="tag">                                  "value":"{{this.identityService.identity.gamePort}}"</span>
         <span class="tag">{{"                              },"}}</span>
         <span class="tag">{{"                              {"}}</span>
         <span class="tag">                                  "name":"TROOPER_NAME",</span>
@@ -199,7 +199,7 @@
     <md-card-content *ngIf="displayLine8">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">curl -XGET http://{{this.identityService.identity.masterIp}}:{{this.identityService.identity.nodePort}}/</span>
+        <span class="tag">curl -XGET http://{{this.identityService.identity.gameIp}}:{{this.identityService.identity.nodePort}}/</span>
       </code>
     </pre>
     </md-card-content>

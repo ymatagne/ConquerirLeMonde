@@ -71,7 +71,7 @@ users:
       - "docker"
 coreos:
   fleet:
-    etcd_servers: "http://54.194.247.99:4001"
+    etcd_servers: "http://{{this.identityService.identity.etcdServer}}:4001"
     metadata: "hostname={{this.identityService.identity.planet}}"
     public-ip: $public_ipv4
   etcd2:
@@ -211,7 +211,7 @@ coreos:
             <span class="tag">ExecStartPre=-/usr/bin/docker kill trooper-{{this.identityService.identity.pseudo}}</span>
             <span class="tag">ExecStartPre=-/usr/bin/docker rm trooper-{{this.identityService.identity.pseudo}}</span>
             <span class="tag">ExecStartPre=/usr/bin/docker pull ymatagne/trooper</span>
-            <span class="tag">ExecStart=/usr/bin/docker run --name trooper-{{this.identityService.identity.pseudo}} -p 0.0.0.0:80:9000 -e PLANET_HOST={{identityService.identity.masterIp}} -e PLANET_PORT={{identityService.identity.masterPort}} -e TROOPER_NAME={{this.identityService.identity.pseudo}} -e TROOPER_HOST={{identityService.identity.yourIp}} -e TROOPER_PORT=80 -e SPACESHIP={{this.identityService.identity.spaceship}} ymatagne/trooper</span>
+            <span class="tag">ExecStart=/usr/bin/docker run --name trooper-{{this.identityService.identity.pseudo}} -p 0.0.0.0:80:9000 -e PLANET_HOST={{identityService.identity.gameIp}} -e PLANET_PORT={{identityService.identity.gamePort}} -e TROOPER_NAME={{this.identityService.identity.pseudo}} -e TROOPER_HOST={{identityService.identity.yourIp}} -e TROOPER_PORT=80 -e SPACESHIP={{this.identityService.identity.spaceship}} ymatagne/trooper</span>
             <span class="tag">ExecStop=/usr/bin/docker stop trooper-{{this.identityService.identity.pseudo}}</span>
             <span class="tag"></span>
             <span class="tag">[X-Fleet]</span>
@@ -271,7 +271,7 @@ users:
       - "docker"
 coreos:
   fleet:
-    etcd_servers: "http://54.194.247.99:4001"
+    etcd_servers: "http://{{this.identityService.identity.etcdServer}}:4001"
     metadata: "hostname={{this.identityService.identity.planet}}"
     public-ip: $public_ipv4
   etcd2:
@@ -296,7 +296,7 @@ coreos:
       <md-card-content *ngIf="displayLine20">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
         <code ng-non-bindable="">
-          <span class="tag">response=$(aws ec2 run-instances --image-id ami-1df22072 --count 1 --instance-type t1.micro --security-groups mixit --user-data file://user-data.yml)</span>
+          <span class="tag">response=$(aws ec2 run-instances --image-id ami-1df22072 --count 1 --instance-type t2.medium --security-groups mixit --user-data file://user-data.yml)</span>
         </code>
       </pre>
       </md-card-content>
@@ -378,7 +378,7 @@ Requires=docker.service
 ExecStartPre=-/usr/bin/docker kill trooper-{{this.identityService.identity.pseudo}}
 ExecStartPre=-/usr/bin/docker rm trooper-{{this.identityService.identity.pseudo}}
 ExecStartPre=/usr/bin/docker pull ymatagne/trooper
-ExecStart=/usr/bin/docker run --name trooper-{{this.identityService.identity.pseudo}} -p 0.0.0.0:80:9000 -e PLANET_HOST={{this.identityService.identity.masterIp}} -e PLANET_PORT={{this.identityService.identity.masterPort}} -e TROOPER_NAME={{this.identityService.identity.pseudo}} -e TROOPER_HOST={{this.identityService.identity.yourIp}} -e TROOPER_PORT=80 -e SPACESHIP={{this.identityService.identity.spaceship}} ymatagne/trooper
+ExecStart=/usr/bin/docker run --name trooper-{{this.identityService.identity.pseudo}} -p 0.0.0.0:80:9000 -e PLANET_HOST={{this.identityService.identity.gameIp}} -e PLANET_PORT={{this.identityService.identity.gamePort}} -e TROOPER_NAME={{this.identityService.identity.pseudo}} -e TROOPER_HOST={{this.identityService.identity.yourIp}} -e TROOPER_PORT=80 -e SPACESHIP={{this.identityService.identity.spaceship}} ymatagne/trooper
 ExecStop=/usr/bin/docker stop trooper-{{this.identityService.identity.pseudo}}
 
 [X-Fleet]

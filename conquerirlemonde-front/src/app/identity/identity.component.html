@@ -15,14 +15,21 @@
       <tr>
         <td>
           <md-input-container class="example-full-width">
-            <input [(ngModel)]="identityService.identity.masterIp" mdInput placeholder="Master's IP" />
+            <input [(ngModel)]="identityService.identity.etcdServer" mdInput placeholder="ETCD's IP for fleet" />
           </md-input-container>
         </td>
       </tr>
       <tr>
         <td>
           <md-input-container class="example-full-width">
-            <input [(ngModel)]="identityService.identity.masterPort" mdInput placeholder="Master's port" />
+            <input [(ngModel)]="identityService.identity.gameIp" mdInput placeholder="Game's IP" />
+          </md-input-container>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <md-input-container class="example-full-width">
+            <input [(ngModel)]="identityService.identity.gamePort" mdInput placeholder="Game's port" />
           </md-input-container>
         </td>
       </tr>

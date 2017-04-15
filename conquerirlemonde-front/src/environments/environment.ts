@@ -12,6 +12,6 @@ export const environment = {
   dropTrooperUrl: 'http://localhost:8083/trooper/die',
   loginUrl: 'http://localhost:8083/api/authenticate',
   masterIp: 'localhost',
-  masterPort : '8083',
+  gamePort : '8083',
   awsKey : '8080'
 };

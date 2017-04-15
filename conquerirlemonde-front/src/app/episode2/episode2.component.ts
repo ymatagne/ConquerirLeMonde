@@ -16,6 +16,8 @@ export class Episode2Component implements OnInit {
   displayLine4 = false;
   displayLine5 = false;
   displayLine6 = false;
+  displayLine7 = false;
+  displayLine8 = false;
   constructor(private identityService: IdentityService) { }
 
   ngOnInit() {

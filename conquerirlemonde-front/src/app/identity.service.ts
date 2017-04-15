@@ -22,7 +22,7 @@ export class IdentityService {
     if(!this.identity){
       this.identity = new Identity();
       this.identity.masterIp = environment.masterIp;
-      this.identity.masterPort = environment.masterPort;
+      this.identity.gamePort = environment.gamePort;
       this.identity.awsKey=environment.awsKey;
       this.save();
     }

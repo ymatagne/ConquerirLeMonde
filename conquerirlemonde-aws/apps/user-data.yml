@@ -5,46 +5,34 @@ users:
       passwd: "$1$o4wTm.HT$TyzV9aftAuUrQ9snvV5cA."
       groups:
         - "sudo"
-        - "docker"
-write_files:
-    - path: "/root/.docker/config.json"
-      permissions: "0644"
-      owner: "root"
-      content: |
-          {
-            "auths": {
-              "984828126579.dkr.ecr.eu-west-1.amazonaws.com": {
-                "auth": "QVdTOkFRRUNBSGgrZFMrQmxOdTBOeG5Yd293YklMczExNXlqZCtMTkFaaEJMWnN1bk94azNBQUFBeTB3Z2dNcEJna3Foa2lHOXcwQkJ3YWdnZ01hTUlJREZnSUJBRENDQXc4R0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTUtiQmFnRTA0OURHWDcrcnhBZ0VRZ0lJQzRMakV6STRCM1dUcktQQUJYNWZzcGhySWdHQ1BkWXFIZ0VpSUZhWllhZjJialA5eWtNTHF3Q1BLVXhBKzIrcE83ZkVWNHhLK2w4RFMreUJzY3QyVFBGd241dDlxby9laE9UVi9vU0FvTElBVkgya1dGN0F3Nmc2Sy9QckZBVG5oQTFSUWNVc0tjK3dpTUQxZFh0UzdRSFBORjcrZ3luY3lMaFpuZDBmd1kyaDhCRDhuTThHcGJqMktmaGlmRkZuVmZDdWZmTWl3a1FGSHRrS3NJN0tWeFhsNkt3N1B3YnRSc00zb1M2SkZ3R3hxOFo5bk9EMmV1ZFJBM2FJV3lpMStZY2Y1cytjTkU3NHdoZGsvbVYzb20yRDVXazNialBTVmxxK3l6eGRIemtONVA3RDFPWlVCT2hYZnh3ZFdDZmU4TmNwYkxaSllLUDNzOU9Remx0dEFvVXNidUZ5KzRNRFRlTDF2ME5lQmN6SlljU1Y4U1NFbTRBSW9NaXlKODFzTFg3dC9XbGxlWExacGFJWEZndmxkZ3VySExjN285ZHpRdy9ZTU52MVdML0E3NGVxOVhaRUV3a0U4aVgrSUdBTnFkci85dTNydlF3TXRoRkN3Ky9nQTlNNzBqZS9BeE52VkFFc3ZkQ3Q4UzYrSUU0dExxM2QrdjhUV0JwOC8xcDh2emwzZVhwRml5b1RTa0QzdjJrQ0I2UjJOT01yOTk5elR4a2I0bU04VGM1cDBaOEJjSHprTmxPejM0T3NwVDRmdjl3TFFYbjdnU0V6a1ltTFhjVlhpM3pGNTROKzhUOG9QUDBuYTEwanFmV2Urb3RtK3RCdkFVc0pXTWVweGRVZjJoSzRJTDNhRFg2bC9JOWExVXdFZ21WTThyYmgvVU01dHlVNHlzV2lEVk1lNnhiZTV2TXZQcml4TlcwWVIyek40Tk1HejJzQ09jK2JseDlzbmdONmp3TzEzSWlPWWJPcDcrSVh1Z0ZIeFhXektNYytDMGtDcUZoT3NIVDRHMDlLclU2NHVFYjVod3RoanhQMlNZWW9sU1lsQjJnaGtxU3NpSGcwUktPa3JYT05KM2FMd3NNTVgvVUpwOGlHNVNHamxiZi9zb0pHc0NnRTlSM0hTRzYramhUaUNSSjM5dytjSml3YWJySWU4WEF6L1lUa2lUS1ZtV0Uxb25NSzU4bE9nWmNNME5YK3NicExPbCtNb2w3VFh3eFJvdS91UlRKYjZsU2lQVUZGcG1tNUh6WWgvQ2xjb2I5cFRjNTNCZDFvZ25WcjdkTFFzamN3SWVUMm9sSmlUK2pvPQ=="
-              }
-            }
-          }             
+        - "docker"           
 coreos:
     units:
       - name: docker.service
         command: start
-      - name: snowcamp-api.service
+      - name: mixit-api.service
         command: start
         content: |
           [Unit]
-          Description=Api Snowcamp
+          Description=Api mixit
           After=docker.service
           [Service]
           Restart=always
-          ExecStartPre=-/usr/bin/docker kill snowcamp-api
-          ExecStartPre=-/usr/bin/docker rm snowcamp-api
-          ExecStartPre=/usr/bin/docker pull 984828126579.dkr.ecr.eu-west-1.amazonaws.com/snowcamp-api:latest
-          ExecStart=/usr/bin/docker run --name snowcamp-api -p 0.0.0.0:8080:8080 984828126579.dkr.ecr.eu-west-1.amazonaws.com/snowcamp-api:latest
-          ExecStop=/usr/bin/docker stop snowcamp-api 
-      - name: snowcamp.service
+          ExecStartPre=-/usr/bin/docker kill mixit-api
+          ExecStartPre=-/usr/bin/docker rm mixit-api
+          ExecStartPre=/usr/bin/docker pull ymatagne/snowcamp-api:latest
+          ExecStart=/usr/bin/docker run --name mixit-api -p 0.0.0.0:8080:8080 ymatagne/mixit-api:latest
+          ExecStop=/usr/bin/docker stop mixit-api 
+      - name: mixit.service
         command: start
         content: |
           [Unit]
-          Description=Snowcamp
+          Description=MixIt
           After=docker.service
           [Service]
           Restart=always
-          ExecStartPre=-/usr/bin/docker kill snowcamp-front
-          ExecStartPre=-/usr/bin/docker rm snowcamp-front
-          ExecStartPre=/usr/bin/docker pull 984828126579.dkr.ecr.eu-west-1.amazonaws.com/snowcamp-front:latest
-          ExecStart=/usr/bin/docker run --name snowcamp-front -p 0.0.0.0:80:80 984828126579.dkr.ecr.eu-west-1.amazonaws.com/snowcamp-front:latest
-          ExecStop=/usr/bin/docker stop snowcamp-front 
+          ExecStartPre=-/usr/bin/docker kill mixit-front
+          ExecStartPre=-/usr/bin/docker rm mixit-front
+          ExecStartPre=/usr/bin/docker pull ymatagne/mixit-front:latest
+          ExecStart=/usr/bin/docker run --name mixit-front -p 0.0.0.0:80:80 ymatagne/mixit-front:latest
+          ExecStop=/usr/bin/docker stop mixit-front 

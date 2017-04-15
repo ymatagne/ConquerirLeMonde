@@ -75,7 +75,7 @@ ENTRYPOINT ["node",  "node_modules/trooper/trooper.js"]
     </md-slide-toggle>
   </md-card-header>
   <md-card-content *ngIf="displayLine4">
-    <div class="flex-container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="space-around stretch" >
+    <div class="flex-container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="space-around stretch">
 
       <md-list-item *ngFor="let ship of ships">
         <md-card class="spaceship-card">
@@ -101,7 +101,7 @@ ENTRYPOINT ["node",  "node_modules/trooper/trooper.js"]
   <md-card-content *ngIf="displayLine5">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">docker run -d -p 80:9000 -e PLANET_HOST={{identityService.identity.masterIp}} -e PLANET_PORT={{identityService.identity.masterPort}} -e TROOPER_NAME={{this.identityService.identity.pseudo}} -e TROOPER_HOST={{identityService.identity.yourIp}} -e TROOPER_PORT=80 -e SPACESHIP={{this.identityService.identity.spaceship}} trooper</span>
+        <span class="tag">docker run -d -p 80:9000 -e PLANET_HOST={{identityService.identity.gameIp}} -e PLANET_PORT={{identityService.identity.gamePort}} -e TROOPER_NAME={{this.identityService.identity.pseudo}} -e TROOPER_HOST={{identityService.identity.yourIp}} -e TROOPER_PORT=80 -e SPACESHIP={{this.identityService.identity.spaceship}} trooper</span>
       </code>
     </pre>
   </md-card-content>
@@ -117,6 +117,36 @@ ENTRYPOINT ["node",  "node_modules/trooper/trooper.js"]
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">exit</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine7">
+      Drop your user-data.yml
+    </md-slide-toggle>
+    <md-card-title></md-card-title>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine7">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">rm user-data.yml</span>
+      </code>
+    </pre>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine7">
+      Drop your instance
+    </md-slide-toggle>
+    <md-card-title></md-card-title>
+  </md-card-header>
+  <md-card-content *ngIf="displayLine7">
+    <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">aws ec2 terminate-instances --instance-id #YOUR_INSTANCE_ID></span>
       </code>
     </pre>
   </md-card-content>
