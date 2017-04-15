@@ -23,11 +23,11 @@
   </md-card>
   <md-card>
     <md-card-header>
-      <md-slide-toggle color="primary" [(ngModel)]="displayLine20">
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine2">
         Connect in your planet
       </md-slide-toggle>
     </md-card-header>
-    <md-card-content *ngIf="displayLine20">
+    <md-card-content *ngIf="displayLine2">
       <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">ssh jarjar@{{this.identityService.identity.yourIp}}</span>
@@ -37,11 +37,11 @@
   </md-card>
   <md-card>
     <md-card-header>
-      <md-slide-toggle color="primary" [(ngModel)]="displayLine21">
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
         Install pypy
       </md-slide-toggle>
     </md-card-header>
-    <md-card-content *ngIf="displayLine21">
+    <md-card-content *ngIf="displayLine3">
       <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">docker run -it --rm -v /home/jarjar:/home/host-core sergeyzh/coreos-pypy</span>
@@ -51,11 +51,11 @@
   </md-card>
     <md-card>
     <md-card-header>
-      <md-slide-toggle color="primary" [(ngModel)]="displayLine22">
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine4">
         Link lib if you have error
       </md-slide-toggle>
     </md-card-header>
-    <md-card-content *ngIf="displayLine22">
+    <md-card-content *ngIf="displayLine4">
       <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">cd /home/jarjar/pypy/bin ;ln -s /lib64/libncurses.so.5.9 libtinfo.so.5</span>
@@ -65,11 +65,11 @@
   </md-card>
   <md-card>
     <md-card-header>
-      <md-slide-toggle color="primary" [(ngModel)]="displayLine2">
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine5">
         Modify Host file
       </md-slide-toggle>
     </md-card-header>
-    <md-card-content *ngIf="displayLine2">
+    <md-card-content *ngIf="displayLine5">
       <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">vi /etc/ansible/hosts</span>
@@ -79,11 +79,11 @@
   </md-card>
   <md-card>
     <md-card-header>
-      <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine6">
         Add all planets in your file
       </md-slide-toggle>
     </md-card-header>
-    <md-card-content *ngIf="displayLine3">
+    <md-card-content *ngIf="displayLine6">
       <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">fleet ansible_host=54.194.247.99 ansible_port=22 ansible_user=jarjar</span>
@@ -101,11 +101,11 @@
 
   <md-card>
     <md-card-header>
-      <md-slide-toggle color="primary" [(ngModel)]="displayLine30">
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine7">
         List all planets
       </md-slide-toggle>
     </md-card-header>
-    <md-card-content *ngIf="displayLine30">
+    <md-card-content *ngIf="displayLine7">
       <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">ansible -i hosts planets --list-hosts</span>
@@ -115,11 +115,11 @@
   </md-card>
   <md-card>
     <md-card-header>
-      <md-slide-toggle color="primary" [(ngModel)]="displayLine4">
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine8">
         Ping all planets
       </md-slide-toggle>
     </md-card-header>
-    <md-card-content *ngIf="displayLine4">
+    <md-card-content *ngIf="displayLine8">
       <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag"> ansible planets -i hosts -m ping --ask-pass --sudo</span>
@@ -129,11 +129,11 @@
   </md-card>
   <md-card>
     <md-card-header>
-      <md-slide-toggle color="primary" [(ngModel)]="displayLine5">
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine9">
         View all docker
       </md-slide-toggle>
     </md-card-header>
-    <md-card-content *ngIf="displayLine5">
+    <md-card-content *ngIf="displayLine9">
       <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag"> ansible all -i hosts -m shell -a 'docker ps' --ask-pass --sudo</span>
@@ -143,11 +143,11 @@
   </md-card>
   <md-card>
     <md-card-header>
-      <md-slide-toggle color="primary" [(ngModel)]="displayLine6">
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine10">
         Kill all docker
       </md-slide-toggle>
     </md-card-header>
-    <md-card-content *ngIf="displayLine6">
+    <md-card-content *ngIf="displayLine10">
       <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">ansible fleet -i hosts -m shell -a 'docker stop #MY_TROOPER' --ask-pass --sudo</span>

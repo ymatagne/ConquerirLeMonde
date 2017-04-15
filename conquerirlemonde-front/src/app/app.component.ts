@@ -13,7 +13,7 @@ import {AuthGuard} from "./auth/auth.guard";
 export class AppComponent {
 
 
-  constructor(private router: Router, private guard : AuthGuard ) {
+  constructor(private router: Router, public guard : AuthGuard ) {
     this.router = router;
     this.guard = guard;
   }

@@ -13,7 +13,7 @@ export class IndentityComponent implements OnInit {
   planetAvailable = Planet.available;
   shipAvailable = Trooper.shipAvailable;
 
-  constructor(private identityService: IdentityService) {
+  constructor(public identityService: IdentityService) {
   }
 
   ngOnInit() {

@@ -10,11 +10,11 @@
 
 <md-card>
   <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine150">
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine1">
       Create file trooper-{{this.identityService.identity.pseudo}}.service.yml
     </md-slide-toggle>
   </md-card-header>
-  <md-card-content *ngIf="displayLine150">
+  <md-card-content *ngIf="displayLine1">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
        <span class="tag">{{"{"}}</span>
@@ -46,11 +46,11 @@
 </md-card>
 <md-card>
   <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine151">
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine2">
       And if you run your service ?
     </md-slide-toggle>
   </md-card-header>
-  <md-card-content *ngIf="displayLine151">
+  <md-card-content *ngIf="displayLine2">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">./kubectl create -f trooper-{{this.identityService.identity.planet}}.service.yml</span>
@@ -60,11 +60,11 @@
 </md-card>
 <md-card>
   <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine152">
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine3">
       Create file trooper-{{this.identityService.identity.planet}}.deployement.yml
     </md-slide-toggle>
   </md-card-header>
-  <md-card-content *ngIf="displayLine152">
+  <md-card-content *ngIf="displayLine3">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">{{"{"}}</span>
@@ -136,11 +136,11 @@
 </md-card>
 <md-card>
   <md-card-header>
-    <md-slide-toggle color="primary" [(ngModel)]="displayLine16">
+    <md-slide-toggle color="primary" [(ngModel)]="displayLine4">
       Create trooper
     </md-slide-toggle>
   </md-card-header>
-  <md-card-content *ngIf="displayLine16">
+  <md-card-content *ngIf="displayLine4">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">./kubectl create -f trooper-{{this.identityService.identity.planet}}.deployement.yml</span>
@@ -150,11 +150,11 @@
 </md-card>
   <md-card>
     <md-card-header>
-      <md-slide-toggle color="primary" [(ngModel)]="displayLine6">
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine5">
         View Replicas
       </md-slide-toggle>
     </md-card-header>
-    <md-card-content *ngIf="displayLine6">
+    <md-card-content *ngIf="displayLine5">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">./kubectl get rc</span>
@@ -164,11 +164,11 @@
   </md-card>
   <md-card>
     <md-card-header>
-      <md-slide-toggle color="primary" [(ngModel)]="displayLine7">
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine6">
         View pods
       </md-slide-toggle>
     </md-card-header>
-    <md-card-content *ngIf="displayLine7">
+    <md-card-content *ngIf="displayLine6">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">./kubectl get pods</span>
@@ -178,11 +178,11 @@
   </md-card>
   <md-card>
     <md-card-header>
-      <md-slide-toggle color="primary" [(ngModel)]="displayLine9">
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine7">
         View Services
       </md-slide-toggle>
     </md-card-header>
-    <md-card-content *ngIf="displayLine9">
+    <md-card-content *ngIf="displayLine7">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">./kubectl get services</span>
@@ -192,11 +192,11 @@
   </md-card>
   <md-card>
     <md-card-header>
-      <md-slide-toggle color="primary" [(ngModel)]="displayLine10">
+      <md-slide-toggle color="primary" [(ngModel)]="displayLine8">
         Connect to your trooper
       </md-slide-toggle>
     </md-card-header>
-    <md-card-content *ngIf="displayLine10">
+    <md-card-content *ngIf="displayLine8">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
         <span class="tag">curl -XGET http://{{this.identityService.identity.masterIp}}:{{this.identityService.identity.nodePort}}/</span>

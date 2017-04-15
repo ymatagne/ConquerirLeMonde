@@ -14,7 +14,7 @@ export class SettingsComponent implements OnInit {
   planets = Planet.available;
   ships = Trooper.shipAvailable;
 
-  constructor(private identityService: IdentityService) { }
+  constructor(public identityService: IdentityService) { }
 
   ngOnInit() {
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {IdentityService} from "../identity.service";
+import { IdentityService } from "../identity.service";
 
 @Component({
   selector: 'app-episode2',
@@ -9,7 +9,13 @@ import {IdentityService} from "../identity.service";
 export class Episode2Component implements OnInit {
 
   ships = ['Corellian', 'DroidStarFighter', 'JediStarFighter', 'MilleniumFalcon', 'NabooBomber', 'NabooStarFighter', 'RebublicCruiser', 'Tibirium', 'TieFighter', 'Xwing', 'YWing']
-
+  options = ['Aws', 'Vagrant'];
+  displayLine1 = false;
+  displayLine2 = false;
+  displayLine3 = false;
+  displayLine4 = false;
+  displayLine5 = false;
+  displayLine6 = false;
   constructor(private identityService: IdentityService) { }
 
   ngOnInit() {
