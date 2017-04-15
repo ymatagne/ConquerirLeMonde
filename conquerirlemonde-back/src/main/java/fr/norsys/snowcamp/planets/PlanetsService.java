@@ -44,14 +44,14 @@ public class PlanetsService {
     EtcdClient etcd;
 
     PlanetsService(){
-        this.etcd = new EtcdClient(URI.create("http://54.194.247.99:4001"));
+        this.etcd = new EtcdClient(URI.create("http://52.59.206.143:4001"));
     }
     List<Planet> planets;
 
 
     private void connectEtcd() {
         if (etcd == null) {
-            etcd = new EtcdClient(URI.create("http://54.194.247.99:4001"));
+            etcd = new EtcdClient(URI.create("http://52.59.206.143:4001"));
         }
     }
 
