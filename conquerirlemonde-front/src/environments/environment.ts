@@ -11,7 +11,7 @@ export const environment = {
   countTrooperUrl: 'ws://localhost:8083/ws/trooper/count',
   dropTrooperUrl: 'http://localhost:8083/trooper/die',
   loginUrl: 'http://localhost:8083/api/authenticate',
-  masterIp: 'localhost',
+  gameIp: 'localhost',
   gamePort : '8083',
   awsKey : '8080'
 };

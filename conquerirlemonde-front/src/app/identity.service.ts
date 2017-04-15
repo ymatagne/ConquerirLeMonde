@@ -21,7 +21,7 @@ export class IdentityService {
     this.identity = JSON.parse(localStorage.getItem('identity'));
     if(!this.identity){
       this.identity = new Identity();
-      this.identity.masterIp = environment.masterIp;
+      this.identity.gameIp = environment.gameIp;
       this.identity.gamePort = environment.gamePort;
       this.identity.awsKey=environment.awsKey;
       this.save();

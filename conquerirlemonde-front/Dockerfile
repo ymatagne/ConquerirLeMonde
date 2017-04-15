@@ -1,4 +1,4 @@
 FROM nginx
-ADD www /usr/share/nginx/html
+ADD dist /usr/share/nginx/html
 
 
