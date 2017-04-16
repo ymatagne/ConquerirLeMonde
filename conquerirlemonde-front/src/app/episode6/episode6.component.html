@@ -200,7 +200,7 @@
     <md-card-content *ngIf="displayLine8">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">curl -XGET http://{{this.identityService.identity.gameIp}}:{{this.identityService.identity.nodePort}}/</span>
+        <span class="tag">curl -XGET http://{{this.identityService.identity.etcdServer}}:{{this.identityService.identity.nodePort}}/</span>
       </code>
     </pre>
     </md-card-content>
