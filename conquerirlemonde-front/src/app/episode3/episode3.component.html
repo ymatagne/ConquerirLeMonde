@@ -419,10 +419,40 @@ MachineMetadata=hostname={{this.identityService.identity.planet}}
     <md-card>
       <md-card-header>
         <md-slide-toggle color="primary" [(ngModel)]="displayLine57">
+          Drop your user-data.yml
+        </md-slide-toggle>
+        <md-card-title></md-card-title>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine57">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">rm user-data.yml</span>
+      </code>
+    </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine58">
+          Drop your instance
+        </md-slide-toggle>
+        <md-card-title></md-card-title>
+      </md-card-header>
+      <md-card-content *ngIf="displayLine58">
+        <pre class="ng-scope undefined lang-bsh prettyprinted">
+      <code ng-non-bindable="">
+        <span class="tag">aws ec2 terminate-instances --instance-id #YOUR_INSTANCE_ID></span>
+      </code>
+    </pre>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-header>
+        <md-slide-toggle color="primary" [(ngModel)]="displayLine59">
           Going Further and More
         </md-slide-toggle>
       </md-card-header>
-      <md-card-content *ngIf="displayLine57">
+      <md-card-content *ngIf="displayLine59">
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">Add Retry to systemd service</span>

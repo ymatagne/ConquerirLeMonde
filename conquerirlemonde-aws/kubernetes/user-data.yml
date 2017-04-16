@@ -25,7 +25,7 @@ write_files:
       DNS.3 = kubernetes.default.svc
       DNS.4 = kubernetes.default.svc.cluster.local
       IP.1 = 10.3.0.1
-      IP.2 = $public_ipv4
+      IP.2 = 52.57.68.20
 
   - path: "/etc/kubernetes/ssl/createMasterCertificats.sh"
     permissions: "0644"
@@ -58,7 +58,7 @@ write_files:
       systemctl enable etcd2
       sleep 10
       echo "insert network in etcd2"
-      curl -X PUT -d "value={\"Network\":\"10.2.0.0/16\",\"Backend\":{\"Type\":\"vxlan\"}}" "http://$public_ipv4:2379/v2/keys/coreos.com/network/config"
+      curl -X PUT -d "value={\"Network\":\"10.2.0.0/16\",\"Backend\":{\"Type\":\"vxlan\"}}" "http://52.57.68.20:2379/v2/keys/coreos.com/network/config"
       echo "start docker"
       systemctl stop docker
       systemctl start docker
@@ -76,7 +76,7 @@ write_files:
     owner: "root"
     content: |
       FLANNELD_IFACE=$private_ipv4
-      FLANNELD_ETCD_ENDPOINTS=http://$public_ipv4:2379
+      FLANNELD_ETCD_ENDPOINTS=http://52.57.68.20:2379
   - path: "/etc/kubernetes/cni/docker_opts_cni.env"
     permissions: "0644"
     owner: "root"
@@ -116,7 +116,7 @@ write_files:
         --container-runtime=docker \
         --allow-privileged=true \
         --pod-manifest-path=/etc/kubernetes/manifests \
-        --hostname-override=$public_ipv4 \
+        --hostname-override=52.57.68.20 \
         --cluster_dns=10.3.0.10 \
         --cluster_domain=cluster.local
       ExecStop=-/usr/bin/rkt stop --uuid-file=/var/run/kubelet-pod.uuid
@@ -143,11 +143,11 @@ write_files:
           - /hyperkube
           - apiserver
           - --bind-address=0.0.0.0
-          - --etcd-servers=http://$public_ipv4:2379
+          - --etcd-servers=http://52.57.68.20:2379
           - --allow-privileged=true
           - --service-cluster-ip-range=10.3.0.0/24
           - --secure-port=443
-          - --advertise-address=$public_ipv4
+          - --advertise-address=52.57.68.20
           - --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota
           - --tls-cert-file=/etc/kubernetes/ssl/apiserver.pem
           - --tls-private-key-file=/etc/kubernetes/ssl/apiserver-key.pem
@@ -291,7 +291,7 @@ coreos:
     etcd2:
       name: "deathstar"
       listen-client-urls: "http://0.0.0.0:2379,http://0.0.0.0:4001"
-      advertise-client-urls: "http://$public_ipv4:2379"
+      advertise-client-urls: "http://52.57.68.20:2379"
     units:
       - name: flanneld.service
         drop-ins:

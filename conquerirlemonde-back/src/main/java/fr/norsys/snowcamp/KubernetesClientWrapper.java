@@ -30,7 +30,7 @@ public class KubernetesClientWrapper {
     KubernetesClientWrapper() throws URISyntaxException {
 
         Config config = new ConfigBuilder()
-                .withMasterUrl("https://54.154.157.5:443")
+                .withMasterUrl("https://52.57.68.20:443")
                 .withCaCertFile("/tmp/certificats/ca.pem")
                 .withClientCertFile("/tmp/certificats/admin.pem")
                 .withClientKeyFile("/tmp/certificats/admin-key.pem")
