@@ -58,8 +58,8 @@ export class Enemy extends Drawable {
         this.speedX = 0;
         this.speedY = speed;
         this.alive = true;
-        this.leftEdge = this.x - 90;
-        this.rightEdge = this.x + 90;
+        this.leftEdge = 0;
+        this.rightEdge = 1200-this.x;
         this.bottomEdge = this.y + 140;
     };
 

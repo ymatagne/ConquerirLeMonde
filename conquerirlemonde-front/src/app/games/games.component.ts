@@ -132,6 +132,7 @@ export class GamesComponent implements AfterViewInit {
 
     var nextEnemySpacer = -enemy.image.height * 1.5;
     this.nextEnemyX += enemy.image.width + 25;
+    this.nextEnemyY -= enemy.image.height + 25;
 
     if (this.enemyXIndex % 15 == 0) {
       this.nextEnemyX = 100;
@@ -139,13 +140,14 @@ export class GamesComponent implements AfterViewInit {
       this.enemyYIndex++;
       this.enemyXIndex = 0;
     }
-    if (this.enemyYIndex % 8 == 0) {
+    if (this.enemyYIndex % 7 == 0) {
       this.nextEnemyX = 100;
       this.nextEnemyY = 250;
       this.enemyYIndex = 1;
       this.enemyXIndex = 0
     }
     this.enemyXIndex++;
+    this.enemyYIndex++;
   }
 
   detectCollision() {
