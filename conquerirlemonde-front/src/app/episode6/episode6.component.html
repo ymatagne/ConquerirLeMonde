@@ -17,13 +17,14 @@
   <md-card-content *ngIf="displayLine1">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
+       <span class="tag">vi trooper-{{this.identityService.identity.pseudo}}.service.yml</span>
        <span class="tag">{{"{"}}</span>
         <span class="tag">            "kind":"Service",</span>
         <span class="tag">            "apiVersion":"v1",</span>
         <span class="tag">{{"            \"metadata\":{"}}</span>
-        <span class="tag">                "name":"trooper-{{this.identityService.identity.planet}}",</span>
+        <span class="tag">                "name":"trooper-{{this.identityService.identity.pseudo}}",</span>
         <span class="tag">{{"                \"labels\":{"}}</span>
-        <span class="tag">                    "app":"trooper-{{this.identityService.identity.planet}}"</span>
+        <span class="tag">                    "app":"trooper-{{this.identityService.identity.pseudo}}"</span>
         <span class="tag">{{"                }"}}</span>
         <span class="tag">{{"            },"}}</span>
         <span class="tag">{{"            \"spec\":{"}}</span>
@@ -35,7 +36,7 @@
         <span class="tag">{{"                }"}}</span>
         <span class="tag">                ],</span>
         <span class="tag">{{"                \"selector\":{"}}</span>
-        <span class="tag">                    "app":"trooper-{{this.identityService.identity.planet}}"</span>
+        <span class="tag">                    "app":"trooper-{{this.identityService.identity.pseudo}}"</span>
         <span class="tag">{{"                },"}}</span>
         <span class="tag">                "type": "LoadBalancer"</span>
         <span class="tag">{{"            }"}}</span>
@@ -53,7 +54,7 @@
   <md-card-content *ngIf="displayLine2">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">./kubectl create -f trooper-{{this.identityService.identity.planet}}.service.yml</span>
+        <span class="tag">./kubectl create -f trooper-{{this.identityService.identity.pseudo}}.service.yml</span>
       </code>
     </pre>
   </md-card-content>
@@ -71,26 +72,26 @@
         <span class="tag">          "kind":"ReplicationController",</span>
         <span class="tag">          "apiVersion":"v1",</span>
         <span class="tag">{{"          \"metadata\":{"}}</span>
-        <span class="tag">              "name":"trooper-{{this.identityService.identity.planet}}",</span>
+        <span class="tag">              "name":"trooper-{{this.identityService.identity.pseudo}}",</span>
         <span class="tag">{{"              \"labels\":{"}}</span>
-        <span class="tag">                  "app":"trooper-{{this.identityService.identity.planet}}"</span>
+        <span class="tag">                  "app":"trooper-{{this.identityService.identity.pseudo}}"</span>
         <span class="tag">{{"              }"}}</span>
         <span class="tag">{{"          },"}}</span>
         <span class="tag">{{"          \"spec\":{"}}</span>
         <span class="tag">              "replicas":10,</span>
         <span class="tag">{{"              \"selector\":{"}}</span>
-        <span class="tag">                "app":"trooper-{{this.identityService.identity.planet}}"</span>
+        <span class="tag">                "app":"trooper-{{this.identityService.identity.pseudo}}"</span>
         <span class="tag">{{"              },"}}</span>
         <span class="tag">{{"              \"template\":{"}}</span>
         <span class="tag">{{"                  \"metadata\":{"}}</span>
         <span class="tag">{{"                      \"labels\":{"}}</span>
-        <span class="tag">                            "app":"trooper-{{this.identityService.identity.planet}}"</span>
+        <span class="tag">                            "app":"trooper-{{this.identityService.identity.pseudo}}"</span>
         <span class="tag">{{"                      }"}}</span>
         <span class="tag">{{"                  },"}}</span>
         <span class="tag">{{"              \"spec\":{"}}</span>
         <span class="tag">                  "containers":[</span>
         <span class="tag">{{"                      {"}}</span>
-        <span class="tag">                          "name":"trooper-{{this.identityService.identity.planet}}",</span>
+        <span class="tag">                          "name":"trooper-{{this.identityService.identity.pseudo}}",</span>
         <span class="tag">                          "image":"ymatagne/trooper",</span>
         <span class="tag">                          "ports":[</span>
         <span class="tag">{{"                              {"}}</span>
@@ -101,7 +102,7 @@
         <span class="tag">			"env":[</span>
         <span class="tag">{{"                              {"}}</span>
         <span class="tag">                                  "name":"TROOPER_HOST",</span>
-        <span class="tag">                                  "value":"54.154.157.5"</span>
+        <span class="tag">                                  "value":"{{this.identityService.identity.etcdServer}}"</span>
         <span class="tag">{{"                              },"}}</span>
         <span class="tag">{{"                              {"}}</span>
         <span class="tag">                                  "name":"PLANET_HOST",</span>
@@ -143,7 +144,7 @@
   <md-card-content *ngIf="displayLine4">
     <pre class="ng-scope undefined lang-bsh prettyprinted">
       <code ng-non-bindable="">
-        <span class="tag">./kubectl create -f trooper-{{this.identityService.identity.planet}}.deployement.yml</span>
+        <span class="tag">./kubectl create -f trooper-{{this.identityService.identity.pseudo}}.deployement.yml</span>
       </code>
     </pre>
   </md-card-content>

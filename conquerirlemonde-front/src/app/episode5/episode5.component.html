@@ -448,6 +448,7 @@
         <pre class="ng-scope undefined lang-bsh prettyprinted">
           <code ng-non-bindable="">
             <span class="tag">exit</span>
+            <span class="tag">exit</span>
           </code>
         </pre>
       </md-card-content>
@@ -479,10 +480,11 @@
           <code ng-non-bindable="">
             <span class="tag"></span>
             <span class="tag">export MASTER_HOST=54.154.157.5</span>
-            <span class="tag">export CA_CERT=CERTIFICATS_PATH/ca.pem</span>
-            <span class="tag">export ADMIN_KEY=CERTIFICATS_PATH/admin-key.pem</span>
-            <span class="tag">export ADMIN_CERT=CERTIFICATS_PATH/admin.pem</span>
+            <span class="tag">export CA_CERT=./ca.pem</span>
+            <span class="tag">export ADMIN_KEY=./admin-key.pem</span>
+            <span class="tag">export ADMIN_CERT=./admin.pem</span>
             <span class="tag"></span>
+            <span class="tag">chmod 777 ./kubectl</span>
             <span class="tag">{{"./kubectl config set-cluster default-cluster --server=https://${MASTER_HOST} --certificate-authority=${CA_CERT}"}}</span>
             <span class="tag">{{"./kubectl config set-credentials default-admin --certificate-authority=${CA_CERT} --client-key=${ADMIN_KEY} --client-certificate=${ADMIN_CERT}"}}</span>
             <span class="tag">{{"./kubectl config set-context default-system --cluster=default-cluster --user=default-admin"}}</span>
